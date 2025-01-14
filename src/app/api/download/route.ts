@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { AudioDownloader } from '@/script/downloadAudio';
+import { AudioDownloader } from '@/lib/downloadAudio';
 
 export async function POST(request: NextRequest) {
     try {

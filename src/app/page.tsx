@@ -96,19 +96,19 @@ export default function Home() {
             <form onSubmit={handleDownload} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="url">视频链接</Label>
+                <Textarea
+                  id="url"
+                  value={url}
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setUrl(e.target.value)}
+                  placeholder="https://www.bilibili.com/video/BV..."
+                  required
+                  className="min-h-[80px] resize-none"
+                />
                 <div className="flex gap-2">
-                  <Textarea
-                    id="url"
-                    value={url}
-                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setUrl(e.target.value)}
-                    placeholder="https://www.bilibili.com/video/BV..."
-                    required
-                    className="min-h-[80px] resize-none"
-                  />
                   <Button
                     type="button"
                     variant="outline"
-                    className="shrink-0"
+                    className="flex-1"
                     onClick={async () => {
                       try {
                         const text = await navigator.clipboard.readText();
@@ -125,18 +125,17 @@ export default function Home() {
                       }
                     }}
                   >
-                    粘贴
+                    粘贴链接
+                  </Button>
+                  <Button 
+                    type="submit" 
+                    className="flex-1"
+                    disabled={loading}
+                  >
+                    {loading ? '下载中...' : '下载音频'}
                   </Button>
                 </div>
               </div>
-              
-              <Button 
-                type="submit" 
-                className="w-full"
-                disabled={loading}
-              >
-                {loading ? '下载中...' : '下载音频'}
-              </Button>
               
               {error && (
                 <p className="text-sm text-destructive text-center">{error}</p>
