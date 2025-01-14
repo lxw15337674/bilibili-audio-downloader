@@ -1,5 +1,4 @@
 import axios, { AxiosError, AxiosProgressEvent } from 'axios';
-import https from 'https';
 
 export enum AudioQualityEnums {
     Low = 64,
@@ -35,11 +34,6 @@ export class AudioDownloader {
             timeout: 60000,
             maxRedirects: 5,
             headers: this.headers,
-            httpsAgent: new https.Agent({
-                keepAlive: true,
-                timeout: 60000,
-                rejectUnauthorized: true
-            })
         });
     }
 
