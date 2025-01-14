@@ -80,7 +80,7 @@ export class AudioDownloader {
         const buffer = await this.retryOperation(() => this.downloadAudio());
         return {
             buffer,
-            filename: `${this.title}-${this.bv}.mp3`
+            filename: `${this.title}.mp3`
         };
     }
 
@@ -127,7 +127,6 @@ export class AudioDownloader {
         const audioStreams = response.data.data.dash.audio as AudioStream[];
         let selectedStream = audioStreams.find(stream => stream.id === this.audioQuality);
         if (!selectedStream) {
-            console.log(`[音频下载器] 未找到质量为 ${this.audioQuality} 的音频，使用最佳可用质量`);
             selectedStream = audioStreams[0];
         }
 
@@ -143,9 +142,9 @@ export class AudioDownloader {
                     ...this.headers,
                     referer: this.baseUrl
                 },
-                responseType: 'stream',
-                decompress: true, // 支持压缩响应
-                maxRedirects: 10, // 允许重定向
+                responseType: 'arraybuffer',
+                decompress: true,
+                maxRedirects: 10,
                 onDownloadProgress: (progressEvent: AxiosProgressEvent) => {
                     const elapsedTime = (Date.now() - this.downloadStartTime) / 1000;
                     const speed = progressEvent.loaded / elapsedTime;
@@ -171,9 +170,10 @@ export class AudioDownloader {
                 code: axiosError.code,
                 status: axiosError.response?.status
             });
+            throw error;
         }
     }
 }
-// 示例用法
-const bvid = 'BV1K1ktYNEHt'; // 替换为实际的 BV 号
-new AudioDownloader(`https://www.bilibili.com/video/${bvid}`).run().catch(console.error);
+// // 示例用法
+// const bvid = 'BV1K1ktYNEHt'; // 替换为实际的 BV 号
+// new AudioDownloader(`https://www.bilibili.com/video/${bvid}`).run().catch(console.error);
