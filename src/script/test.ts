@@ -1,8 +1,6 @@
 import fs from 'fs';
-import path from 'path';
 import axios from 'axios';
 import ffmpeg from 'fluent-ffmpeg';
-import { Readable } from 'stream';
 
 // 获取视频信息（这里只是一个简化的示例，实际情况需要根据 B 站 API 或网页结构进行调整）
 async function getVideoInfo(bvid: string): Promise<{ audioUrl: string; videoUrl: string } | null> {
@@ -34,7 +32,11 @@ async function downloadFile(url: string, filePath: string): Promise<void> {
     const response = await axios({
         method: 'get',
         url: url,
-        responseType: 'stream'
+        responseType: 'stream',
+        headers:{
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            referer: 'https://www.bilibili.com',
+        }
     });
 
     const writer = fs.createWriteStream(filePath);
@@ -72,5 +74,5 @@ async function extractAudio(bvid: string, outputFilename: string = 'output.mp3')
 }
 
 // 示例用法
-const bvid = 'BV16McuepE4z'; // 替换为实际的 BV 号
+const bvid = 'BV1hsk2YhExq'; // 替换为实际的 BV 号
 extractAudio(bvid, 'output.mp3').catch(console.error);
