@@ -15,8 +15,27 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "B站音频下载器",
-  description: "一个简单的B站视频音频提取工具",
+  title: "B站音频下载器 | Bilibili Audio Downloader",
+  description: "一个简单的B站视频音频提取工具，支持多种音质选择，快速下载B站视频的音频内容。免费、便捷、高效的哔哩哔哩视频音频下载工具。",
+  keywords: ["bilibili", "音频下载", "B站", "哔哩哔哩", "视频音频", "音频提取", "音乐下载"],
+  authors: [{ name: "Your Name" }],
+  openGraph: {
+    title: "B站音频下载器 | Bilibili Audio Downloader",
+    description: "一个简单的B站视频音频提取工具，支持多种音质选择。",
+    type: "website",
+    locale: "zh_CN",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  alternates: {
+    canonical: "https://bilibili-audio-downloader.vercel.app",
+  },
 };
 
 export default function RootLayout({
