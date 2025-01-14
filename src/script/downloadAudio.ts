@@ -1,5 +1,17 @@
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, AxiosProgressEvent } from 'axios';
 import https from 'https';
+
+export enum AudioQualityEnums {
+    Low = 64,
+    Medium = 132,
+    High = 192,
+    Highest = 320,
+}
+
+interface AudioStream {
+    id: number;
+    baseUrl: string;
+}
 
 export class AudioDownloader {
     private readonly headers: { [key: string]: string };
@@ -10,13 +22,13 @@ export class AudioDownloader {
     private readonly axiosInstance;
     private readonly maxRetries = 3;
     private readonly retryDelay = 3000; // 3 seconds
+    private downloadStartTime: number = 0;
 
-    constructor(private readonly baseUrl: string, private readonly qn: number = 100) {
+    constructor(private readonly baseUrl: string, private readonly audioQuality: AudioQualityEnums = AudioQualityEnums.High) {
         this.headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36 Edg/115.0.1901.203",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
             "Referer": "https://www.bilibili.com",
-            "Origin": "https://www.bilibili.com",
-            // "Cookie":"buvid3=40949A60-E6C5-1985-AFE8-D8E56978241663623infoc; b_nut=1725525163; theme_style=dark; _uuid=A31DD187-DA78-81B10-9AE3-CA89D5D8861664951infoc; buvid_fp=9e9037642040cde2a2c4bee83bd6d201; buvid4=BB5E8B3C-A441-BF9A-5362-F0A7CD0E1A5437218-024090509-9S3HYK1DLRqCHr9vBj2sL/+FHsXrsNDMX+npJi/qTqjJElcJkaNRK9Zt49vmUJA1; sid=7fkjefil; rpdid=|(um~JJRkm~J0J'u~kl)Y)kku; header_theme_version=CLOSE; enable_web_push=DISABLE; home_feed_column=5; browser_resolution=1638-954; bili_ticket=eyJhbGciOiJIUzI1NiIsImtpZCI6InMwMyIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzcwOTk1NzIsImlhdCI6MTczNjg0MDMxMiwicGx0IjotMX0.iEfDXfobGzb-0IZit8gZj8o6Bp9Skrd2RiTaFmMHTQY; bili_ticket_expires=1737099512; CURRENT_FNVAL=4048; share_source_origin=COPY; bsource=share_source_copy_link; b_lsid=9E16B6107_19463F30CCD"
+            "Origin": "https://www.bilibili.com"
         };
 
         this.axiosInstance = axios.create({
@@ -33,6 +45,18 @@ export class AudioDownloader {
 
     private async sleep(ms: number): Promise<void> {
         return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    private formatBytes(bytes: number): string {
+        if (bytes === 0) return '0 B';
+        const k = 1024;
+        const sizes = ['B', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))} ${sizes[i]}`;
+    }
+
+    private formatSpeed(bytesPerSecond: number): string {
+        return `${this.formatBytes(bytesPerSecond)}/s`;
     }
 
     private async retryOperation<T>(operation: () => Promise<T>, retryCount = 0): Promise<T> {
@@ -61,7 +85,7 @@ export class AudioDownloader {
     }
 
     private async getCid(): Promise<void> {
-        const pattern = /(BV.*)\//;
+        const pattern = /(BV[a-zA-Z0-9]+)/;
         const match = this.baseUrl.match(pattern);
         if (!match) throw new Error("Invalid BiliBili URL");
         this.bv = match[1];
@@ -70,6 +94,10 @@ export class AudioDownloader {
             params: { bvid: this.bv },
             headers: this.headers
         });
+
+        if (!response.data.data) {
+            throw new Error("Failed to get video information");
+        }
 
         this.cid = response.data.data.cid;
         this.title = response.data.data.title.replace(/[<>:"/\\|?*]/g, '_'); // Remove invalid filename characters
@@ -82,35 +110,58 @@ export class AudioDownloader {
             params: {
                 bvid: this.bv,
                 cid: this.cid,
-                qn: this.qn,
+                qn: this.audioQuality,
                 fnver: 0,
                 fnval: 4048,
                 fourk: 1
             },
+
             headers: this.headers
         });
 
-        this.audioUrl = response.data.data.dash.audio[0].baseUrl;
-        console.log(`[音频下载器] 获取到音频URL`);
+        if (!response.data.data?.dash?.audio?.length) {
+            throw new Error("No audio stream found");
+        }
+
+        // Find the audio stream with the requested quality or fallback to the best available
+        const audioStreams = response.data.data.dash.audio as AudioStream[];
+        let selectedStream = audioStreams.find(stream => stream.id === this.audioQuality);
+        if (!selectedStream) {
+            console.log(`[音频下载器] 未找到质量为 ${this.audioQuality} 的音频，使用最佳可用质量`);
+            selectedStream = audioStreams[0];
+        }
+
+        this.audioUrl = selectedStream.baseUrl;
+        console.log(`[音频下载器] 获取到音频URL，质量: ${selectedStream.id}kbps`);
     }
 
     private async downloadAudio(): Promise<Buffer> {
-        const downloadedBytes = 0;
-
         try {
+            this.downloadStartTime = Date.now();
             const response = await this.axiosInstance.get(this.audioUrl, {
                 headers: {
                     ...this.headers,
-                    'Range': `bytes=${downloadedBytes}-`
+                    referer: this.baseUrl
                 },
-                responseType: 'arraybuffer',
-                onDownloadProgress: (progressEvent) => {
-                    const percentCompleted = Math.round((progressEvent.loaded * 100) / (progressEvent.total || progressEvent.loaded));
-                    process.stdout.write(`\r[音频下载器] 下载进度: ${percentCompleted}%`);
+                responseType: 'stream',
+                decompress: true, // 支持压缩响应
+                maxRedirects: 10, // 允许重定向
+                onDownloadProgress: (progressEvent: AxiosProgressEvent) => {
+                    const elapsedTime = (Date.now() - this.downloadStartTime) / 1000;
+                    const speed = progressEvent.loaded / elapsedTime;
+                    const percent = Math.round((progressEvent.loaded * 100) / (progressEvent.total || progressEvent.loaded));
+                    const downloadedSize = this.formatBytes(progressEvent.loaded);
+                    const totalSize = progressEvent.total ? this.formatBytes(progressEvent.total) : 'Unknown';
+                    const downloadSpeed = this.formatSpeed(speed);
+                    
+                    process.stdout.write(`\r[音频下载器] 下载进度: ${percent}% | ${downloadedSize}/${totalSize} | ${downloadSpeed}`);
+                    
+                    if (progressEvent.loaded === progressEvent.total) {
+                        process.stdout.write('\n');
+                    }
                 }
             });
 
-            process.stdout.write('\n');  // New line after progress
             console.log(`[音频下载器] 音频下载成功`);
             return Buffer.from(response.data);
         } catch (error) {
@@ -120,7 +171,9 @@ export class AudioDownloader {
                 code: axiosError.code,
                 status: axiosError.response?.status
             });
-            throw error;
         }
     }
 }
+// 示例用法
+const bvid = 'BV1K1ktYNEHt'; // 替换为实际的 BV 号
+new AudioDownloader(`https://www.bilibili.com/video/${bvid}`).run().catch(console.error);
