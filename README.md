@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# B站视频音频下载器
 
-## Getting Started
+这是一个基于 [Next.js](https://nextjs.org) 开发的B站视频音频提取工具，可以方便地下载B站视频的音频文件。
 
-First, run the development server:
+## 功能特点
+
+- 🎵 支持从B站视频链接提取音频
+- 🎨 现代化的用户界面设计
+- 💾 本地下载历史记录
+- 📊 下载统计
+## 开始使用
+
+首先，运行开发服务器：
 
 ```bash
 npm run dev
-# or
+# 或
 yarn dev
-# or
+# 或
 pnpm dev
-# or
+# 或
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+在浏览器中打开 [http://localhost:3000](http://localhost:3000) 即可看到应用界面。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 使用方法
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. 复制B站视频链接（支持 bilibili.com/video/ 格式的链接）
+2. 粘贴到输入框中
+3. 点击下载按钮
+4. 等待下载完成，音频文件会自动保存
 
-## Learn More
+## 技术栈
 
-To learn more about Next.js, take a look at the following resources:
+- Next.js 14 (App Router)
+- React
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+- Axios
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 本地开发
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. 克隆项目
+2. 安装依赖：
+   ```bash
+   npm install
+   ```
+3. 运行开发服务器：
+   ```bash
+   npm run dev
+   ```
 
-## Deploy on Vercel
+## 部署
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+推荐使用 [Vercel 平台](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) 部署，它是 Next.js 的创建者提供的托管服务。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+更多部署相关信息，请查看 [Next.js 部署文档](https://nextjs.org/docs/app/building-your-application/deploying)。
