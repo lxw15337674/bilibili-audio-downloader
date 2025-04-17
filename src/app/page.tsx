@@ -7,12 +7,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useLocalStorageState } from 'ahooks';
 import { useToast } from '@/hooks/use-toast';
+import { Loader2, Trash2, Github } from 'lucide-react'; // Import Github icon
+import { format } from 'date-fns'; // Import date-fns for formatting
 
 interface DownloadRecord {
   url: string;
   title: string;
   timestamp: number;
 }
+
 
 export default function Home() {
   const [url, setUrl] = useState('');
@@ -82,15 +85,39 @@ export default function Home() {
     }
   };
 
+  const clearHistory = () => {
+    setDownloadHistory([]);
+    toast({
+      title: "下载历史已清除",
+    });
+  };
+
   return (
-    <main className="min-h-screen bg-background p-4">
-      <div className="max-w-4xl mx-auto space-y-4">
+    <main className="min-h-screen bg-background p-4 sm:p-6 md:p-8 relative">
+      <a
+        href="https://github.com/lxw15337674/bilibili-audio-downloader"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="在 GitHub 上查看源代码"
+        className="fixed top-4 right-4 z-50"
+      >
+        <Button variant="outline" size="icon">
+          <Github />
+        </Button>
+      </a>
+
+      <div className="max-w-2xl mx-auto space-y-6">
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl text-center">B站音频下载</CardTitle>
+            <h1 className="text-2xl text-center font-semibold tracking-tight">
+              <CardTitle>B站音频下载</CardTitle>
+            </h1>
             <CardDescription className="text-center">
-              请输入完整的B站视频链接，我们将为您提取音频
+              请输入完整的B站视频链接（支持 BV/AV 号）
             </CardDescription>
+            <p className="text-xs text-muted-foreground text-center pt-1">
+              所有下载历史记录均保存在您的浏览器本地，服务器不会保留任何信息。
+            </p>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleDownload} className="space-y-6">
@@ -125,38 +152,50 @@ export default function Home() {
                       }
                     }}
                   >
-                    粘贴链接
+                    粘贴链接（从剪贴板）
                   </Button>
-                  <Button 
-                    type="submit" 
-                    className="flex-1"
+                  <Button
+                    type="submit"
+                    className="flex-1 flex items-center justify-center gap-2"
                     disabled={loading}
                   >
+                    {loading && <Loader2 className="h-4 w-4 animate-spin" />}
                     {loading ? '下载中...' : '下载音频'}
                   </Button>
                 </div>
               </div>
-              
               {error && (
                 <p className="text-sm text-destructive text-center">{error}</p>
               )}
             </form>
           </CardContent>
         </Card>
-
         {downloadHistory && downloadHistory.length > 0 && (
           <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">下载历史</CardTitle>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <div className="space-y-1">
+                <h2 className="text-lg font-semibold tracking-tight">
+                  <CardTitle>下载历史</CardTitle>
+                </h2>
+                <CardDescription>最近 10 条记录</CardDescription>
+              </div>
+              <Button variant="ghost" size="sm" onClick={clearHistory} aria-label="清除历史记录">
+                <Trash2 className="h-4 w-4" />
+              </Button>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
                 {downloadHistory.map((record) => (
-                  <div key={record.timestamp} className="flex items-center justify-between gap-4 text-sm p-2 hover:bg-muted/50 rounded-lg">
-                    <span className="flex-1 truncate" title={record.title}>
-                      {record.title}
-                    </span>
-                    <div className="flex gap-2 shrink-0">
+                  <div key={record.timestamp} className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4 text-sm p-2 hover:bg-muted/50 rounded-lg">
+                    <div className="flex-1 min-w-0">
+                      <p className="truncate font-medium" title={record.title}>
+                        {record.title}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {format(new Date(record.timestamp), 'yyyy-MM-dd HH:mm')}
+                      </p>
+                    </div>
+                    <div className="flex gap-2 shrink-0 w-full sm:w-auto justify-end">
                       <Button
                         variant="outline"
                         size="sm"
@@ -175,6 +214,7 @@ export default function Home() {
                             title: "链接已填入",
                             description: "点击下载按钮重新下载",
                           });
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
                         }}
                       >
                         重新下载
