@@ -21,9 +21,10 @@ export class AudioDownloader {
     private readonly axiosInstance;
     private readonly maxRetries = 3;
     private readonly retryDelay = 3000; // 3 seconds
-    private downloadStartTime: number = 0;
-
-    constructor(private readonly baseUrl: string, private readonly audioQuality: AudioQualityEnums = AudioQualityEnums.High) {
+    private downloadStartTime: number = 0;    constructor(private readonly baseUrl: string, private readonly audioQuality: AudioQualityEnums = AudioQualityEnums.High) {
+        // 清理和验证 baseUrl
+        this.baseUrl = this.cleanUrl(baseUrl);
+        
         this.headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
             "Referer": "https://www.bilibili.com",
@@ -35,6 +36,11 @@ export class AudioDownloader {
             maxRedirects: 5,
             headers: this.headers,
         });
+    }
+
+    private cleanUrl(url: string): string {
+        // 移除可能导致HTTP头部错误的字符
+        return url.trim().replace(/[\r\n\t\u0000-\u001f\u007f-\u009f]/g, '');
     }
 
     private async sleep(ms: number): Promise<void> {
@@ -51,12 +57,21 @@ export class AudioDownloader {
 
     private formatSpeed(bytesPerSecond: number): string {
         return `${this.formatBytes(bytesPerSecond)}/s`;
-    }
-
-    private async retryOperation<T>(operation: () => Promise<T>, retryCount = 0): Promise<T> {
+    }    private async retryOperation<T>(operation: () => Promise<T>, retryCount = 0): Promise<T> {
         try {
             return await operation();
         } catch (error) {
+            const axiosError = error as AxiosError;
+            
+            // 记录详细的错误信息
+            console.error(`[音频下载器] 操作失败:`, {
+                message: axiosError.message,
+                code: axiosError.code,
+                status: axiosError.response?.status,
+                url: axiosError.config?.url,
+                method: axiosError.config?.method
+            });
+            
             if (retryCount >= this.maxRetries) {
                 throw error;
             }
@@ -126,16 +141,18 @@ export class AudioDownloader {
 
         this.audioUrl = selectedStream.baseUrl;
         console.log(`[音频下载器] 获取到音频URL，质量: ${selectedStream.id}kbps`);
-    }
-
-    private async downloadAudio(): Promise<Buffer> {
+    }    private async downloadAudio(): Promise<Buffer> {
         try {
             this.downloadStartTime = Date.now();
+            // 创建安全的下载头部
+            const downloadHeaders = {
+                "User-Agent": this.headers["User-Agent"],
+                "Referer": "https://www.bilibili.com",
+                "Origin": "https://www.bilibili.com"
+            };
+            
             const response = await this.axiosInstance.get(this.audioUrl, {
-                headers: {
-                    ...this.headers,
-                    referer: this.baseUrl
-                },
+                headers: downloadHeaders,
                 responseType: 'arraybuffer',
                 decompress: true,
                 maxRedirects: 10,
