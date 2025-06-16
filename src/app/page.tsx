@@ -114,10 +114,23 @@ export default function Home() {
             </h1>
             <CardDescription className="text-center">
               请输入完整的B站视频链接（支持 BV/AV 号）
-            </CardDescription>
-            <p className="text-xs text-muted-foreground text-center pt-1">
+            </CardDescription>            <p className="text-xs text-muted-foreground text-center pt-1">
               所有下载历史记录均保存在您的浏览器本地，服务器不会保留任何信息。
             </p>
+            <div className="text-center pt-2">
+              <p className="text-xs text-muted-foreground">
+                遇到问题？请前往{' '}
+                <a
+                  href="https://github.com/lxw15337674/bilibili-audio-downloader/issues"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  GitHub Issues
+                </a>
+                {' '}反馈
+              </p>
+            </div>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleDownload} className="space-y-6">
