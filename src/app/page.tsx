@@ -165,7 +165,7 @@ export default function Home() {
                       }
                     }}
                   >
-                    粘贴链接（从剪贴板）
+                    从剪贴板粘贴链接
                   </Button>
                   <Button
                     type="submit"
