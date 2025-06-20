@@ -216,7 +216,7 @@ export default function Home() {
                           window.open(record.url, '_blank');
                         }}
                       >
-                        查看视频
+                        查看源视频
                       </Button>
                       <Button
                         variant="outline"
