@@ -72,6 +72,9 @@ export default function Home() {
         title: "下载成功",
         description: `音频已保存为：${filename}`,
       });
+
+      // Clear the input field after successful download
+      setUrl('');
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : '下载过程中出现错误';
       setError(errorMessage);
@@ -112,9 +115,7 @@ export default function Home() {
             <h1 className="text-2xl text-center font-semibold tracking-tight">
               <CardTitle>B站音频下载</CardTitle>
             </h1>
-            <CardDescription className="text-center">
-              请输入完整的B站视频链接（支持 BV/AV 号）
-            </CardDescription>            <p className="text-xs text-muted-foreground text-center pt-1">
+            <p className="text-xs text-muted-foreground text-center pt-1">
               所有下载历史记录均保存在您的浏览器本地，服务器不会保留任何信息。
             </p>
             <div className="text-center pt-2">
@@ -128,19 +129,18 @@ export default function Home() {
                 >
                   GitHub Issues
                 </a>
-                {' '}反馈
+                反馈
               </p>
             </div>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleDownload} className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="url">视频链接</Label>
                 <Textarea
                   id="url"
                   value={url}
                   onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setUrl(e.target.value)}
-                  placeholder="https://www.bilibili.com/video/BV..."
+                  placeholder="输入完整的B站视频链接,例如：https://www.bilibili.com/video/BV1LrETzVE8t"
                   required
                   className="min-h-[80px] resize-none"
                 />

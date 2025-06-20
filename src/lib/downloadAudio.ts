@@ -57,35 +57,76 @@ export class AudioDownloader {
 
     private formatSpeed(bytesPerSecond: number): string {
         return `${this.formatBytes(bytesPerSecond)}/s`;
+    }
+
+    /**
+ * 从各种格式的B站URL中提取BV号
+ * 支持格式：
+ * 1. https://www.bilibili.com/video/BV1234567890
+ * 2. https://www.bilibili.com/list/watchlater?bvid=BV1234567890&...
+ * 3. 任何包含bvid参数或BV号的URL
+ */
+    private extractBvFromUrl(url: string): string | null {
+        try {
+            // 方法1: 尝试从URL路径中提取 (传统格式)
+            const pathPattern = /\/video\/(BV[a-zA-Z0-9]+)/;
+            const pathMatch = url.match(pathPattern);
+            if (pathMatch) {
+                return pathMatch[1];
+            }
+
+            // 方法2: 尝试从URL参数中提取 bvid
+            const urlObj = new URL(url);
+            const bvidFromParam = urlObj.searchParams.get('bvid');
+            if (bvidFromParam && /^BV[a-zA-Z0-9]+$/.test(bvidFromParam)) {
+                return bvidFromParam;
+            }
+
+            // 方法3: 最后尝试在整个URL中查找BV号 (兜底)
+            const generalPattern = /(BV[a-zA-Z0-9]+)/;
+            const generalMatch = url.match(generalPattern);
+            if (generalMatch) {
+                return generalMatch[1];
+            }
+
+            return null;
+        } catch (error) {
+            // URL解析失败，尝试正则匹配
+            const bvMatch = url.match(/(BV[a-zA-Z0-9]+)/);
+            if (bvMatch) {
+                return bvMatch[1];
+            }
+            return null;
+        }
     }    private async retryOperation<T>(operation: () => Promise<T>, retryCount = 0): Promise<T> {
         try {
             return await operation();
         } catch (error) {
             const axiosError = error as AxiosError;
             
-            // 记录详细的错误信息
-            console.error(`[音频下载器] 操作失败:`, {
-                message: axiosError.message,
-                code: axiosError.code,
-                status: axiosError.response?.status,
-                url: axiosError.config?.url,
-                method: axiosError.config?.method
-            });
-            
             if (retryCount >= this.maxRetries) {
+                // 只在最终失败时记录详细错误
+                console.error(`[音频下载器] 操作最终失败:`, {
+                    message: axiosError.message,
+                    code: axiosError.code,
+                    status: axiosError.response?.status
+                });
                 throw error;
             }
             
-            console.log(`[音频下载器] 第${retryCount + 1}次尝试失败，${this.retryDelay/1000}秒后重试...`);
+            console.log(`[音频下载器] 重试 ${retryCount + 1}/${this.maxRetries} | ${axiosError.message}`);
             await this.sleep(this.retryDelay);
             return this.retryOperation(operation, retryCount + 1);
         }
     }
 
     public async run(): Promise<{ buffer: Buffer; filename: string }> {
-        console.log("[音频下载器] 开始下载音频...");
         await this.retryOperation(() => this.getCid());
         await this.retryOperation(() => this.getAudioUrl());
+
+        // 聚合log - 一次性输出所有关键信息
+        console.log(`[音频下载器] 信息获取完成 | BV: ${this.bv} | CID: ${this.cid} | 标题: ${this.title} | 质量: ${this.audioQuality}kbps`);
+
         const buffer = await this.retryOperation(() => this.downloadAudio());
         return {
             buffer,
@@ -93,11 +134,35 @@ export class AudioDownloader {
         };
     }
 
+    /**
+ * 获取音频流信息（用于流式代理）
+ * 只获取音频URL和相关信息，不下载实际文件
+ */
+    public async getAudioStreamUrl(): Promise<{
+        audioUrl: string;
+        title: string;
+        quality: number;
+        filename: string;
+    }> {
+        await this.retryOperation(() => this.getCid());
+        await this.retryOperation(() => this.getAudioUrl());
+
+        // 聚合log - 一次性输出所有关键信息
+        console.log(`[音频下载器] 流信息获取完成 | BV: ${this.bv} | CID: ${this.cid} | 标题: ${this.title} | 质量: ${this.audioQuality}kbps`);
+
+        return {
+            audioUrl: this.audioUrl,
+            title: this.title,
+            quality: this.audioQuality,
+            filename: `${this.title}.mp3`
+        };
+    }
+
     private async getCid(): Promise<void> {
-        const pattern = /(BV[a-zA-Z0-9]+)/;
-        const match = this.baseUrl.match(pattern);
-        if (!match) throw new Error("Invalid BiliBili URL");
-        this.bv = match[1];
+        // 提取BV号的方法，支持多种URL格式
+        const bv = this.extractBvFromUrl(this.baseUrl);
+        if (!bv) throw new Error("Invalid BiliBili URL: 无法找到有效的BV号");
+        this.bv = bv;
 
         const response = await this.axiosInstance.get("https://api.bilibili.com/x/web-interface/view", {
             params: { bvid: this.bv },
@@ -110,8 +175,6 @@ export class AudioDownloader {
 
         this.cid = response.data.data.cid;
         this.title = response.data.data.title.replace(/[<>:"/\\|?*]/g, '_'); // Remove invalid filename characters
-        console.log(`[音频下载器] 获取到CID: ${this.cid}`);
-        console.log(`[音频下载器] 视频标题: ${this.title}`);
     }
 
     private async getAudioUrl(): Promise<void> {
@@ -140,7 +203,6 @@ export class AudioDownloader {
         }
 
         this.audioUrl = selectedStream.baseUrl;
-        console.log(`[音频下载器] 获取到音频URL，质量: ${selectedStream.id}kbps`);
     }    private async downloadAudio(): Promise<Buffer> {
         try {
             this.downloadStartTime = Date.now();
