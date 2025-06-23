@@ -31,6 +31,21 @@ export default function Home() {
     setLoading(true);
     setError('');
 
+    // URL格式验证
+    if (!url.trim()) {
+      setError('请输入视频链接');
+      setLoading(false);
+      return;
+    }
+
+    // 验证是否为有效的B站视频链接
+    const bilibiliVideoRegex = /^https?:\/\/(www\.)?bilibili\.com\/video\/(BV[a-zA-Z0-9]+|av\d+)/;
+    if (!bilibiliVideoRegex.test(url.trim())) {
+      setError('请输入有效的B站视频链接格式，例如：https://www.bilibili.com/video/BV1234567890');
+      setLoading(false);
+      return;
+    }
+
     try {
       // 构建下载链接
       const downloadUrl = `https://bhwa233-api.vercel.app/api/bilibili-audio/download?url=${encodeURIComponent(url)}`;
@@ -145,7 +160,7 @@ export default function Home() {
                   <Button
                     type="submit"
                     className="flex-1 flex items-center justify-center gap-2"
-                    disabled={loading}
+                    disabled={loading || !url.trim()}
                   >
                     {loading && <Loader2 className="h-4 w-4 animate-spin" />}
                     {loading ? '下载中...' : '下载音频'}
