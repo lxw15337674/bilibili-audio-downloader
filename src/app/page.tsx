@@ -134,7 +134,7 @@ export default function Home() {
                 <CardTitle>B站音频下载</CardTitle>
               </h1>
               <p className="text-xs text-muted-foreground text-center pt-1">
-                所有下载历史记录均保存在您的浏览器本地，服务器不会保留任何信息。
+                下载历史记录保存在您的浏览器本地，服务器不会保留任何信息。
               </p>
             </CardHeader>
             <CardContent>
