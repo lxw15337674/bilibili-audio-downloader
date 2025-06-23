@@ -97,28 +97,12 @@ export default function Home() {
       // 处理标题获取结果
       const title = titleResult.title;
 
-      // 如果获取标题时出现错误，显示警告
-      if (titleResult.hasError && titleResult.errorMessage) {
-        toast({
-          variant: "destructive",
-          title: "警告",
-          description: `${titleResult.errorMessage}，但下载将继续进行`,
-        });
-      }
-
-      // Add to download history
       const newRecord: DownloadRecord = {
         url,
         title,
         timestamp: Date.now(),
       };
       setDownloadHistory([newRecord, ...(downloadHistory || []).slice(0, 50)]); 
-      toast({
-        title: "下载开始",
-        description: `正在下载：${title}`,
-      });
-
-      // Clear the input field after successful download
       setUrl('');
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : '下载过程中出现错误';
