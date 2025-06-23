@@ -9,7 +9,6 @@ import { useLocalStorageState } from 'ahooks';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, Trash2, Github } from 'lucide-react'; // Import Github icon
 import { format } from 'date-fns'; // Import date-fns for formatting
-import axios from 'axios';
 
 interface DownloadRecord {
   url: string;
@@ -33,41 +32,34 @@ export default function Home() {
     setError('');
 
     try {
-      const response = await axios.get('/download', {
-        params: { url },
-        headers: {
-          'Accept': 'audio/mpeg',
-        },
-        responseType: 'blob'
-      });
+      // 构建下载链接
+      const downloadUrl = `https://bhwa233-api.vercel.app/api/bilibili-audio/download?url=${encodeURIComponent(url)}`;
 
-      const blob = response.data;
-      const downloadUrl = window.URL.createObjectURL(blob);
+      // 后台下载：创建隐藏的 a 标签触发下载
       const a = document.createElement('a');
       a.href = downloadUrl;
-      
-      // Get filename from Content-Disposition header
-      const contentDisposition = response.headers['content-disposition'];
-      const filenameMatch = contentDisposition?.match(/filename\*=UTF-8''(.+)$/);
-      const filename = filenameMatch ? decodeURIComponent(filenameMatch[1]) : 'audio.mp3';
-      
-      a.download = filename;
+      a.download = ''; // 让浏览器自动处理文件名
+      a.style.display = 'none';
       document.body.appendChild(a);
       a.click();
-      window.URL.revokeObjectURL(downloadUrl);
       document.body.removeChild(a);
+
+      // 提取视频标题作为简单的标识符（这里使用URL作为临时标题）
+      const urlMatch = url.match(/\/video\/([^/?]+)/);
+      const videoId = urlMatch ? urlMatch[1] : 'unknown';
+      const title = `B站音频_${videoId}`;
 
       // Add to download history
       const newRecord: DownloadRecord = {
         url,
-        title: filename.replace('.mp3', ''),
+        title,
         timestamp: Date.now(),
       };
       setDownloadHistory([newRecord, ...(downloadHistory || []).slice(0, 9)]); // Keep last 10 records
 
       toast({
-        title: "下载成功",
-        description: `音频已保存为：${filename}`,
+        title: "下载开始",
+        description: "下载链接已在新窗口打开",
       });
 
       // Clear the input field after successful download
