@@ -38,7 +38,7 @@ export default function Home() {
       // 获取备用标题（视频ID）
       const urlMatch = url.match(/\/video\/([^/?]+)/);
       const videoId = urlMatch ? urlMatch[1] : 'unknown';
-      let fallbackTitle = `B站音频_${videoId}`;
+      const fallbackTitle = `B站音频_${videoId}`;
 
       // 并发执行：同时开始下载和获取标题
       const downloadPromise = new Promise<void>((resolve) => {
