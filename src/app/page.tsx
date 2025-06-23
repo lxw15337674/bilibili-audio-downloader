@@ -35,19 +35,31 @@ export default function Home() {
       // 构建下载链接
       const downloadUrl = `https://bhwa233-api.vercel.app/api/bilibili-audio/download?url=${encodeURIComponent(url)}`;
 
-      // 后台下载：创建隐藏的 a 标签触发下载
-      const a = document.createElement('a');
-      a.href = downloadUrl;
-      a.download = ''; // 让浏览器自动处理文件名
-      a.style.display = 'none';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-
-      // 提取视频标题作为简单的标识符（这里使用URL作为临时标题）
+      // 获取备用标题（视频ID）
       const urlMatch = url.match(/\/video\/([^/?]+)/);
       const videoId = urlMatch ? urlMatch[1] : 'unknown';
-      const title = `B站音频_${videoId}`;
+      let fallbackTitle = `B站音频_${videoId}`;
+
+      // 并发执行：同时开始下载和获取标题
+      const downloadPromise = new Promise<void>((resolve) => {
+        // 后台下载：创建隐藏的 a 标签触发下载
+        const a = document.createElement('a');
+        a.href = downloadUrl;
+        a.download = ''; // 让浏览器自动处理文件名
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        resolve();
+      });
+
+      const titlePromise = fetch(`/api/bilibili-title?url=${encodeURIComponent(url)}`)
+        .then(response => response.ok ? response.json() : null)
+        .then(data => data?.data?.title || fallbackTitle)
+        .catch(() => fallbackTitle);
+
+      // 等待两个操作完成
+      const [, title] = await Promise.all([downloadPromise, titlePromise]);
 
       // Add to download history
       const newRecord: DownloadRecord = {
@@ -59,7 +71,7 @@ export default function Home() {
 
       toast({
         title: "下载开始",
-        description: "下载链接已在新窗口打开",
+        description: `正在下载：${title}`,
       });
 
       // Clear the input field after successful download
