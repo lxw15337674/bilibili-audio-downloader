@@ -9,6 +9,7 @@ import { useLocalStorageState } from 'ahooks';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, Trash2, Github } from 'lucide-react'; // Import Github icon
 import { format } from 'date-fns'; // Import date-fns for formatting
+import axios from 'axios';
 
 interface DownloadRecord {
   url: string;
@@ -32,25 +33,21 @@ export default function Home() {
     setError('');
 
     try {
-      const response = await fetch('/api/download', {
-        method: 'POST',
+      const response = await axios.get('/download', {
+        params: { url },
         headers: {
-          'Content-Type': 'application/json',
+          'Accept': 'audio/mpeg',
         },
-        body: JSON.stringify({ url }),
+        responseType: 'blob'
       });
 
-      if (!response.ok) {
-        throw new Error('下载失败');
-      }
-
-      const blob = await response.blob();
+      const blob = response.data;
       const downloadUrl = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = downloadUrl;
       
       // Get filename from Content-Disposition header
-      const contentDisposition = response.headers.get('Content-Disposition');
+      const contentDisposition = response.headers['content-disposition'];
       const filenameMatch = contentDisposition?.match(/filename\*=UTF-8''(.+)$/);
       const filename = filenameMatch ? decodeURIComponent(filenameMatch[1]) : 'audio.mp3';
       
