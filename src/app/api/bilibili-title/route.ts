@@ -45,6 +45,10 @@ export async function GET(request: NextRequest) {
 
         const videoInfo = data.data;
 
+        // 计算视频时长（分钟）
+        const durationMinutes = Math.floor(videoInfo.duration / 60);
+        console.log(`获取视频信息成功: ${videoInfo.title}[${durationMinutes}m]`);
+
         return NextResponse.json({
             success: true,
             data: {
