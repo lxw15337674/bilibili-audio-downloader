@@ -38,10 +38,10 @@ export default function Home() {
       return;
     }
 
-    // 验证是否为有效的B站视频链接
-    const bilibiliVideoRegex = /^https?:\/\/(www\.)?bilibili\.com\/video\/(BV[a-zA-Z0-9]+|av\d+)/;
-    if (!bilibiliVideoRegex.test(url.trim())) {
-      setError('请输入有效的B站视频链接格式，例如：https://www.bilibili.com/video/BV1234567890');
+    // 验证是否为B站域名
+    const bilibiliDomainRegex = /^https?:\/\/(www\.)?bilibili\.com\//;
+    if (!bilibiliDomainRegex.test(url.trim())) {
+      setError('请输入有效的B站链接');
       setLoading(false);
       return;
     }
@@ -69,12 +69,38 @@ export default function Home() {
       });
 
       const titlePromise = fetch(`/api/bilibili-title?url=${encodeURIComponent(url)}`)
-        .then(response => response.ok ? response.json() : null)
-        .then(data => data?.data?.title || fallbackTitle)
-        .catch(() => fallbackTitle);
+        .then(async response => {
+          if (response.ok) {
+            const data = await response.json();
+            return { title: data?.data?.title || fallbackTitle, hasError: false };
+          } else if (response.status === 400) {
+            // 400错误：链接格式问题或视频不存在
+            const errorData = await response.json().catch(() => ({}));
+            return {
+              title: fallbackTitle,
+              hasError: true,
+              errorMessage: errorData.error || '视频链接可能无效'
+            };
+          } else {
+            return { title: fallbackTitle, hasError: true, errorMessage: '获取视频信息失败' };
+          }
+        })
+        .catch(() => ({ title: fallbackTitle, hasError: true, errorMessage: '网络错误' }));
 
       // 等待两个操作完成
-      const [, title] = await Promise.all([downloadPromise, titlePromise]);
+      const [, titleResult] = await Promise.all([downloadPromise, titlePromise]);
+
+      // 处理标题获取结果
+      const title = titleResult.title;
+
+      // 如果获取标题时出现错误，显示警告
+      if (titleResult.hasError) {
+        toast({
+          variant: "destructive",
+          title: "警告",
+          description: `${titleResult.errorMessage}，但下载将继续进行`,
+        });
+      }
 
       // Add to download history
       const newRecord: DownloadRecord = {

@@ -12,27 +12,9 @@ export async function GET(request: NextRequest) {
             );
         }
 
-        // 验证是否为B站视频链接
-        if (!url.includes('bilibili.com/video/')) {
-            return NextResponse.json(
-                { error: '请提供有效的B站视频链接' },
-                { status: 400 }
-            );
-        }
-
-        // 提取视频ID
-        const bvMatch = url.match(/\/video\/(BV[a-zA-Z0-9]+)/);
-        if (!bvMatch) {
-            return NextResponse.json(
-                { error: '无法解析视频ID' },
-                { status: 400 }
-            );
-        }
-
-        const bvid = bvMatch[1];
 
         // 请求B站API获取视频信息
-        const apiUrl = `https://api.bilibili.com/x/web-interface/view?bvid=${bvid}`;
+        const apiUrl = request.url;
 
         const response = await fetch(apiUrl, {
             headers: {
