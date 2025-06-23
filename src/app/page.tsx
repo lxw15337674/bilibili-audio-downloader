@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useLocalStorageState } from 'ahooks';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Trash2, Github } from 'lucide-react'; // Import Github icon
+import { Loader2, Trash2 } from 'lucide-react'; // Import Github icon
 import { format } from 'date-fns'; // Import date-fns for formatting
 
 interface DownloadRecord {
@@ -98,18 +98,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-background p-4 sm:p-6 md:p-8 relative">
-      <a
-        href="https://github.com/lxw15337674/bilibili-audio-downloader"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="在 GitHub 上查看源代码"
-        className="fixed top-4 right-4 z-50"
-      >
-        <Button variant="outline" size="icon">
-          <Github />
-        </Button>
-      </a>
-
       <div className="max-w-2xl mx-auto space-y-6">
         <Card>
           <CardHeader>
@@ -119,20 +107,6 @@ export default function Home() {
             <p className="text-xs text-muted-foreground text-center pt-1">
               所有下载历史记录均保存在您的浏览器本地，服务器不会保留任何信息。
             </p>
-            <div className="text-center pt-2">
-              <p className="text-xs text-muted-foreground">
-                遇到问题？请前往{' '}
-                <a
-                  href="https://github.com/lxw15337674/bilibili-audio-downloader/issues"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline"
-                >
-                  GitHub Issues
-                </a>
-                反馈
-              </p>
-            </div>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleDownload} className="space-y-6">
