@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import axios from 'axios';
 
 export async function GET(request: NextRequest) {
     try {
@@ -12,22 +13,28 @@ export async function GET(request: NextRequest) {
             );
         }
 
+        // 从B站URL中提取BV号
+        const bvMatch = url.match(/\/video\/(BV[a-zA-Z0-9]+)/);
+        if (!bvMatch) {
+            return NextResponse.json(
+                { error: '无效的B站视频链接' },
+                { status: 400 }
+            );
+        }
+
+        const bvid = bvMatch[1];
 
         // 请求B站API获取视频信息
-        const apiUrl = request.url;
+        const apiUrl = `https://api.bilibili.com/x/web-interface/view?bvid=${bvid}`;
 
-        const response = await fetch(apiUrl, {
+        const response = await axios.get(apiUrl, {
             headers: {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
                 'Referer': 'https://www.bilibili.com/',
             },
         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
+        const data = response.data;
 
         if (data.code !== 0) {
             return NextResponse.json(
@@ -61,6 +68,18 @@ export async function GET(request: NextRequest) {
 
     } catch (error) {
         console.error('获取B站视频信息失败:', error);
+
+        // Handle axios error
+        if (axios.isAxiosError(error)) {
+            return NextResponse.json(
+                {
+                    error: '获取视频信息失败',
+                    details: error.response?.data?.message || error.message || '网络请求失败'
+                },
+                { status: error.response?.status || 500 }
+            );
+        }
+
         return NextResponse.json(
             {
                 error: '获取视频信息失败',

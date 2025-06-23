@@ -4,11 +4,11 @@ import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import { useLocalStorageState } from 'ahooks';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Trash2 } from 'lucide-react'; // Import Github icon
+import { Loader2, Trash2 } from 'lucide-react';
 import { format } from 'date-fns'; // Import date-fns for formatting
+import axios from 'axios';
 
 interface DownloadRecord {
   url: string;
@@ -68,24 +68,28 @@ export default function Home() {
         resolve();
       });
 
-      const titlePromise = fetch(`/api/bilibili-title?url=${encodeURIComponent(url)}`)
-        .then(async response => {
-          if (response.ok) {
-            const data = await response.json();
-            return { title: data?.data?.title || fallbackTitle, hasError: false };
-          } else if (response.status === 400) {
+      const titlePromise = axios.get(`/api/bilibili-title?url=${encodeURIComponent(url)}`)
+        .then(response => {
+          const data = response.data;
+          return { title: data?.data?.title || fallbackTitle, hasError: false, errorMessage: undefined };
+        })
+        .catch(error => {
+          if (axios.isAxiosError(error) && error.response?.status === 400) {
             // 400错误：链接格式问题或视频不存在
-            const errorData = await response.json().catch(() => ({}));
+            const errorData = error.response.data || {};
             return {
               title: fallbackTitle,
               hasError: true,
               errorMessage: errorData.error || '视频链接可能无效'
             };
           } else {
-            return { title: fallbackTitle, hasError: true, errorMessage: '获取视频信息失败' };
+            return {
+              title: fallbackTitle,
+              hasError: true,
+              errorMessage: axios.isAxiosError(error) ? (error.response?.data?.error || '获取视频信息失败') : '网络错误'
+            };
           }
-        })
-        .catch(() => ({ title: fallbackTitle, hasError: true, errorMessage: '网络错误' }));
+        });
 
       // 等待两个操作完成
       const [, titleResult] = await Promise.all([downloadPromise, titlePromise]);
@@ -94,7 +98,7 @@ export default function Home() {
       const title = titleResult.title;
 
       // 如果获取标题时出现错误，显示警告
-      if (titleResult.hasError) {
+      if (titleResult.hasError && titleResult.errorMessage) {
         toast({
           variant: "destructive",
           title: "警告",
