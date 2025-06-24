@@ -8,15 +8,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         url: `${baseUrl}/${locale}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
-        priority: 1.0,
-        alternates: {
-            languages: {
-                'zh-Hans': `${baseUrl}/zh`,
-                'zh-Hant': `${baseUrl}/zh-tw`,
-                'zh-TW': `${baseUrl}/zh-tw`,
-                'en': `${baseUrl}/en`,
-                'x-default': `${baseUrl}/zh`,
-            }
-        }
+        priority: locale === i18n.defaultLocale ? 1.0 : 0.8,
     }))
 } 

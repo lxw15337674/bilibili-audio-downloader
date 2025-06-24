@@ -1,6 +1,0 @@
-# Allow all crawlers
-User-agent: *
-Allow: /
-
-# Sitemap location
-Sitemap: https://bilibili-audio-downloader.vercel.app/sitemap.xml 
