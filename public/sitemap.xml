@@ -1,9 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- 简体中文版本 -->
   <url>
-    <loc>https://bilibili-audio-downloader.vercel.app</loc>
-    <lastmod>2024-03-14</lastmod>
+    <loc>https://bilibili-audio-downloader.vercel.app/zh</loc>
+    <lastmod>2024-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://bilibili-audio-downloader.vercel.app/zh" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://bilibili-audio-downloader.vercel.app/zh-tw" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://bilibili-audio-downloader.vercel.app/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bilibili-audio-downloader.vercel.app/zh" />
+  </url>
+  
+  <!-- 繁體中文版本 -->
+  <url>
+    <loc>https://bilibili-audio-downloader.vercel.app/zh-tw</loc>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://bilibili-audio-downloader.vercel.app/zh" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://bilibili-audio-downloader.vercel.app/zh-tw" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://bilibili-audio-downloader.vercel.app/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bilibili-audio-downloader.vercel.app/zh" />
+  </url>
+  
+  <!-- 英文版本 -->
+  <url>
+    <loc>https://bilibili-audio-downloader.vercel.app/en</loc>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://bilibili-audio-downloader.vercel.app/zh" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://bilibili-audio-downloader.vercel.app/zh-tw" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://bilibili-audio-downloader.vercel.app/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bilibili-audio-downloader.vercel.app/zh" />
   </url>
 </urlset> 

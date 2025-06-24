@@ -1,0 +1,25 @@
+{
+    "name": "B站音频下载器",
+    "short_name": "B站音频",
+    "description": "免费在线 B 站音频下载工具，支持提取哔哩哔哩视频 MP3 音频",
+    "start_url": "/zh",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#000000",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": [
+        "productivity",
+        "utilities"
+    ],
+    "lang": "zh-CN",
+    "scope": "/",
+    "id": "bilibili-audio-downloader"
+}
