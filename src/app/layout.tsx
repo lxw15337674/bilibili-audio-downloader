@@ -17,9 +17,9 @@ const geistMono = Geist_Mono({
 
 // Updated Metadata from page.tsx
 export const metadata: Metadata = {
-  title: 'B站音频下载器 - 轻松提取哔哩哔哩视频 MP3 音频',
+  title: 'B站音频提取 - 轻松提取哔哩哔哩视频 MP3 音频',
   description: '免费在线 B 站音频下载工具，输入 Bilibili 视频链接，一键提取并下载高质量 MP3 音频文件。支持 BV 号和 AV 号。',
-  keywords: ['B站音频下载', '哔哩哔哩音频提取', 'Bilibili 转 MP3', 'BV 转 MP3', 'AV 转 MP3', '视频转音频', 'B站下载器'],
+  keywords: ['B站音频下载', '哔哩哔哩音频提取', 'Bilibili 转 MP3', 'BV 转 MP3', 'bilibili音频提取器', '视频转音频', 'B站下载器'],
   openGraph: {
     title: 'B站音频下载器 - 轻松提取哔哩哔哩视频 MP3 音频',
     description: '免费在线 B 站音频下载工具，输入 Bilibili 视频链接，一键提取并下载高质量 MP3 音频文件。',
