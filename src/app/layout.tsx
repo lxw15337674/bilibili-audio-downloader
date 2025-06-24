@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster"
 import { Analytics } from "@vercel/analytics/next"
+import { ClientI18nProvider } from "./ClientI18nProvider"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,7 +16,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Updated Metadata from page.tsx
+// Default Metadata (will be updated dynamically by client-side)
 export const metadata: Metadata = {
   title: 'B站音频提取 - 轻松提取哔哩哔哩视频 MP3 音频',
   description: '免费在线 B 站音频下载工具，输入 Bilibili 视频链接，一键提取并下载高质量 MP3 音频文件。支持 BV 号和 AV 号。',
@@ -23,15 +24,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'B站音频下载器 - 轻松提取哔哩哔哩视频 MP3 音频',
     description: '免费在线 B 站音频下载工具，输入 Bilibili 视频链接，一键提取并下载高质量 MP3 音频文件。',
-    url: 'https://your-website-url.com', // Replace with your actual URL
+    url: 'https://bilibili-audio-downloader.vercel.app',
     siteName: 'B站音频下载器',
-    // images: [ // Optional: Add an image for social sharing
-    //   {
-    //     url: 'https://your-website-url.com/og-image.png', 
-    //     width: 800,
-    //     height: 600,
-    //   },
-    // ],
     locale: 'zh_CN',
     type: 'website',
   },
@@ -44,7 +38,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://bilibili-audio-downloader.vercel.app", // Keep or update your canonical URL
+    canonical: "https://bilibili-audio-downloader.vercel.app",
   },
 };
 
@@ -59,16 +53,18 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Toaster />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={true}
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
-        <Analytics />
+        <ClientI18nProvider>
+          <Toaster />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem={true}
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+          <Analytics />
+        </ClientI18nProvider>
       </body>
     </html>
   );

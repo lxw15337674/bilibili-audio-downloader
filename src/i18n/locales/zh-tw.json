@@ -1,0 +1,50 @@
+{
+    "common": {
+        "appName": "B站音頻下載",
+        "loading": "載入中...",
+        "error": "錯誤",
+        "success": "成功",
+        "confirm": "確認",
+        "cancel": "取消"
+    },
+    "metadata": {
+        "title": "B站音頻提取 - 輕鬆提取嗶哩嗶哩影片 MP3 音頻",
+        "description": "免費線上 B 站音頻下載工具，輸入 Bilibili 影片連結，一鍵提取並下載高品質 MP3 音頻檔案。支援 BV 號和 AV 號。",
+        "keywords": "B站音頻下載,嗶哩嗶哩音頻提取,Bilibili 轉 MP3,BV 轉 MP3,bilibili音頻提取器,影片轉音頻,B站下載器",
+        "ogTitle": "B站音頻下載器 - 輕鬆提取嗶哩嗶哩影片 MP3 音頻",
+        "ogDescription": "免費線上 B 站音頻下載工具，輸入 Bilibili 影片連結，一鍵提取並下載高品質 MP3 音頻檔案。",
+        "siteName": "B站音頻下載器"
+    },
+    "main": {
+        "title": "B站音頻下載",
+        "subtitle": "下載歷史記錄儲存在您的瀏覽器本機，伺服器不會保留任何資訊。",
+        "urlPlaceholder": "輸入完整的B站影片連結，例如：https://www.bilibili.com/video/BV1LrETzVE8t",
+        "pasteFromClipboard": "從剪貼簿貼上連結",
+        "downloadAudio": "下載音頻",
+        "downloading": "下載中...",
+        "downloadHistory": "下載歷史",
+        "recentRecords": "最近 50 筆記錄",
+        "clearHistory": "清除歷史",
+        "viewSource": "檢視來源影片",
+        "redownload": "重新下載"
+    },
+    "errors": {
+        "emptyUrl": "請輸入影片連結",
+        "invalidUrl": "請輸入有效的B站連結",
+        "downloadError": "下載過程中出現錯誤",
+        "invalidVideoLink": "影片連結可能無效",
+        "fetchVideoInfoFailed": "獲取影片資訊失敗",
+        "networkError": "網路錯誤",
+        "clipboardReadFailed": "讀取剪貼簿失敗",
+        "clipboardPermissionDescription": "請檢查是否授予了剪貼簿權限"
+    },
+    "messages": {
+        "downloadFailed": "下載失敗",
+        "historyCleared": "下載歷史已清除",
+        "linkFilled": "連結已填入",
+        "linkFilledDescription": "點擊下載按鈕重新下載"
+    },
+    "fallback": {
+        "audioTitle": "B站音頻_{{videoId}}"
+    }
+}

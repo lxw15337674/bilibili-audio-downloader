@@ -9,6 +9,9 @@ import { useToast } from '@/hooks/use-toast';
 import { Loader2, Trash2 } from 'lucide-react';
 import { format } from 'date-fns'; // Import date-fns for formatting
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { useUpdateMetadata } from '@/hooks/useUpdateMetadata';
 
 interface DownloadRecord {
   url: string;
@@ -22,9 +25,13 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [downloadHistory, setDownloadHistory] = useLocalStorageState<DownloadRecord[]>('download-history', {
     defaultValue: []
   });
+
+  // 更新页面 metadata
+  useUpdateMetadata();
 
   const handleDownload = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,7 +40,7 @@ export default function Home() {
 
     // URL格式验证
     if (!url.trim()) {
-      setError('请输入视频链接');
+      setError(t('errors.emptyUrl'));
       setLoading(false);
       return;
     }
@@ -41,7 +48,7 @@ export default function Home() {
     // 验证是否为B站域名
     const bilibiliDomainRegex = /^https?:\/\/(www\.)?bilibili\.com\//;
     if (!bilibiliDomainRegex.test(url.trim())) {
-      setError('请输入有效的B站链接');
+      setError(t('errors.invalidUrl'));
       setLoading(false);
       return;
     }
@@ -53,7 +60,7 @@ export default function Home() {
       // 获取备用标题（视频ID）
       const urlMatch = url.match(/\/video\/([^/?]+)/);
       const videoId = urlMatch ? urlMatch[1] : 'unknown';
-      const fallbackTitle = `B站音频_${videoId}`;
+      const fallbackTitle = t('fallback.audioTitle', { videoId });
 
       // 并发执行：同时开始下载和获取标题
       const downloadPromise = new Promise<void>((resolve) => {
@@ -80,13 +87,13 @@ export default function Home() {
             return {
               title: fallbackTitle,
               hasError: true,
-              errorMessage: errorData.error || '视频链接可能无效'
+              errorMessage: errorData.error || t('errors.invalidVideoLink')
             };
           } else {
             return {
               title: fallbackTitle,
               hasError: true,
-              errorMessage: axios.isAxiosError(error) ? (error.response?.data?.error || '获取视频信息失败') : '网络错误'
+              errorMessage: axios.isAxiosError(error) ? (error.response?.data?.error || t('errors.fetchVideoInfoFailed')) : t('errors.networkError')
             };
           }
         });
@@ -105,11 +112,11 @@ export default function Home() {
       setDownloadHistory([newRecord, ...(downloadHistory || []).slice(0, 50)]); 
       setUrl('');
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : '下载过程中出现错误';
+      const errorMessage = err instanceof Error ? err.message : t('errors.downloadError');
       setError(errorMessage);
       toast({
         variant: "destructive",
-        title: "下载失败",
+        title: t('messages.downloadFailed'),
         description: errorMessage,
       });
     } finally {
@@ -120,21 +127,26 @@ export default function Home() {
   const clearHistory = () => {
     setDownloadHistory([]);
     toast({
-      title: "下载历史已清除",
+      title: t('messages.historyCleared'),
     });
   };
 
   return (
     <div className="h-screen flex flex-col bg-background">
-      <main className="flex-1 p-4 sm:p-6 md:p-8 overflow-hidden">
+      {/* 顶部语言切换 */}
+      <div className="flex justify-end p-4">
+        <LanguageSwitcher />
+      </div>
+
+      <main className="flex-1 p-4 sm:p-6 md:p-8 pt-0 overflow-hidden">
         <div className="max-w-2xl mx-auto h-full flex flex-col gap-4">
           <Card className="shrink-0">
             <CardHeader>
               <h1 className="text-2xl text-center font-semibold tracking-tight">
-                <CardTitle>B站音频下载</CardTitle>
+                <CardTitle>{t('main.title')}</CardTitle>
               </h1>
               <p className="text-xs text-muted-foreground text-center pt-1">
-                下载历史记录保存在您的浏览器本地，服务器不会保留任何信息。
+                {t('main.subtitle')}
               </p>
             </CardHeader>
             <CardContent>
@@ -144,7 +156,7 @@ export default function Home() {
                     id="url"
                     value={url}
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setUrl(e.target.value)}
-                    placeholder="输入完整的B站视频链接,例如：https://www.bilibili.com/video/BV1LrETzVE8t"
+                    placeholder={t('main.urlPlaceholder')}
                     required
                     className="min-h-[80px] resize-none"
                   />
@@ -163,13 +175,13 @@ export default function Home() {
                           console.error('Failed to read clipboard:', err);
                           toast({
                             variant: "destructive",
-                            title: "读取剪贴板失败",
-                            description: "请检查是否授予了剪贴板权限",
+                            title: t('errors.clipboardReadFailed'),
+                            description: t('errors.clipboardPermissionDescription'),
                           });
                         }
                       }}
                     >
-                      从剪贴板粘贴链接
+                      {t('main.pasteFromClipboard')}
                     </Button>
                     <Button
                       type="submit"
@@ -177,7 +189,7 @@ export default function Home() {
                       disabled={loading || !url.trim()}
                     >
                       {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-                      {loading ? '下载中...' : '下载音频'}
+                      {loading ? t('main.downloading') : t('main.downloadAudio')}
                     </Button>
                   </div>
                 </div>
@@ -192,12 +204,12 @@ export default function Home() {
               <CardHeader className="flex flex-row items-center justify-between pb-2 shrink-0">
                 <div className="space-y-1">
                   <h2 className="text-lg font-semibold tracking-tight">
-                    <CardTitle>下载历史</CardTitle>
+                    <CardTitle>{t('main.downloadHistory')}</CardTitle>
                   </h2>
-                  <CardDescription>最近 50 条记录</CardDescription>
+                  <CardDescription>{t('main.recentRecords')}</CardDescription>
                 </div>
                 <Button variant="outline" size="sm" onClick={clearHistory}>
-                  清除历史
+                  {t('main.clearHistory')}
                 </Button>
               </CardHeader>
               <CardContent className="flex-1 min-h-0 p-6 pt-0">
@@ -220,7 +232,7 @@ export default function Home() {
                             window.open(record.url, '_blank');
                           }}
                         >
-                          查看源视频
+                          {t('main.viewSource')}
                         </Button>
                         <Button
                           variant="outline"
@@ -228,13 +240,13 @@ export default function Home() {
                           onClick={() => {
                             setUrl(record.url);
                             toast({
-                              title: "链接已填入",
-                              description: "点击下载按钮重新下载",
+                              title: t('messages.linkFilled'),
+                              description: t('messages.linkFilledDescription'),
                             });
                             window.scrollTo({ top: 0, behavior: 'smooth' });
                           }}
                         >
-                          重新下载
+                          {t('main.redownload')}
                         </Button>
                       </div>
                     </div>

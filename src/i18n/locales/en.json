@@ -1,0 +1,50 @@
+{
+    "common": {
+        "appName": "Bilibili Audio Downloader",
+        "loading": "Loading...",
+        "error": "Error",
+        "success": "Success",
+        "confirm": "Confirm",
+        "cancel": "Cancel"
+    },
+    "metadata": {
+        "title": "Bilibili Audio Extractor - Easily Extract MP3 Audio from Bilibili Videos",
+        "description": "Free online Bilibili audio download tool. Input Bilibili video links to extract and download high-quality MP3 audio files with one click. Supports BV and AV numbers.",
+        "keywords": "Bilibili audio download,Bilibili audio extraction,Bilibili to MP3,BV to MP3,bilibili audio extractor,video to audio,Bilibili downloader",
+        "ogTitle": "Bilibili Audio Downloader - Easily Extract MP3 Audio from Bilibili Videos",
+        "ogDescription": "Free online Bilibili audio download tool. Input Bilibili video links to extract and download high-quality MP3 audio files with one click.",
+        "siteName": "Bilibili Audio Downloader"
+    },
+    "main": {
+        "title": "Bilibili Audio Download",
+        "subtitle": "Download history is saved locally in your browser, no information is retained on the server.",
+        "urlPlaceholder": "Enter the complete Bilibili video link, e.g.: https://www.bilibili.com/video/BV1LrETzVE8t",
+        "pasteFromClipboard": "Paste Link from Clipboard",
+        "downloadAudio": "Download Audio",
+        "downloading": "Downloading...",
+        "downloadHistory": "Download History",
+        "recentRecords": "Recent 50 records",
+        "clearHistory": "Clear History",
+        "viewSource": "View Source Video",
+        "redownload": "Re-download"
+    },
+    "errors": {
+        "emptyUrl": "Please enter a video link",
+        "invalidUrl": "Please enter a valid Bilibili link",
+        "downloadError": "An error occurred during download",
+        "invalidVideoLink": "Video link may be invalid",
+        "fetchVideoInfoFailed": "Failed to fetch video information",
+        "networkError": "Network error",
+        "clipboardReadFailed": "Failed to read clipboard",
+        "clipboardPermissionDescription": "Please check if clipboard permission is granted"
+    },
+    "messages": {
+        "downloadFailed": "Download Failed",
+        "historyCleared": "Download history cleared",
+        "linkFilled": "Link filled",
+        "linkFilledDescription": "Click download button to re-download"
+    },
+    "fallback": {
+        "audioTitle": "Bilibili_Audio_{{videoId}}"
+    }
+}
