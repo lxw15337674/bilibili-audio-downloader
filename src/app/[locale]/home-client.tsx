@@ -158,7 +158,7 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                                         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setUrl(e.target.value)}
                                         placeholder={dict.form.placeholder}
                                         required
-                                        className="min-h-[80px] resize-none"
+                                        className="min-h-[80px] resize-none break-all"
                                     />
                                     <div className="flex gap-2">
                                         <Button
@@ -168,9 +168,7 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                                             onClick={async () => {
                                                 try {
                                                     const text = await navigator.clipboard.readText();
-                                                    if (text.includes('bilibili.com/video/')) {
                                                         setUrl(text);
-                                                    }
                                                 } catch (err) {
                                                     console.error('Failed to read clipboard:', err);
                                                     toast({
