@@ -2,6 +2,8 @@ export interface Dictionary {
     page: {
         title: string;
         description: string;
+        feedback: string;
+        feedbackLinkText: string;
     };
     form: {
         placeholder: string;
