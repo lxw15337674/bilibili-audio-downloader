@@ -1,45 +1,52 @@
 {
     "page": {
-        "title": "Bilibili Audio Downloader",
-        "description": "A simple tool to download audio from Bilibili videos. Downloads in the best audio quality by default.",
-        "feedback": "For any suggestions or bug reports, please ",
-        "feedbackLinkText": "submit an issue."
+        "title": "Bilibili & Douyin Downloader",
+        "description": "Download history is saved locally in your browser, no server-side data retention.",
+        "feedback": "For feedback or suggestions, please ",
+        "feedbackLinkText": "submit an issue on GitHub"
     },
     "form": {
-        "placeholder": "Paste the Bilibili video link here, e.g., https://www.bilibili.com/video/BV1...",
-        "pasteButton": "Paste link from clipboard",
-        "downloadButton": "Download Audio",
+        "placeholder": "Paste Bilibili video link here...",
+        "douyinPlaceholder": "Paste Douyin video/note link here...",
+        "pasteButton": "Paste",
+        "downloadButton": "Download",
         "downloading": "Downloading...",
         "fallbackTitle": "Bilibili_Audio"
     },
-    "errors": {
-        "emptyUrl": "Please enter a video link",
-        "invalidUrl": "Please enter a valid Bilibili link",
-        "downloadFailed": "Download failed",
-        "clipboardFailed": "Failed to read clipboard",
-        "clipboardPermission": "Please check if clipboard permissions are granted",
-        "downloadError": "An error occurred during download",
-        "videoLinkInvalid": "Video link may be invalid",
-        "getVideoInfoFailed": "Failed to get video information",
-        "networkError": "Network error"
+    "result": {
+        "title": "Download Result",
+        "downloadButton": "Download Video"
     },
     "history": {
-        "title": "Download History",
-        "description": "Last 50 records",
-        "clear": "Clear History",
-        "cleared": "Download history cleared",
+        "title": "History",
+        "description": "Your recent downloads (last 50)",
+        "clear": "Clear",
         "viewSource": "View Source",
-        "redownload": "Re-download",
-        "linkFilled": "Link filled in",
-        "clickToRedownload": "Click download button to re-download"
+        "redownload": "Re-download"
+    },
+    "errors": {
+        "emptyUrl": "URL cannot be empty.",
+        "invalidUrl": "Please enter a valid Bilibili or Douyin link.",
+        "downloadError": "An unknown error occurred during download.",
+        "downloadFailed": "Download failed",
+        "videoLinkInvalid": "Video link may be invalid.",
+        "getVideoInfoFailed": "Failed to get video information, please try again later.",
+        "networkError": "Network error.",
+        "clipboardFailed": "Failed to read clipboard.",
+        "clipboardPermission": "Please check if clipboard permission is granted."
+    },
+    "toast": {
+        "historyCleared": "Download history cleared.",
+        "linkFilled": "Link has been pasted.",
+        "clickToRedownload": "Click the download button to start."
     },
     "metadata": {
-        "title": "Bilibili Audio Downloader - Extract MP3 from Bilibili Videos",
-        "description": "Free online Bilibili audio download tool. Enter a Bilibili video link to extract and download high-quality MP3 audio files. Supports BV and AV numbers.",
-        "keywords": "Bilibili audio download,Bilibili audio extractor,Bilibili to MP3,BV to MP3,bilibili audio converter,video to audio,Bilibili downloader",
-        "ogTitle": "Bilibili Audio Downloader - Extract MP3 from Bilibili Videos",
-        "ogDescription": "Free online Bilibili audio download tool. Enter a Bilibili video link to extract and download high-quality MP3 audio files.",
-        "siteName": "Bilibili Audio Downloader"
+        "title": "Bilibili Audio & Douyin Video Downloader",
+        "description": "Free online tool to download Bilibili audio and Douyin videos. Paste a link to extract high-quality MP3 audio or download watermark-free videos.",
+        "keywords": "Bilibili audio download, Douyin video download, Bilibili to MP3, Douyin no-watermark",
+        "ogTitle": "Bilibili Audio & Douyin Video Downloader",
+        "ogDescription": "Free online tool for Bilibili audio and Douyin video downloads. One-click audio extraction from Bilibili and watermark-free video downloads from Douyin.",
+        "siteName": "Bilibili & Douyin Downloader"
     },
     "languages": {
         "zh": "简体中文",

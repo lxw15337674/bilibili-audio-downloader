@@ -17,6 +17,15 @@ interface DownloadRecord {
     url: string;
     title: string;
     timestamp: number;
+    service: 'bilibili' | 'douyin';
+    cover?: string;
+    downloadUrl?: string;
+}
+
+interface DouyinVideoInfo {
+    title: string;
+    coverUrl: string;
+    downloadUrl: string;
 }
 
 interface HomeClientProps {
@@ -28,46 +37,50 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
     const [url, setUrl] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [service, setService] = useState<'bilibili' | 'douyin'>('bilibili');
+
     const { toast } = useToast();
     const [downloadHistory, setDownloadHistory] = useLocalStorageState<DownloadRecord[]>('download-history', {
         defaultValue: []
     });
 
-    const handleDownload = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         setError('');
 
-        // URL格式验证
         if (!url.trim()) {
             setError(dict.errors.emptyUrl);
             setLoading(false);
             return;
         }
 
-        // 验证是否为B站域名
+        if (service === 'bilibili') {
+            await handleBilibiliDownload();
+        } else {
+            await handleDouyinDownload();
+        }
+
+        setLoading(false);
+    };
+
+    const handleBilibiliDownload = async () => {
         const bilibiliDomainRegex = /^https?:\/\/(www\.)?bilibili\.com\//;
         if (!bilibiliDomainRegex.test(url.trim())) {
             setError(dict.errors.invalidUrl);
-            setLoading(false);
             return;
         }
 
         try {
-            // 构建下载链接
             const downloadUrl = `https://bhwa233-api.vercel.app/api/bilibili-audio/download?url=${encodeURIComponent(url)}`;
-
-            // 获取备用标题（视频ID）
             const urlMatch = url.match(/\/video\/([^/?]+)/);
             const videoId = urlMatch ? urlMatch[1] : 'unknown';
             const fallbackTitle = `${dict.form.fallbackTitle}_${videoId}`;
 
-            // 并发执行：同时开始下载和获取标题
             const downloadPromise = new Promise<void>((resolve) => {
-                // 后台下载：创建隐藏的 a 标签触发下载
                 const a = document.createElement('a');
                 a.href = downloadUrl;
-                a.download = ''; // 让浏览器自动处理文件名
+                a.download = '';
                 a.style.display = 'none';
                 document.body.appendChild(a);
                 a.click();
@@ -76,58 +89,59 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
             });
 
             const titlePromise = axios.get(`/api/bilibili-title?url=${encodeURIComponent(url)}`)
-                .then(response => {
-                    const data = response.data;
-                    return { title: data?.data?.title || fallbackTitle, hasError: false, errorMessage: undefined };
-                })
-                .catch(error => {
-                    if (axios.isAxiosError(error) && error.response?.status === 400) {
-                        // 400错误：链接格式问题或视频不存在
-                        const errorData = error.response.data || {};
-                        return {
-                            title: fallbackTitle,
-                            hasError: true,
-                            errorMessage: errorData.error || dict.errors.videoLinkInvalid
-                        };
-                    } else {
-                        return {
-                            title: fallbackTitle,
-                            hasError: true,
-                            errorMessage: axios.isAxiosError(error) ? (error.response?.data?.error || dict.errors.getVideoInfoFailed) : dict.errors.networkError
-                        };
-                    }
-                });
+                .then(response => ({ title: response.data?.data?.title || fallbackTitle }))
+                .catch(() => ({ title: fallbackTitle }));
 
-            // 等待两个操作完成
-            const [, titleResult] = await Promise.all([downloadPromise, titlePromise]);
-
-            // 处理标题获取结果
-            const title = titleResult.title;
+            const [{ title }] = await Promise.all([titlePromise, downloadPromise]);
 
             const newRecord: DownloadRecord = {
                 url,
                 title,
                 timestamp: Date.now(),
+                service: 'bilibili',
             };
             setDownloadHistory([newRecord, ...(downloadHistory || []).slice(0, 50)]);
             setUrl('');
         } catch (err) {
             const errorMessage = err instanceof Error ? err.message : dict.errors.downloadError;
             setError(errorMessage);
-            toast({
-                variant: "destructive",
-                title: dict.errors.downloadFailed,
-                description: errorMessage,
-            });
-        } finally {
-            setLoading(false);
+            toast({ variant: "destructive", title: dict.errors.downloadFailed, description: errorMessage });
+        }
+    };
+
+    const handleDouyinDownload = async () => {
+        const douyinDomainRegex = /^https?:\/\/(www\.)?douyin\.com\//;
+        if (!douyinDomainRegex.test(url.trim())) {
+            setError(dict.errors.invalidUrl);
+            return;
+        }
+        try {
+            const response = await axios.get(`/api/douyin/download?url=${encodeURIComponent(url)}`);
+            const data = response.data as DouyinVideoInfo;
+
+            window.open(data.downloadUrl, '_blank');
+
+            const newRecord: DownloadRecord = {
+                url,
+                title: data.title,
+                timestamp: Date.now(),
+                service: 'douyin',
+                cover: data.coverUrl,
+                downloadUrl: data.downloadUrl
+            };
+            setDownloadHistory([newRecord, ...(downloadHistory || []).slice(0, 50)]);
+            setUrl('');
+        } catch (err) {
+            const errorMessage = axios.isAxiosError(err) ? (err.response?.data?.error || dict.errors.getVideoInfoFailed) : dict.errors.networkError;
+            setError(errorMessage);
+            toast({ variant: "destructive", title: dict.errors.downloadFailed, description: errorMessage });
         }
     };
 
     const clearHistory = () => {
         setDownloadHistory([]);
         toast({
-            title: dict.history.cleared,
+            title: dict.toast.historyCleared,
         });
     };
 
@@ -148,7 +162,11 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                             <p className="text-xs text-muted-foreground text-center pt-1">
                                 {dict.page.description}
                             </p>
-                            <p className="text-center text-xs text-muted-foreground">
+                            <div className="flex justify-center gap-2 pt-4">
+                                <Button variant={service === 'bilibili' ? 'default' : 'outline'} onClick={() => setService('bilibili')}>Bilibili</Button>
+                                <Button variant={service === 'douyin' ? 'default' : 'outline'} onClick={() => setService('douyin')}>Douyin</Button>
+                            </div>
+                            <p className="text-center text-xs text-muted-foreground pt-4">
                                 {dict.page.feedback}
                                 <a
                                     href="https://github.com/lxw15337674/bilibili-audio-downloader-report/issues/new"
@@ -161,13 +179,13 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                             </p>
                         </CardHeader>
                         <CardContent>
-                            <form onSubmit={handleDownload} className="space-y-6">
+                            <form onSubmit={handleSubmit} className="space-y-6">
                                 <div className="space-y-2">
                                     <Textarea
                                         id="url"
                                         value={url}
                                         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setUrl(e.target.value)}
-                                        placeholder={dict.form.placeholder}
+                                        placeholder={service === 'bilibili' ? dict.form.placeholder : dict.form.douyinPlaceholder}
                                         required
                                         className="min-h-[80px] resize-none break-all"
                                     />
@@ -208,6 +226,7 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                             </form>
                         </CardContent>
                     </Card>
+
                  
                     {downloadHistory && downloadHistory.length > 0 && (
                         <Card className="flex-1 min-h-0 flex flex-col">
@@ -248,12 +267,17 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                                                     variant="outline"
                                                     size="sm"
                                                     onClick={() => {
-                                                        setUrl(record.url);
-                                                        toast({
-                                                            title: dict.history.linkFilled,
-                                                            description: dict.history.clickToRedownload,
-                                                        });
-                                                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                                                        if (record.service === 'bilibili') {
+                                                            const downloadUrl = `https://bhwa233-api.vercel.app/api/bilibili-audio/download?url=${encodeURIComponent(record.url)}`;
+                                                            const a = document.createElement('a');
+                                                            a.href = downloadUrl;
+                                                            a.download = '';
+                                                            document.body.appendChild(a);
+                                                            a.click();
+                                                            document.body.removeChild(a);
+                                                        } else if (record.service === 'douyin' && record.downloadUrl) {
+                                                            window.open(record.downloadUrl, '_blank');
+                                                        }
                                                     }}
                                                 >
                                                     {dict.history.redownload}

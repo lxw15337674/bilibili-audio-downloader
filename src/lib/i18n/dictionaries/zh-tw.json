@@ -1,45 +1,52 @@
 {
     "page": {
-        "title": "Bilibili 音訊下載器",
-        "description": "一個用於從 Bilibili 影片中下載音訊的簡單工具，默認會以最佳音頻質量下載。",
-        "feedback": "如有任何建議或 Bug，請 ",
-        "feedbackLinkText": "提交 Issue。"
+        "title": "Bilibili & 抖音 下載器",
+        "description": "下載歷史記錄儲存在您的瀏覽器本機，伺服器不會保留任何資訊。",
+        "feedback": "如有回饋或建議，請至 ",
+        "feedbackLinkText": "GitHub 提交 issue"
     },
     "form": {
-        "placeholder": "在此處貼上 Bilibili 影片連結，例如 https://www.bilibili.com/video/BV1...",
-        "pasteButton": "從剪貼簿貼上連結",
-        "downloadButton": "下載音訊",
+        "placeholder": "請在此處貼上B站影片連結...",
+        "douyinPlaceholder": "請在此處貼上抖音影片/圖文連結...",
+        "pasteButton": "貼上",
+        "downloadButton": "下載",
         "downloading": "下載中...",
         "fallbackTitle": "B站音訊"
     },
-    "errors": {
-        "emptyUrl": "請輸入視訊連結",
-        "invalidUrl": "請輸入有效的B站連結",
-        "downloadFailed": "下載失敗",
-        "clipboardFailed": "讀取剪貼簿失敗",
-        "clipboardPermission": "請檢查是否授予剪貼簿權限",
-        "downloadError": "下載過程中發生錯誤",
-        "videoLinkInvalid": "視訊連結可能無效",
-        "getVideoInfoFailed": "獲取視訊資訊失敗",
-        "networkError": "網路錯誤"
+    "result": {
+        "title": "下載結果",
+        "downloadButton": "下載影片"
     },
     "history": {
-        "title": "下載記錄",
-        "description": "最近 50 條記錄",
-        "clear": "清除記錄",
-        "cleared": "下載記錄已清除",
-        "viewSource": "查看源視訊",
-        "redownload": "重新下載",
-        "linkFilled": "連結已填入",
-        "clickToRedownload": "點擊下載按鈕重新下載"
+        "title": "歷史記錄",
+        "description": "您最近的下載（最近50條）",
+        "clear": "清除",
+        "viewSource": "檢視來源",
+        "redownload": "重新下載"
+    },
+    "errors": {
+        "emptyUrl": "連結不能為空。",
+        "invalidUrl": "請輸入有效的Bilibili或抖音連結。",
+        "downloadError": "下載時發生未知錯誤。",
+        "downloadFailed": "下載失敗",
+        "videoLinkInvalid": "影片連結可能無效。",
+        "getVideoInfoFailed": "獲取影片資訊失敗，請稍後重試。",
+        "networkError": "網路錯誤。",
+        "clipboardFailed": "讀取剪貼簿失敗。",
+        "clipboardPermission": "請檢查剪貼簿權限是否已授予。"
+    },
+    "toast": {
+        "historyCleared": "下載歷史已清除。",
+        "linkFilled": "連結已貼上。",
+        "clickToRedownload": "點擊下載按鈕以開始。"
     },
     "metadata": {
-        "title": "B站音訊提取 - 輕鬆提取嗶哩嗶哩視訊 MP3 音訊",
-        "description": "免費線上 B 站音訊下載工具，輸入 Bilibili 視訊連結，一鍵提取並下載高品質 MP3 音訊檔案。支援 BV 號和 AV 號。",
-        "keywords": "B站音訊下載,嗶哩嗶哩音訊提取,Bilibili 轉 MP3,BV 轉 MP3,bilibili音訊轉換器,視訊轉音訊,B站下載器",
-        "ogTitle": "B站音訊下載器 - 輕鬆提取嗶哩嗶哩視訊 MP3 音訊",
-        "ogDescription": "免費線上 B 站音訊下載工具，輸入 Bilibili 視訊連結，一鍵提取並下載高品質 MP3 音訊檔案。",
-        "siteName": "B站音訊下載器"
+        "title": "B站音訊提取 | 抖音影片下載 - 輕鬆提取嗶哩嗶哩影片MP3音訊及抖音無浮水印影片",
+        "description": "免費線上B站音訊下載、抖音影片下載工具。輸入連結，一鍵提取並下載高品質MP3音訊檔案或無浮水印影片。支援B站BV/AV號及抖音分享連結。",
+        "keywords": "B站音訊下載,抖音影片下載,嗶哩嗶哩音訊提取,Bilibili轉MP3,抖音去浮水印,影片下載器",
+        "ogTitle": "B站音訊下載器 | 抖音影片下載器",
+        "ogDescription": "免費線上B站音訊和抖音影片下載工具。一鍵提取B站音訊，下載抖音無浮水印影片。",
+        "siteName": "B站抖音下載器"
     },
     "languages": {
         "zh": "简体中文",

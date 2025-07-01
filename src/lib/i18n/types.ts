@@ -7,6 +7,7 @@ export interface Dictionary {
     };
     form: {
         placeholder: string;
+        douyinPlaceholder: string;
         pasteButton: string;
         downloadButton: string;
         downloading: string;
@@ -23,6 +24,10 @@ export interface Dictionary {
         getVideoInfoFailed: string;
         networkError: string;
     };
+    result: {
+        title: string;
+        downloadButton: string;
+    };
     history: {
         title: string;
         description: string;
@@ -30,6 +35,11 @@ export interface Dictionary {
         cleared: string;
         viewSource: string;
         redownload: string;
+        linkFilled: string;
+        clickToRedownload: string;
+    };
+    toast: {
+        historyCleared: string;
         linkFilled: string;
         clickToRedownload: string;
     };
