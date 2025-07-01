@@ -1,10 +1,12 @@
 {
     "page": {
         "title": "Bilibili Audio Downloader",
-        "description": "Download history is saved locally in your browser, no information is retained on the server."
+        "description": "A simple tool to download audio from Bilibili videos.",
+        "feedback": "For any suggestions or bug reports, please ",
+        "feedbackLinkText": "submit an issue."
     },
     "form": {
-        "placeholder": "Enter the complete Bilibili video link, e.g.: https://www.bilibili.com/video/BV1LrETzVE8t",
+        "placeholder": "Paste the Bilibili video link here, e.g., https://www.bilibili.com/video/BV1...",
         "pasteButton": "Paste link from clipboard",
         "downloadButton": "Download Audio",
         "downloading": "Downloading...",

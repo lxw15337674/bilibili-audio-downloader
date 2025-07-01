@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
         }
 
         // 从B站URL中提取BV号
-        const bvMatch = url.match(/\/video\/(BV[a-zA-Z0-9]+)/);
+        const bvMatch = url.match(/\/(BV[a-zA-Z0-9]+)/);
         if (!bvMatch) {
             return NextResponse.json(
                 { error: '无效的B站视频链接' },

@@ -1,10 +1,12 @@
 {
     "page": {
-        "title": "B站音频下载",
-        "description": "下载历史记录保存在您的浏览器本地，服务器不会保留任何信息。"
+        "title": "Bilibili 音频下载器",
+        "description": "一个用于从 Bilibili 视频中下载音频的简单工具。",
+        "feedback": "如有任何建议或 Bug，请 ",
+        "feedbackLinkText": "提交 Issue。"
     },
     "form": {
-        "placeholder": "输入完整的B站视频链接,例如：https://www.bilibili.com/video/BV1LrETzVE8t",
+        "placeholder": "在此处粘贴 Bilibili 视频链接，例如 https://www.bilibili.com/video/BV1...",
         "pasteButton": "从剪贴板粘贴链接",
         "downloadButton": "下载音频",
         "downloading": "下载中...",

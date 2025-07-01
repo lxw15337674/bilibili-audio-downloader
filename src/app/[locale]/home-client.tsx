@@ -148,6 +148,17 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                             <p className="text-xs text-muted-foreground text-center pt-1">
                                 {dict.page.description}
                             </p>
+                            <p className="text-center text-xs text-muted-foreground">
+                                {dict.page.feedback}
+                                <a
+                                    href="https://github.com/lxw15337674/bilibili-audio-downloader-report/issues/new"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="underline"
+                                >
+                                    {dict.page.feedbackLinkText}
+                                </a>
+                            </p>
                         </CardHeader>
                         <CardContent>
                             <form onSubmit={handleDownload} className="space-y-6">
@@ -158,7 +169,7 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                                         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setUrl(e.target.value)}
                                         placeholder={dict.form.placeholder}
                                         required
-                                        className="min-h-[80px] resize-none"
+                                        className="min-h-[80px] resize-none break-all"
                                     />
                                     <div className="flex gap-2">
                                         <Button
@@ -168,9 +179,7 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                                             onClick={async () => {
                                                 try {
                                                     const text = await navigator.clipboard.readText();
-                                                    if (text.includes('bilibili.com/video/')) {
                                                         setUrl(text);
-                                                    }
                                                 } catch (err) {
                                                     console.error('Failed to read clipboard:', err);
                                                     toast({
@@ -199,6 +208,7 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                             </form>
                         </CardContent>
                     </Card>
+                 
                     {downloadHistory && downloadHistory.length > 0 && (
                         <Card className="flex-1 min-h-0 flex flex-col">
                             <CardHeader className="flex flex-row items-center justify-between pb-2 shrink-0">
