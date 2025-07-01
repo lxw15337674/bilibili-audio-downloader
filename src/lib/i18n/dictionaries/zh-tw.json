@@ -1,7 +1,7 @@
 {
     "page": {
         "title": "Bilibili 音訊下載器",
-        "description": "一個用於從 Bilibili 影片中下載音訊的簡單工具。",
+        "description": "一個用於從 Bilibili 影片中下載音訊的簡單工具，默認會以最佳音頻質量下載。",
         "feedback": "如有任何建議或 Bug，請 ",
         "feedbackLinkText": "提交 Issue。"
     },

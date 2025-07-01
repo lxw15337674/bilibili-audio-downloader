@@ -1,7 +1,7 @@
 {
     "page": {
         "title": "Bilibili Audio Downloader",
-        "description": "A simple tool to download audio from Bilibili videos.",
+        "description": "A simple tool to download audio from Bilibili videos. Downloads in the best audio quality by default.",
         "feedback": "For any suggestions or bug reports, please ",
         "feedbackLinkText": "submit an issue."
     },
