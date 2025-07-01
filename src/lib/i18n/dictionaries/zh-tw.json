@@ -1,0 +1,49 @@
+{
+    "page": {
+        "title": "Bilibili 音訊下載器",
+        "description": "一個用於從 Bilibili 影片中下載音訊的簡單工具。",
+        "feedback": "如有任何建議或 Bug，請 ",
+        "feedbackLinkText": "提交 Issue。"
+    },
+    "form": {
+        "placeholder": "在此處貼上 Bilibili 影片連結，例如 https://www.bilibili.com/video/BV1...",
+        "pasteButton": "從剪貼簿貼上連結",
+        "downloadButton": "下載音訊",
+        "downloading": "下載中...",
+        "fallbackTitle": "B站音訊"
+    },
+    "errors": {
+        "emptyUrl": "請輸入視訊連結",
+        "invalidUrl": "請輸入有效的B站連結",
+        "downloadFailed": "下載失敗",
+        "clipboardFailed": "讀取剪貼簿失敗",
+        "clipboardPermission": "請檢查是否授予剪貼簿權限",
+        "downloadError": "下載過程中發生錯誤",
+        "videoLinkInvalid": "視訊連結可能無效",
+        "getVideoInfoFailed": "獲取視訊資訊失敗",
+        "networkError": "網路錯誤"
+    },
+    "history": {
+        "title": "下載記錄",
+        "description": "最近 50 條記錄",
+        "clear": "清除記錄",
+        "cleared": "下載記錄已清除",
+        "viewSource": "查看源視訊",
+        "redownload": "重新下載",
+        "linkFilled": "連結已填入",
+        "clickToRedownload": "點擊下載按鈕重新下載"
+    },
+    "metadata": {
+        "title": "B站音訊提取 - 輕鬆提取嗶哩嗶哩視訊 MP3 音訊",
+        "description": "免費線上 B 站音訊下載工具，輸入 Bilibili 視訊連結，一鍵提取並下載高品質 MP3 音訊檔案。支援 BV 號和 AV 號。",
+        "keywords": "B站音訊下載,嗶哩嗶哩音訊提取,Bilibili 轉 MP3,BV 轉 MP3,bilibili音訊轉換器,視訊轉音訊,B站下載器",
+        "ogTitle": "B站音訊下載器 - 輕鬆提取嗶哩嗶哩視訊 MP3 音訊",
+        "ogDescription": "免費線上 B 站音訊下載工具，輸入 Bilibili 視訊連結，一鍵提取並下載高品質 MP3 音訊檔案。",
+        "siteName": "B站音訊下載器"
+    },
+    "languages": {
+        "zh": "简体中文",
+        "zh-tw": "繁體中文",
+        "en": "English"
+    }
+}

@@ -1,0 +1,49 @@
+{
+    "page": {
+        "title": "Bilibili 音频下载器",
+        "description": "一个用于从 Bilibili 视频中下载音频的简单工具。",
+        "feedback": "如有任何建议或 Bug，请 ",
+        "feedbackLinkText": "提交 Issue。"
+    },
+    "form": {
+        "placeholder": "在此处粘贴 Bilibili 视频链接，例如 https://www.bilibili.com/video/BV1...",
+        "pasteButton": "从剪贴板粘贴链接",
+        "downloadButton": "下载音频",
+        "downloading": "下载中...",
+        "fallbackTitle": "B站音频"
+    },
+    "errors": {
+        "emptyUrl": "请输入视频链接",
+        "invalidUrl": "请输入有效的B站链接",
+        "downloadFailed": "下载失败",
+        "clipboardFailed": "读取剪贴板失败",
+        "clipboardPermission": "请检查是否授予了剪贴板权限",
+        "downloadError": "下载过程中出现错误",
+        "videoLinkInvalid": "视频链接可能无效",
+        "getVideoInfoFailed": "获取视频信息失败",
+        "networkError": "网络错误"
+    },
+    "history": {
+        "title": "下载历史",
+        "description": "最近 50 条记录",
+        "clear": "清除历史",
+        "cleared": "下载历史已清除",
+        "viewSource": "查看源视频",
+        "redownload": "重新下载",
+        "linkFilled": "链接已填入",
+        "clickToRedownload": "点击下载按钮重新下载"
+    },
+    "metadata": {
+        "title": "B站音频提取 - 轻松提取哔哩哔哩视频 MP3 音频",
+        "description": "免费在线 B 站音频下载工具，输入 Bilibili 视频链接，一键提取并下载高质量 MP3 音频文件。支持 BV 号和 AV 号。",
+        "keywords": "B站音频下载,哔哩哔哩音频提取,Bilibili 转 MP3,BV 转 MP3,bilibili音频提取器,视频转音频,B站下载器",
+        "ogTitle": "B站音频下载器 - 轻松提取哔哩哔哩视频 MP3 音频",
+        "ogDescription": "免费在线 B 站音频下载工具，输入 Bilibili 视频链接，一键提取并下载高质量 MP3 音频文件。",
+        "siteName": "B站音频下载器"
+    },
+    "languages": {
+        "zh": "简体中文",
+        "zh-tw": "繁體中文",
+        "en": "English"
+    }
+}

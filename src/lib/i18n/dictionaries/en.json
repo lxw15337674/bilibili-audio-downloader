@@ -1,0 +1,49 @@
+{
+    "page": {
+        "title": "Bilibili Audio Downloader",
+        "description": "A simple tool to download audio from Bilibili videos.",
+        "feedback": "For any suggestions or bug reports, please ",
+        "feedbackLinkText": "submit an issue."
+    },
+    "form": {
+        "placeholder": "Paste the Bilibili video link here, e.g., https://www.bilibili.com/video/BV1...",
+        "pasteButton": "Paste link from clipboard",
+        "downloadButton": "Download Audio",
+        "downloading": "Downloading...",
+        "fallbackTitle": "Bilibili_Audio"
+    },
+    "errors": {
+        "emptyUrl": "Please enter a video link",
+        "invalidUrl": "Please enter a valid Bilibili link",
+        "downloadFailed": "Download failed",
+        "clipboardFailed": "Failed to read clipboard",
+        "clipboardPermission": "Please check if clipboard permissions are granted",
+        "downloadError": "An error occurred during download",
+        "videoLinkInvalid": "Video link may be invalid",
+        "getVideoInfoFailed": "Failed to get video information",
+        "networkError": "Network error"
+    },
+    "history": {
+        "title": "Download History",
+        "description": "Last 50 records",
+        "clear": "Clear History",
+        "cleared": "Download history cleared",
+        "viewSource": "View Source",
+        "redownload": "Re-download",
+        "linkFilled": "Link filled in",
+        "clickToRedownload": "Click download button to re-download"
+    },
+    "metadata": {
+        "title": "Bilibili Audio Downloader - Extract MP3 from Bilibili Videos",
+        "description": "Free online Bilibili audio download tool. Enter a Bilibili video link to extract and download high-quality MP3 audio files. Supports BV and AV numbers.",
+        "keywords": "Bilibili audio download,Bilibili audio extractor,Bilibili to MP3,BV to MP3,bilibili audio converter,video to audio,Bilibili downloader",
+        "ogTitle": "Bilibili Audio Downloader - Extract MP3 from Bilibili Videos",
+        "ogDescription": "Free online Bilibili audio download tool. Enter a Bilibili video link to extract and download high-quality MP3 audio files.",
+        "siteName": "Bilibili Audio Downloader"
+    },
+    "languages": {
+        "zh": "简体中文",
+        "zh-tw": "繁體中文",
+        "en": "English"
+    }
+}
