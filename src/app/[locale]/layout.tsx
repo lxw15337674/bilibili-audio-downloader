@@ -108,6 +108,7 @@ export default async function RootLayout({
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta name="theme-color" content="#000000" />
                 <meta name="color-scheme" content="dark light" />
+                <meta name="google-adsense-account" content="ca-pub-9521447814904059" />
                 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
                 <link rel="apple-touch-icon" href="/favicon.svg" />
                 <link rel="manifest" href="/manifest.json" />
