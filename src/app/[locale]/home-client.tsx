@@ -22,11 +22,6 @@ interface DownloadRecord {
     downloadUrl?: string;
 }
 
-interface DouyinVideoInfo {
-    title: string;
-    coverUrl: string;
-    downloadUrl: string;
-}
 
 interface HomeClientProps {
     locale: Locale;
@@ -110,26 +105,26 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
     };
 
     const handleDouyinDownload = async () => {
-        const douyinDomainRegex = /^https?:\/\/(www\.)?douyin\.com\//;
+        const douyinDomainRegex = /^https?:\/\/.*?douyin\.com\//;
         if (!douyinDomainRegex.test(url.trim())) {
             setError(dict.errors.invalidUrl);
             return;
         }
         try {
-            const response = await axios.get(`/api/douyin/download?url=${encodeURIComponent(url)}`);
-            const data = response.data as DouyinVideoInfo;
-
-            window.open(data.downloadUrl, '_blank');
-
-            const newRecord: DownloadRecord = {
-                url,
-                title: data.title,
-                timestamp: Date.now(),
-                service: 'douyin',
-                cover: data.coverUrl,
-                downloadUrl: data.downloadUrl
-            };
-            setDownloadHistory([newRecord, ...(downloadHistory || []).slice(0, 50)]);
+            // 获取视频信息
+            const downloadUrl = `http://localhost:8080/api/douyin/download?url=${encodeURIComponent(url)}`;
+            // 下载文件
+            const downloadPromise = new Promise<void>((resolve) => {
+                const a = document.createElement('a');
+                a.href = downloadUrl;
+                a.download = '';
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                resolve();
+            });
+            await downloadPromise
             setUrl('');
         } catch (err) {
             const errorMessage = axios.isAxiosError(err) ? (err.response?.data?.error || dict.errors.getVideoInfoFailed) : dict.errors.networkError;
