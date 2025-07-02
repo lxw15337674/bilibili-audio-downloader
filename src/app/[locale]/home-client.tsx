@@ -103,17 +103,15 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
     };
 
     const handleDouyinDownload = async () => {
-        const douyinDomainRegex = /^https?:\/\/.*?douyin\.com\//;
-        if (!douyinDomainRegex.test(url.trim())) {
-            setError(dict.errors.invalidUrl);
-            return;
-        }
         try {
             // 调用解析接口获取视频信息
-            const parseUrl = `${API_ENDPOINTS.douyin.parse}?url=${encodeURIComponent(url)}`;
-            const response = await axios.get(parseUrl);
-
-            if (response.data && response.data.downloadUrl && response.data.title) {
+            const response = await axios.get(API_ENDPOINTS.douyin.parse, {
+                params: {
+                    url: url
+                }
+            });
+            debugger
+            if (response.data) {
                 const result: DouyinParseResult = {
                     title: response.data.title,
                     downloadUrl: response.data.downloadUrl,
@@ -131,8 +129,7 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                 setDownloadHistory([newRecord, ...(downloadHistory || []).slice(0, 50)]);
 
                 // 直接执行快速下载
-                const proxyDownloadUrl = `${API_ENDPOINTS.douyin.download}?url=${encodeURIComponent(url)}`;
-                downloadFile(proxyDownloadUrl);
+                downloadFile(response.data.proxyDownloadUrl);
 
                 // 显示toast通知作为备用下载
                 toast({
