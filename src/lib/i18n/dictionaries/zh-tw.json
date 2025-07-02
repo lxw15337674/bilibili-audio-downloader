@@ -17,18 +17,6 @@
         "title": "下載結果",
         "downloadButton": "下載影片"
     },
-    "douyinResult": {
-        "title": "抖音影片解析結果",
-        "downloadInstructions": "請右鍵點擊下方連結，選擇「另存連結為」進行下載",
-        "mobileInstructions": "請長按下方連結，選擇「複製連結」或「下載」",
-        "downloadLink": "下載連結",
-        "copyLink": "複製連結",
-        "close": "關閉",
-        "linkCopied": "連結已複製到剪貼簿",
-        "videoPreview": "影片預覽",
-        "videoLoadError": "影片載入失敗，可能是網路問題或影片連結已過期",
-        "videoLoading": "影片載入中..."
-    },
     "history": {
         "title": "歷史記錄",
         "description": "您最近的下載（最近50條）",
@@ -50,10 +38,12 @@
     "toast": {
         "historyCleared": "下載歷史已清除。",
         "linkFilled": "連結已貼上。",
-        "clickToRedownload": "點擊下載按鈕以開始。"
+        "clickToRedownload": "點擊下載按鈕以開始。",
+        "douyinParseSuccess": "解析成功",
+        "manualDownloadLink": "若未自動下載，可右鍵點此選擇「另存連結為」"
     },
     "metadata": {
-        "title": "B站音訊提取 | 抖音影片下載 - 輕鬆提取嗶哩嗶哩影片MP3音訊及抖音無浮水印影片",
+        "title": "B站音訊提取 | 抖音影片下載 - 輕鬆提取哔哩哔哩影片MP3音訊及抖音無浮水印影片",
         "description": "免費線上B站音訊下載、抖音影片下載工具。輸入連結，一鍵提取並下載高品質MP3音訊檔案或無浮水印影片。支援B站BV/AV號及抖音分享連結。",
         "keywords": "B站音訊下載,抖音影片下載,嗶哩嗶哩音訊提取,Bilibili轉MP3,抖音去浮水印,影片下載器",
         "ogTitle": "B站音訊下載器 | 抖音影片下載器",

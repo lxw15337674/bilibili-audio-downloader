@@ -17,19 +17,6 @@
         "title": "下载结果",
         "downloadButton": "下载视频"
     },
-    "douyinResult": {
-        "title": "抖音视频解析结果",
-        "downloadInstructions": "请右键点击下方链接，选择\"链接另存为\"进行下载",
-        "mobileInstructions": "请长按下方链接，选择\"复制链接\"或\"下载\"",
-        "downloadLink": "下载链接",
-        "copyLink": "复制链接",
-        "close": "关闭",
-        "linkCopied": "链接已复制到剪贴板",
-        "videoPreview": "视频预览",
-        "videoLoadError": "视频加载失败，可能是网络问题或视频链接已过期",
-        "videoLoading": "视频加载中...",
-        "retryingWithPolicy": "正在尝试其他加载策略..."
-    },
     "history": {
         "title": "历史记录",
         "description": "您最近的下载（最近50条）",
@@ -51,7 +38,9 @@
     "toast": {
         "historyCleared": "下载历史已清除。",
         "linkFilled": "链接已粘贴。",
-        "clickToRedownload": "点击下载按钮以开始。"
+        "clickToRedownload": "点击下载按钮以开始。",
+        "douyinParseSuccess": "解析成功",
+        "manualDownloadLink": "若未自动下载，请右键这里选择'链接另存为'手动下载"
     },
     "metadata": {
         "title": "B站音频提取 | 抖音视频下载 - 轻松提取哔哩哔哩视频MP3音频及抖音无水印视频",

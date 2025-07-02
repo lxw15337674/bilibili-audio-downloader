@@ -41,7 +41,7 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [service, setService] = useState<'bilibili' | 'douyin'>('bilibili');
-    const [douyinResult, setDouyinResult] = useState<DouyinParseResult | null>(null);
+    // const [douyinResult, setDouyinResult] = useState<DouyinParseResult | null>(null);
 
     const { toast } = useToast();
     const [downloadHistory, setDownloadHistory] = useLocalStorageState<DownloadRecord[]>('download-history', {
@@ -52,7 +52,7 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
         e.preventDefault();
         setLoading(true);
         setError('');
-        setDouyinResult(null);
+        // setDouyinResult(null);
 
         if (!url.trim()) {
             setError(dict.errors.emptyUrl);
@@ -134,8 +134,27 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                 const proxyDownloadUrl = `${API_ENDPOINTS.douyin.download}?url=${encodeURIComponent(url)}`;
                 downloadFile(proxyDownloadUrl);
 
-                // 显示解析结果
-                setDouyinResult(result);
+                // 显示toast通知作为备用下载
+                toast({
+                    title: dict.toast.douyinParseSuccess, // This will be localized later
+                    description: (
+                        <div>
+                            <p className="line-clamp-3" title={result.title}>{result.title}</p>
+                            <a
+                                href={result.downloadUrl}
+                                download={result.title}
+                                className="text-sm text-blue-600 hover:text-blue-800 underline break-all"
+                                target="_blank"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                {dict.toast.manualDownloadLink}
+                            </a>
+                        </div>
+                    ),
+                    duration: 10000
+                });
+
+                // setDouyinResult(result); // Disable setting state
                 setUrl('');
             } else {
                 setError(dict.errors.getVideoInfoFailed);
@@ -236,8 +255,7 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                         </CardContent>
                     </Card>
 
-                    {/* 抖音解析结果 */}
-                    {douyinResult && (
+                    {/* {douyinResult && (
                         <Card className="shrink-0">
                             <CardHeader className="flex flex-row items-center justify-between pb-2">
                                 <CardTitle>{dict.douyinResult.title}</CardTitle>
@@ -270,7 +288,7 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                                 </div>
                             </CardContent>
                         </Card>
-                    )}
+                    )} */}
 
                     <Card className=" min-h-0 flex flex-col">
                         <CardHeader className="flex flex-row items-center justify-between pb-2 shrink-0">
