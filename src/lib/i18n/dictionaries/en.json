@@ -17,6 +17,18 @@
         "title": "Download Result",
         "downloadButton": "Download Video"
     },
+    "douyinResult": {
+        "title": "Douyin Video Parse Result",
+        "downloadInstructions": "Please right-click on the link below and select 'Save link as' to download",
+        "mobileInstructions": "Please long press on the link below and select 'Copy link' or 'Download'",
+        "downloadLink": "Download Link",
+        "copyLink": "Copy Link",
+        "close": "Close",
+        "linkCopied": "Link copied to clipboard",
+        "videoPreview": "Video Preview",
+        "videoLoadError": "Failed to load video, possibly due to network issues or expired video link",
+        "videoLoading": "Video loading..."
+    },
     "history": {
         "title": "History",
         "description": "Your recent downloads (last 50)",

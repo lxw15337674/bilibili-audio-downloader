@@ -6,12 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useLocalStorageState } from 'ahooks';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2 } from 'lucide-react';
+import { Loader2, X } from 'lucide-react';
 import { format } from 'date-fns';
 import axios from 'axios';
 import type { Locale } from "@/lib/i18n/config"
 import type { Dictionary } from "@/lib/i18n/types"
 import { LanguageSwitcher } from "@/components/language-switcher"
+import { downloadFile } from "@/lib/utils"
+import { API_ENDPOINTS } from "@/lib/config"
 
 interface DownloadRecord {
     url: string;
@@ -20,6 +22,12 @@ interface DownloadRecord {
     service: 'bilibili' | 'douyin';
     cover?: string;
     downloadUrl?: string;
+}
+
+interface DouyinParseResult {
+    title: string;
+    downloadUrl: string;
+    originalUrl: string;
 }
 
 
@@ -33,6 +41,7 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [service, setService] = useState<'bilibili' | 'douyin'>('bilibili');
+    const [douyinResult, setDouyinResult] = useState<DouyinParseResult | null>(null);
 
     const { toast } = useToast();
     const [downloadHistory, setDownloadHistory] = useLocalStorageState<DownloadRecord[]>('download-history', {
@@ -43,6 +52,7 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
         e.preventDefault();
         setLoading(true);
         setError('');
+        setDouyinResult(null);
 
         if (!url.trim()) {
             setError(dict.errors.emptyUrl);
@@ -60,30 +70,18 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
     };
 
     const handleBilibiliDownload = async () => {
-        const bilibiliDomainRegex = /^https?:\/\/(www\.)?bilibili\.com\//;
-        if (!bilibiliDomainRegex.test(url.trim())) {
-            setError(dict.errors.invalidUrl);
-            return;
-        }
-
         try {
-            const downloadUrl = `https://bhwa233-api.vercel.app/api/bilibili-audio/download?url=${encodeURIComponent(url)}`;
+            const downloadUrl = `${API_ENDPOINTS.bilibili.download}?url=${encodeURIComponent(url)}`;
             const urlMatch = url.match(/\/video\/([^/?]+)/);
             const videoId = urlMatch ? urlMatch[1] : 'unknown';
             const fallbackTitle = `${dict.form.fallbackTitle}_${videoId}`;
 
             const downloadPromise = new Promise<void>((resolve) => {
-                const a = document.createElement('a');
-                a.href = downloadUrl;
-                a.download = '';
-                a.style.display = 'none';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
+                downloadFile(downloadUrl);
                 resolve();
             });
 
-            const titlePromise = axios.get(`/api/bilibili-title?url=${encodeURIComponent(url)}`)
+            const titlePromise = axios.get(`${API_ENDPOINTS.bilibili.title}?url=${encodeURIComponent(url)}`)
                 .then(response => ({ title: response.data?.data?.title || fallbackTitle }))
                 .catch(() => ({ title: fallbackTitle }));
 
@@ -111,21 +109,37 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
             return;
         }
         try {
-            // 获取视频信息
-            const downloadUrl = `http://localhost:8080/api/douyin/download?url=${encodeURIComponent(url)}`;
-            // 下载文件
-            const downloadPromise = new Promise<void>((resolve) => {
-                const a = document.createElement('a');
-                a.href = downloadUrl;
-                a.download = '';
-                a.style.display = 'none';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                resolve();
-            });
-            await downloadPromise
-            setUrl('');
+            // 调用解析接口获取视频信息
+            const parseUrl = `${API_ENDPOINTS.douyin.parse}?url=${encodeURIComponent(url)}`;
+            const response = await axios.get(parseUrl);
+
+            if (response.data && response.data.downloadUrl && response.data.title) {
+                const result: DouyinParseResult = {
+                    title: response.data.title,
+                    downloadUrl: response.data.downloadUrl,
+                    originalUrl: url
+                };
+
+                // 保存到下载历史
+                const newRecord: DownloadRecord = {
+                    url,
+                    title: response.data.title,
+                    timestamp: Date.now(),
+                    service: 'douyin',
+                    downloadUrl: response.data.downloadUrl
+                };
+                setDownloadHistory([newRecord, ...(downloadHistory || []).slice(0, 50)]);
+
+                // 直接执行快速下载
+                const proxyDownloadUrl = `${API_ENDPOINTS.douyin.download}?url=${encodeURIComponent(url)}`;
+                downloadFile(proxyDownloadUrl);
+
+                // 显示解析结果
+                setDouyinResult(result);
+                setUrl('');
+            } else {
+                setError(dict.errors.getVideoInfoFailed);
+            }
         } catch (err) {
             const errorMessage = axios.isAxiosError(err) ? (err.response?.data?.error || dict.errors.getVideoInfoFailed) : dict.errors.networkError;
             setError(errorMessage);
@@ -141,14 +155,14 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
     };
 
     return (
-        <div className="h-screen flex flex-col bg-background">
+        <div className="min-h-screen flex flex-col bg-background">
             {/* Language Switcher */}
             <div className="absolute top-4 right-4 z-10">
                 <LanguageSwitcher currentLocale={locale} dict={dict} />
             </div>
 
-            <main className="flex-1 p-4 sm:p-6 md:p-8 overflow-hidden">
-                <div className="max-w-2xl mx-auto h-full flex flex-col gap-4">
+            <main className="flex-1 p-4 sm:p-6 md:p-8">
+                <div className="max-w-2xl mx-auto flex flex-col gap-4">
                     <Card className="shrink-0">
                         <CardHeader>
                             <h1 className="text-2xl text-center font-semibold tracking-tight">
@@ -222,23 +236,58 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                         </CardContent>
                     </Card>
 
-                 
-                    {downloadHistory && downloadHistory.length > 0 && (
-                        <Card className="flex-1 min-h-0 flex flex-col">
-                            <CardHeader className="flex flex-row items-center justify-between pb-2 shrink-0">
-                                <div className="space-y-1">
-                                    <h2 className="text-lg font-semibold tracking-tight">
-                                        <CardTitle>{dict.history.title}</CardTitle>
-                                    </h2>
-                                    <CardDescription>{dict.history.description}</CardDescription>
-                                </div>
-                                <Button variant="outline" size="sm" onClick={clearHistory}>
-                                    {dict.history.clear}
+                    {/* 抖音解析结果 */}
+                    {douyinResult && (
+                        <Card className="shrink-0">
+                            <CardHeader className="flex flex-row items-center justify-between pb-2">
+                                <CardTitle>{dict.douyinResult.title}</CardTitle>
+                                <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => setDouyinResult(null)}
+                                >
+                                    <X className="h-4 w-4" />
                                 </Button>
                             </CardHeader>
-                            <CardContent className="flex-1 min-h-0 p-6 pt-0">
-                                <div className="h-full overflow-y-auto space-y-2 pr-2">
-                                    {downloadHistory.map((record) => (
+                            <CardContent className="space-y-4">
+                                <div>
+                                    <h3 className="font-medium text-sm text-muted-foreground mb-2">
+                                        标题
+                                    </h3>
+                                    <p className="text-sm break-all line-clamp-2" title={douyinResult.title}>{douyinResult.title}</p>
+                                </div>
+                                <div>
+                                    <h3 className="font-medium text-sm text-muted-foreground mb-2">
+                                        兼容下载 （如果自动下载失败，请右键点击下方链接，选择&ldquo;链接另存为&rdquo;进行下载）
+                                    </h3>
+                                    <a
+                                        href={douyinResult.downloadUrl}
+                                        download={douyinResult.title}
+                                        className="text-sm text-blue-600 hover:text-blue-800 underline break-all"
+                                    >
+                                        {douyinResult.downloadUrl}
+                                    </a>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    )}
+
+                    <Card className=" min-h-0 flex flex-col">
+                        <CardHeader className="flex flex-row items-center justify-between pb-2 shrink-0">
+                            <div className="space-y-1">
+                                <h2 className="text-lg font-semibold tracking-tight">
+                                    <CardTitle>{dict.history.title}</CardTitle>
+                                </h2>
+                                <CardDescription>{dict.history.description}</CardDescription>
+                            </div>
+                            <Button variant="outline" size="sm" onClick={clearHistory}>
+                                {dict.history.clear}
+                            </Button>
+                        </CardHeader>
+                        <CardContent className="flex-1 min-h-0 p-6 pt-0 overflow-hidden">
+                            <div className="h-full overflow-y-auto space-y-2 pr-2">
+                                {downloadHistory && downloadHistory.length > 0 ? (
+                                    downloadHistory.map((record) => (
                                         <div key={record.timestamp} className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4 text-sm p-2 hover:bg-muted/50 rounded-lg">
                                             <div className="flex-1 min-w-0">
                                                 <p className="truncate font-medium" title={record.title}>
@@ -262,28 +311,22 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                                                     variant="outline"
                                                     size="sm"
                                                     onClick={() => {
-                                                        if (record.service === 'bilibili') {
-                                                            const downloadUrl = `https://bhwa233-api.vercel.app/api/bilibili-audio/download?url=${encodeURIComponent(record.url)}`;
-                                                            const a = document.createElement('a');
-                                                            a.href = downloadUrl;
-                                                            a.download = '';
-                                                            document.body.appendChild(a);
-                                                            a.click();
-                                                            document.body.removeChild(a);
-                                                        } else if (record.service === 'douyin' && record.downloadUrl) {
-                                                            window.open(record.downloadUrl, '_blank');
-                                                        }
+                                                        setUrl(record.url);
                                                     }}
                                                 >
                                                     {dict.history.redownload}
                                                 </Button>
                                             </div>
                                         </div>
-                                    ))}
-                                </div>
-                            </CardContent>
-                        </Card>
-                    )}
+                                    ))
+                                ) : (
+                                    <div className="flex items-center justify-center h-32 text-muted-foreground text-sm">
+                                        暂无下载记录
+                                    </div>
+                                )}
+                            </div>
+                        </CardContent>
+                    </Card>
                 </div>
             </main>
         </div>

@@ -28,15 +28,24 @@ export interface Dictionary {
         title: string;
         downloadButton: string;
     };
+    douyinResult: {
+        title: string;
+        downloadInstructions: string;
+        mobileInstructions: string;
+        downloadLink: string;
+        copyLink: string;
+        close: string;
+        linkCopied: string;
+        videoPreview: string;
+        videoLoadError: string;
+        videoLoading: string;
+    };
     history: {
         title: string;
         description: string;
         clear: string;
-        cleared: string;
         viewSource: string;
         redownload: string;
-        linkFilled: string;
-        clickToRedownload: string;
     };
     toast: {
         historyCleared: string;

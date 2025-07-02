@@ -17,6 +17,18 @@
         "title": "下載結果",
         "downloadButton": "下載影片"
     },
+    "douyinResult": {
+        "title": "抖音影片解析結果",
+        "downloadInstructions": "請右鍵點擊下方連結，選擇「另存連結為」進行下載",
+        "mobileInstructions": "請長按下方連結，選擇「複製連結」或「下載」",
+        "downloadLink": "下載連結",
+        "copyLink": "複製連結",
+        "close": "關閉",
+        "linkCopied": "連結已複製到剪貼簿",
+        "videoPreview": "影片預覽",
+        "videoLoadError": "影片載入失敗，可能是網路問題或影片連結已過期",
+        "videoLoading": "影片載入中..."
+    },
     "history": {
         "title": "歷史記錄",
         "description": "您最近的下載（最近50條）",
