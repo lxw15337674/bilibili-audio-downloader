@@ -1,4 +1,18 @@
 export interface Dictionary {
+    home: {
+        title: string;
+        description: string;
+        bilibiliButton: string;
+        douyinButton: string;
+    };
+    bilibili: {
+        pageTitle: string;
+        pageDescription: string;
+    };
+    douyin: {
+        pageTitle: string;
+        pageDescription: string;
+    };
     page: {
         title: string;
         description: string;
@@ -41,6 +55,7 @@ export interface Dictionary {
         clickToRedownload: string;
         douyinParseSuccess: string;
         manualDownloadLink: string;
+        recordDeleted: string;
     };
     metadata: {
         title: string;

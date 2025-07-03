@@ -1,4 +1,18 @@
 {
+    "home": {
+        "title": "Select a Service",
+        "description": "Choose which service you want to download from.",
+        "bilibiliButton": "Bilibili Downloader",
+        "douyinButton": "Douyin Downloader"
+    },
+    "bilibili": {
+        "pageTitle": "Bilibili Audio Downloader",
+        "pageDescription": "Paste a Bilibili video link to extract and download the audio."
+    },
+    "douyin": {
+        "pageTitle": "Douyin Video Downloader",
+        "pageDescription": "Paste a Douyin video link to download the video without watermark."
+    },
     "page": {
         "title": "Bilibili & Douyin Downloader",
         "description": "Download history is saved locally in your browser, no server-side data retention.",
@@ -40,7 +54,8 @@
         "linkFilled": "Link pasted.",
         "clickToRedownload": "Click the download button to start.",
         "douyinParseSuccess": "Successfully parsed",
-        "manualDownloadLink": "If download doesn't start, right-click here and 'Save link as...'"
+        "manualDownloadLink": "If download doesn't start, right-click here and 'Save link as...'",
+        "recordDeleted": "Record has been deleted."
     },
     "metadata": {
         "title": "Bilibili & Douyin Downloader - Easily Extract MP3 Audio from Bilibili and Videos from Douyin",

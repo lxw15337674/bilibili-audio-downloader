@@ -1,4 +1,18 @@
 {
+    "home": {
+        "title": "請選擇服務",
+        "description": "請選擇您想從哪個服務下載。",
+        "bilibiliButton": "Bilibili 下載器",
+        "douyinButton": "抖音下載器"
+    },
+    "bilibili": {
+        "pageTitle": "Bilibili 音訊下載器",
+        "pageDescription": "貼上Bilibili影片連結以提取並下載音訊。"
+    },
+    "douyin": {
+        "pageTitle": "抖音影片下載器",
+        "pageDescription": "貼上抖音影片連結以下載無浮水印影片。"
+    },
     "page": {
         "title": "Bilibili & 抖音 下載器",
         "description": "下載歷史記錄儲存在您的瀏覽器本機，伺服器不會保留任何資訊。",
@@ -40,7 +54,8 @@
         "linkFilled": "連結已貼上。",
         "clickToRedownload": "點擊下載按鈕以開始。",
         "douyinParseSuccess": "解析成功",
-        "manualDownloadLink": "若未自動下載，可右鍵點此選擇「另存連結為」"
+        "manualDownloadLink": "若未自動下載，可右鍵點此選擇「另存連結為」",
+        "recordDeleted": "記錄已刪除。"
     },
     "metadata": {
         "title": "B站音訊提取 | 抖音影片下載 - 輕鬆提取哔哩哔哩影片MP3音訊及抖音無浮水印影片",
