@@ -7,7 +7,7 @@
     },
     "form": {
         "placeholder": "在此處貼上 Bilibili 影片連結，例如 https://www.bilibili.com/video/BV1...",
-        "pasteButton": "從剪貼簿貼上連結",
+        "pasteButton": "從剪貼簿貼上",
         "downloadButton": "下載音訊",
         "downloading": "下載中...",
         "fallbackTitle": "B站音訊"
@@ -25,7 +25,7 @@
     },
     "history": {
         "title": "下載記錄",
-        "description": "最近 50 條記錄",
+        "description": "最多保留20條記錄，資料僅存儲在瀏覽器本地",
         "clear": "清除記錄",
         "cleared": "下載記錄已清除",
         "viewSource": "查看源視訊",
@@ -45,5 +45,171 @@
         "zh": "简体中文",
         "zh-tw": "繁體中文",
         "en": "English"
+    },
+    "collapsible": {
+        "whyChooseUs": {
+            "title": "為什麼選擇我們？",
+            "description": "專業、安全、高效的 B 站音訊提取工具，了解我們的技術優勢"
+        },
+        "userGuide": {
+            "title": "使用指南",
+            "description": "簡單三步完成下載，查看常見問題和使用技巧"
+        },
+        "privacyTerms": {
+            "title": "隱私與條款",
+            "description": "了解我們的隱私政策、使用條款和法律聲明"
+        },
+        "expandHint": "點擊查看詳細內容",
+        "autoCollapseNotice": "內容將自動折疊以保持頁面簡潔"
+    },
+    "features": {
+        "title": "為什麼選擇我們的音訊下載器？",
+        "subtitle": "專業、安全、高效的 B 站音訊提取工具",
+        "quality": {
+            "title": "高品質音訊",
+            "description": "自動選擇最佳音訊品質，支援高清晰度音訊格式，確保您獲得最佳的聽覺體驗。"
+        },
+        "speed": {
+            "title": "極速下載",
+            "description": "採用先進的音訊提取技術，快速處理和轉換，節省您的寶貴時間。"
+        },
+        "free": {
+            "title": "完全免費",
+            "description": "無需註冊，無需付費，永久免費使用。支援批量下載記錄管理。"
+        },
+        "privacy": {
+            "title": "隱私保護",
+            "description": "本地處理，不儲存任何使用者資料或視訊內容，確保您的隱私安全。"
+        }
+    },
+    "steps": {
+        "title": "如何使用？",
+        "subtitle": "三步即可完成音訊下載",
+        "step1": {
+            "title": "複製連結",
+            "description": "在 Bilibili 網站或 APP 中複製您想要下載音訊的視訊連結，支援 BV 號和 AV 號格式。"
+        },
+        "step2": {
+            "title": "貼上連結",
+            "description": "將複製的連結貼上到上方的輸入框中，可以使用快捷貼上按鈕或手動輸入。"
+        },
+        "step3": {
+            "title": "立即下載",
+            "description": "點擊下載按鈕，系統將自動提取音訊並開始下載，檔案會儲存到您的預設下載目錄。"
+        }
+    },
+    "technical": {
+        "title": "技術特色",
+        "subtitle": "先進技術確保最佳體驗",
+        "extraction": {
+            "title": "智慧音訊提取",
+            "description": "使用先進的音訊分離技術，從視訊中提取高品質音訊軌道。"
+        },
+        "formats": {
+            "title": "多格式支援",
+            "description": "支援 MP3、AAC 等主流音訊格式，相容各種播放裝置。"
+        },
+        "compatibility": {
+            "title": "裝置相容",
+            "description": "支援桌面端和行動端存取，跨平台使用無障礙。"
+        },
+        "reliability": {
+            "title": "穩定可靠",
+            "description": "7x24 小時穩定運行，高可用性保證隨時可用。"
+        }
+    },
+    "legal": {
+        "title": "使用聲明",
+        "subtitle": "請合法合規使用本工具",
+        "personalUse": "本工具僅供個人學習和研究使用，請勿用於商業用途。",
+        "copyright": "請尊重原創作者的版權，下載的音訊內容僅供個人欣賞。",
+        "support": "建議您支持原創作者，透過正當管道獲取和使用音訊內容。",
+        "disclaimer": "使用本工具產生的任何法律後果由使用者自行承擔。"
+    },
+    "faq": {
+        "title": "常見問題",
+        "subtitle": "解答您的疑問",
+        "format": {
+            "question": "支援哪些連結格式？",
+            "answer": "支援標準的 Bilibili 視訊連結，包括 BV 號和 AV 號格式，如：https://www.bilibili.com/video/BV1xx411c7mD"
+        },
+        "quality": {
+            "question": "音訊品質如何？",
+            "answer": "自動選擇視訊的最高音訊品質進行提取，通常為 128kbps 或更高品質的音訊。"
+        },
+        "limit": {
+            "question": "有下載限制嗎？",
+            "answer": "目前無下載次數限制，但請合理使用，避免對伺服器造成過大壓力。"
+        },
+        "safety": {
+            "question": "安全性如何保障？",
+            "answer": "本站不儲存任何使用者資料，處理過程在安全的伺服器環境中進行，保護使用者隱私。"
+        }
+    },
+    "navigation": {
+        "home": "首頁",
+        "privacy": "隱私政策",
+        "terms": "服務條款",
+        "about": "關於我們",
+        "contact": "聯繫我們"
+    },
+    "privacy": {
+        "title": "隱私政策",
+        "lastUpdated": "最後更新：2025年1月",
+        "introduction": {
+            "title": "引言",
+            "content": "本隱私政策說明了 Bilibili 音訊下載器（以下簡稱「我們」或「本服務」）如何收集、使用、儲存和保護使用者資訊。我們深知隱私保護的重要性，承諾保護使用者的個人資訊安全。"
+        },
+        "collection": {
+            "title": "資訊收集",
+            "subtitle": "我們收集的資訊類型",
+            "noPersonalData": "我們不收集任何個人身份資訊，包括但不限於姓名、電子郵件、電話號碼等。",
+            "technicalData": "我們可能收集技術資訊，如 IP 位址、瀏覽器類型、裝置資訊等，僅用於服務優化和安全保護。",
+            "usageData": "我們可能收集服務使用統計資訊，如存取次數、下載次數等，用於改進服務品質。"
+        },
+        "usage": {
+            "title": "資訊使用",
+            "subtitle": "我們如何使用收集的資訊",
+            "serviceProvision": "提供和維護音訊下載服務",
+            "improvement": "改進和優化服務效能",
+            "security": "保護服務安全，防止濫用",
+            "analytics": "進行匿名資料分析，了解使用者需求"
+        },
+        "storage": {
+            "title": "資料儲存",
+            "subtitle": "資料儲存和保護措施",
+            "noStorage": "我們不儲存使用者上傳的視訊連結或下載的音訊檔案。",
+            "temporary": "處理過程中的暫存資料會在處理完成後立即刪除。",
+            "security": "所有資料傳輸使用 HTTPS 加密協定保護。"
+        },
+        "cookies": {
+            "title": "Cookie 使用",
+            "subtitle": "Cookie 和類似技術的使用",
+            "localStorage": "我們使用本地儲存保存您的下載記錄，這些資料僅儲存在您的裝置上。",
+            "analytics": "我們可能使用第三方分析工具（如 Google Analytics）來了解網站使用情況。",
+            "ads": "我們使用 Google AdSense 展示廣告，相關 Cookie 政策請參閱 Google 的隱私政策。"
+        },
+        "thirdParty": {
+            "title": "第三方服務",
+            "subtitle": "我們使用的第三方服務",
+            "analytics": "Google Analytics - 用於網站分析",
+            "ads": "Google AdSense - 用於展示廣告",
+            "hosting": "Vercel - 用於網站託管"
+        },
+        "rights": {
+            "title": "使用者權利",
+            "subtitle": "您的權利和選擇",
+            "access": "由於我們不收集個人資訊，無需提供資料存取功能。",
+            "deletion": "您可以隨時清除瀏覽器中的本地儲存資料。",
+            "optOut": "您可以透過瀏覽器設定停用 Cookie 和 JavaScript。"
+        },
+        "updates": {
+            "title": "政策更新",
+            "content": "我們可能會不時更新本隱私政策。任何更改將在此頁面公布，重大更改會在網站首頁進行通知。"
+        },
+        "contact": {
+            "title": "聯繫我們",
+            "content": "如果您對本隱私政策有任何疑問，請透過 GitHub Issues 聯繫我們。"
+        }
     }
 }
