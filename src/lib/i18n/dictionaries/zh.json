@@ -54,7 +54,7 @@
         "linkFilled": "链接已粘贴。",
         "clickToRedownload": "点击下载按钮以开始。",
         "douyinParseSuccess": "解析成功",
-        "manualDownloadLink": "若未自动下载，请右键这里选择'链接另存为'手动下载",
+        "manualDownloadLink": "由于抖音限制，请右键这里选择'链接另存为'手动下载",
         "recordDeleted": "记录已删除。"
     },
     "metadata": {

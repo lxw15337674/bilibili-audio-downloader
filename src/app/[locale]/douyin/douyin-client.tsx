@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useLocalStorageState } from 'ahooks';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, X } from 'lucide-react';
+import { Loader2, X, Download } from 'lucide-react';
 import { format } from 'date-fns';
 import axios from 'axios';
 import type { Dictionary } from '@/lib/i18n/types';
@@ -38,6 +38,7 @@ export function DouyinClient({ dict, locale }: DouyinClientProps) {
     const [url, setUrl] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [douyinResult, setDouyinResult] = useState<DouyinParseResult | null>(null);
 
     const { toast } = useToast();
     const [downloadHistory, setDownloadHistory] = useLocalStorageState<DownloadRecord[]>('download-history', {
@@ -48,6 +49,7 @@ export function DouyinClient({ dict, locale }: DouyinClientProps) {
         e.preventDefault();
         setLoading(true);
         setError('');
+        setDouyinResult(null);
 
         if (!url.trim()) {
             setError(dict.errors.emptyUrl);
@@ -69,6 +71,9 @@ export function DouyinClient({ dict, locale }: DouyinClientProps) {
                     originalUrl: url
                 };
 
+                // 设置结果状态用于显示卡片
+                setDouyinResult(result);
+
                 // 保存到下载历史
                 const newRecord: DownloadRecord = {
                     url,
@@ -79,25 +84,10 @@ export function DouyinClient({ dict, locale }: DouyinClientProps) {
                 };
                 setDownloadHistory([newRecord, ...(downloadHistory || []).slice(0, 50)]);
 
-                // 显示toast通知作为备用下载
+                // 显示简化的成功 toast
                 toast({
                     title: dict.toast.douyinParseSuccess,
-                    description: (
-                        <div>
-                            <p className="line-clamp-3" title={result.title}>{result.title}</p>
-                            <a
-                                href={result.downloadUrl}
-                                download={result.title}
-                                className="text-sm text-blue-600 hover:text-blue-800 underline break-all"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                onClick={(e) => e.stopPropagation()}
-                            >
-                                {dict.toast.manualDownloadLink}
-                            </a>
-                        </div>
-                    ),
-                    duration: 10000
+                    duration: 3000
                 });
 
                 setUrl('');
@@ -123,6 +113,10 @@ export function DouyinClient({ dict, locale }: DouyinClientProps) {
     const removeHistoryItem = (index: number) => {
         setDownloadHistory((downloadHistory || []).filter((_, i) => i !== index));
         toast({ title: dict.toast.recordDeleted });
+    };
+
+    const closeResult = () => {
+        setDouyinResult(null);
     };
 
     return (
@@ -202,6 +196,50 @@ export function DouyinClient({ dict, locale }: DouyinClientProps) {
                         </CardContent>
                     </Card>
 
+                    {/* 下载结果卡片 */}
+                    {douyinResult && (
+                        <Card className="shrink-0 animate-in slide-in-from-top-2 duration-300">
+                            <CardHeader className="flex flex-row items-center justify-between pb-3">
+                                <CardTitle className="text-lg line-clamp-2">{dict.result.title}</CardTitle>
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    onClick={closeResult}
+                                    className="h-6 w-6 rounded-full"
+                                >
+                                    <X className="h-4 w-4" />
+                                </Button>
+                            </CardHeader>
+                            <CardContent className="space-y-4">
+                                <div>
+                                    <h3 className="font-medium text-sm text-muted-foreground mb-2">
+                                        视频标题
+                                    </h3>
+                                    <p className="text-sm leading-relaxed break-words" title={douyinResult.title}>
+                                        {douyinResult.title}
+                                    </p>
+                                </div>
+                                <div>
+                                    <h3 className="font-medium text-sm text-muted-foreground mb-2">
+                                        下载地址
+                                    </h3>
+                                    <p className="text-xs text-muted-foreground mb-2">
+                                        {dict.toast.manualDownloadLink}
+                                    </p>
+                                    <a
+                                        href={douyinResult.downloadUrl}
+                                        download={douyinResult.title}
+                                        className="text-sm text-blue-600 hover:text-blue-800 underline break-all block p-2 bg-muted/30 rounded border"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        {douyinResult.downloadUrl}
+                                    </a>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    )}
+
                     {downloadHistory && downloadHistory.length > 0 && (
                         <Card>
                             <CardHeader className="flex flex-row items-center justify-between">
@@ -216,7 +254,7 @@ export function DouyinClient({ dict, locale }: DouyinClientProps) {
                             <CardContent>
                                 <div className="space-y-4">
                                     {downloadHistory.map((item, index) => (
-                                        <div key={index} className="flex items-start gap-4 p-2 rounded-md hover:bg-muted/50 relative group">
+                                        <div key={index} className="flex items-start gap-4 p-4 rounded-md hover:bg-muted/50 relative group border">
                                             {item.cover && (
                                                 <img
                                                     src={item.cover}
@@ -226,35 +264,52 @@ export function DouyinClient({ dict, locale }: DouyinClientProps) {
                                                     className="w-20 h-20 rounded-md object-cover"
                                                 />
                                             )}
-                                            <div className="flex-1 min-w-0">
-                                                <p className="text-sm font-medium leading-none line-clamp-2" title={item.title}>
-                                                    {item.title}
-                                                </p>
-                                                <p className="text-xs text-muted-foreground truncate pt-1" title={item.url}>
-                                                    <span className="font-semibold">{item.service.toUpperCase()}: </span>{item.url}
-                                                </p>
-                                                <p className="text-xs text-muted-foreground pt-1">
-                                                    {format(new Date(item.timestamp), 'yyyy-MM-dd HH:mm:ss')}
-                                                </p>
-                                                {item.downloadUrl && (
-                                                    <p className="pt-1">
+                                            <div className="flex-1 min-w-0 space-y-3">
+                                                <div>
+                                                    <h3 className="font-medium text-sm text-muted-foreground mb-1">
+                                                        视频标题
+                                                    </h3>
+                                                    <p className="text-sm font-medium leading-relaxed line-clamp-2" title={item.title}>
+                                                        {item.title}
+                                                    </p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-xs text-muted-foreground">
+                                                        <span className="font-semibold">{item.service.toUpperCase()}</span> • {format(new Date(item.timestamp), 'yyyy-MM-dd HH:mm:ss')}
+                                                    </p>
+                                                </div>
+                                                {item.downloadUrl && item.service === 'douyin' && (
+                                                    <div>
+                                                        <h3 className="font-medium text-sm text-muted-foreground mb-2">
+                                                            下载地址
+                                                        </h3>
+                                                        <p className="text-xs text-muted-foreground mb-2">
+                                                            {dict.toast.manualDownloadLink}
+                                                        </p>
                                                         <a
                                                             href={item.downloadUrl}
                                                             download={item.title}
-                                                            className="text-sm text-blue-600 hover:text-blue-800 underline break-all"
+                                                            className="text-sm text-blue-600 hover:text-blue-800 underline break-all block p-2 bg-muted/30 rounded border"
                                                             target="_blank"
                                                             rel="noopener noreferrer"
                                                             onClick={(e) => e.stopPropagation()}
                                                         >
-                                                            {dict.toast.manualDownloadLink}
+                                                            {item.downloadUrl}
                                                         </a>
-                                                    </p>
+                                                    </div>
+                                                )}
+                                                {item.service === 'bilibili' && (
+                                                    <div>
+                                                        <p className="text-xs text-muted-foreground truncate" title={item.url}>
+                                                            来源：{item.url}
+                                                        </p>
+                                                    </div>
                                                 )}
                                             </div>
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
-                                                className="absolute top-1 right-1 h-6 w-6 opacity-0 group-hover:opacity-100"
+                                                className="absolute top-2 right-2 h-6 w-6 opacity-0 group-hover:opacity-100"
                                                 onClick={() => removeHistoryItem(index)}
                                             >
                                                 <X className="h-4 w-4" />
