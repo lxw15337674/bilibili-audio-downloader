@@ -7,7 +7,7 @@
     },
     "form": {
         "placeholder": "在此處貼上 Bilibili 影片連結，例如 https://www.bilibili.com/video/BV1...",
-        "pasteButton": "從剪貼簿貼上連結",
+        "pasteButton": "從剪貼簿貼上",
         "downloadButton": "下載音訊",
         "downloading": "下載中...",
         "fallbackTitle": "B站音訊"
@@ -25,7 +25,7 @@
     },
     "history": {
         "title": "下載記錄",
-        "description": "最近 50 條記錄",
+        "description": "最多保留20條記錄，資料僅存儲在瀏覽器本地",
         "clear": "清除記錄",
         "cleared": "下載記錄已清除",
         "viewSource": "查看源視訊",

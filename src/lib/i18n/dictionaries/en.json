@@ -7,7 +7,7 @@
     },
     "form": {
         "placeholder": "Paste the Bilibili video link here, e.g., https://www.bilibili.com/video/BV1...",
-        "pasteButton": "Paste link from clipboard",
+        "pasteButton": "Paste from clipboard",
         "downloadButton": "Download Audio",
         "downloading": "Downloading...",
         "fallbackTitle": "Bilibili_Audio"
@@ -25,7 +25,7 @@
     },
     "history": {
         "title": "Download History",
-        "description": "Last 50 records",
+        "description": "Keep up to 20 records, data is stored locally in the browser only",
         "clear": "Clear History",
         "cleared": "Download history cleared",
         "viewSource": "View Source",

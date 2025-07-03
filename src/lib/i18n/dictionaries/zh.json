@@ -7,7 +7,7 @@
     },
     "form": {
         "placeholder": "在此处粘贴 Bilibili 视频链接，例如 https://www.bilibili.com/video/BV1...",
-        "pasteButton": "从剪贴板粘贴链接",
+        "pasteButton": "从剪贴板粘贴",
         "downloadButton": "下载音频",
         "downloading": "下载中...",
         "fallbackTitle": "B站音频"
@@ -25,7 +25,7 @@
     },
     "history": {
         "title": "下载历史",
-        "description": "最近 50 条记录",
+        "description": "最多保留20条记录，数据仅存储在浏览器本地",
         "clear": "清除历史",
         "cleared": "下载历史已清除",
         "viewSource": "查看源视频",

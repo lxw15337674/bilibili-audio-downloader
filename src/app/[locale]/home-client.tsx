@@ -130,7 +130,7 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                 title,
                 timestamp: Date.now(),
             };
-            setDownloadHistory([newRecord, ...(downloadHistory || []).slice(0, 50)]);
+            setDownloadHistory([newRecord, ...(downloadHistory || []).slice(0, 19)]);
             setUrl('');
         } catch (err) {
             const errorMessage = err instanceof Error ? err.message : dict.errors.downloadError;
@@ -471,7 +471,7 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                     )}
 
                     {downloadHistory && downloadHistory.length > 0 && (
-                        <Card className="flex-1 min-h-0 flex flex-col">
+                        <Card className="flex-1 min-h-0 flex flex-col ">
                             <CardHeader className="flex flex-row items-center justify-between pb-2 shrink-0">
                                 <div className="space-y-1">
                                     <h2 className="text-lg font-semibold tracking-tight">
@@ -483,7 +483,7 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                                     {dict.history.clear}
                                 </Button>
                             </CardHeader>
-                            <CardContent className="flex-1 min-h-0 p-6 pt-0">
+                            <CardContent className="flex-1 min-h-0 p-6 pt-0 ">
                                 <div className="h-full overflow-y-auto space-y-2 pr-2">
                                     {downloadHistory.map((record) => (
                                         <div key={record.timestamp} className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4 text-sm p-2 hover:bg-muted/50 rounded-lg">
