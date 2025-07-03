@@ -110,7 +110,6 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                     url: url
                 }
             });
-            debugger
             if (response.data) {
                 const result: DouyinParseResult = {
                     title: response.data.title,
@@ -127,9 +126,6 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                     downloadUrl: response.data.downloadUrl
                 };
                 setDownloadHistory([newRecord, ...(downloadHistory || []).slice(0, 50)]);
-
-                // 直接执行快速下载
-                downloadFile(response.data.proxyDownloadUrl);
 
                 // 显示toast通知作为备用下载
                 toast({
