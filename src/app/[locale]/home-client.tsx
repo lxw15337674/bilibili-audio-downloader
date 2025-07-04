@@ -34,26 +34,6 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
         defaultValue: []
     });
 
-    // 折叠区域状态管理
-    const [whyChooseUsOpen, setWhyChooseUsOpen] = useState(true);
-    const [userGuideOpen, setUserGuideOpen] = useState(true);
-    const [privacyTermsOpen, setPrivacyTermsOpen] = useState(true);
-    const [hasAutoCollapsed, setHasAutoCollapsed] = useState(false);
-
-    // 自动折叠逻辑 - 只在没有下载历史时生效
-    useEffect(() => {
-        if (!hasAutoCollapsed && (!downloadHistory || downloadHistory.length === 0)) {
-            const timer = setTimeout(() => {
-                setWhyChooseUsOpen(false);
-                setUserGuideOpen(false);
-                setPrivacyTermsOpen(false);
-                setHasAutoCollapsed(true);
-            }, 3000); // 3秒后自动折叠
-
-            return () => clearTimeout(timer);
-        }
-    }, [hasAutoCollapsed, downloadHistory]);
-
     const handleDownload = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
@@ -235,8 +215,6 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                         <>
                             {/* Why Choose Us - Collapsible Section */}
                             <Collapsible
-                                open={whyChooseUsOpen}
-                                onOpenChange={setWhyChooseUsOpen}
                                 className="shrink-0"
                             >
                                 <Card>
@@ -248,7 +226,7 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                                                     <CardDescription>{dict.collapsible.whyChooseUs.description}</CardDescription>
                                                 </div>
                                                 <ChevronDown
-                                                    className={`h-5 w-5 transition-transform duration-200 ${whyChooseUsOpen ? 'rotate-180' : ''}`}
+                                                    className={`h-5 w-5 transition-transform duration-200 `}
                                                 />
                                             </div>
                                         </CardHeader>
@@ -307,8 +285,6 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
 
                             {/* User Guide - Collapsible Section */}
                             <Collapsible
-                                open={userGuideOpen}
-                                onOpenChange={setUserGuideOpen}
                                 className="shrink-0"
                             >
                                 <Card>
@@ -320,7 +296,7 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                                                     <CardDescription>{dict.collapsible.userGuide.description}</CardDescription>
                                                 </div>
                                                 <ChevronDown
-                                                    className={`h-5 w-5 transition-transform duration-200 ${userGuideOpen ? 'rotate-180' : ''}`}
+                                                    className={`h-5 w-5 transition-transform duration-200 `}
                                                 />
                                             </div>
                                         </CardHeader>
@@ -384,8 +360,6 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
 
                             {/* Privacy & Terms - Collapsible Section */}
                             <Collapsible
-                                open={privacyTermsOpen}
-                                onOpenChange={setPrivacyTermsOpen}
                                 className="shrink-0"
                             >
                                 <Card>
@@ -397,7 +371,7 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                                                     <CardDescription>{dict.collapsible.privacyTerms.description}</CardDescription>
                                                 </div>
                                                 <ChevronDown
-                                                    className={`h-5 w-5 transition-transform duration-200 ${privacyTermsOpen ? 'rotate-180' : ''}`}
+                                                    className={`h-5 w-5 transition-transform duration-200 `}
                                                 />
                                             </div>
                                         </CardHeader>
