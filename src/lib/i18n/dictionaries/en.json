@@ -5,6 +5,16 @@
         "bilibiliButton": "Bilibili Downloader",
         "douyinButton": "Douyin Downloader"
     },
+    "unified": {
+        "pageTitle": "Smart Downloader",
+        "pageDescription": "Paste video links and automatically detect platform. Supports Bilibili audio and Douyin videos.",
+        "placeholder": "Paste video link here...",
+        "placeholderBilibili": "Paste Bilibili video link here...",
+        "placeholderDouyin": "Paste Douyin video/note link here...",
+        "platformDetected": "Detected",
+        "platformUnknown": "Unknown platform",
+        "switchToUnified": "Use Smart Downloader"
+    },
     "bilibili": {
         "pageTitle": "Bilibili Audio Downloader",
         "pageDescription": "Paste a Bilibili video link to extract and download the audio."
@@ -41,6 +51,7 @@
     "errors": {
         "emptyUrl": "URL cannot be empty.",
         "invalidUrl": "Please enter a valid Bilibili or Douyin link.",
+        "unsupportedPlatform": "Platform not supported. Please use Bilibili or Douyin links.",
         "downloadError": "An unknown error occurred during download.",
         "downloadFailed": "Download failed",
         "videoLinkInvalid": "Video link may be invalid.",
@@ -55,7 +66,8 @@
         "clickToRedownload": "Click the download button to start.",
         "douyinParseSuccess": "Successfully parsed",
         "manualDownloadLink": "Due to Douyin restrictions, please right-click here and select 'Save link as...' to download manually",
-        "recordDeleted": "Record has been deleted."
+        "recordDeleted": "Record has been deleted.",
+        "platformDetected": "Detected {platform} link"
     },
     "metadata": {
         "title": "Bilibili & Douyin Downloader - Easily Extract MP3 Audio from Bilibili and Videos from Douyin",

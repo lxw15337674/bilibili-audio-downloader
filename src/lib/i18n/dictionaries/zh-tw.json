@@ -5,6 +5,16 @@
         "bilibiliButton": "Bilibili 下載器",
         "douyinButton": "抖音下載器"
     },
+    "unified": {
+        "pageTitle": "智慧下載器",
+        "pageDescription": "貼上影片連結，自動識別並下載。支援 Bilibili 音訊和抖音影片。",
+        "placeholder": "請在此處貼上影片連結...",
+        "placeholderBilibili": "請在此處貼上B站影片連結...",
+        "placeholderDouyin": "請在此處貼上抖音影片/圖文連結...",
+        "platformDetected": "檢測到",
+        "platformUnknown": "未識別平台",
+        "switchToUnified": "使用智慧下載器"
+    },
     "bilibili": {
         "pageTitle": "Bilibili 音訊下載器",
         "pageDescription": "貼上Bilibili影片連結以提取並下載音訊。"
@@ -34,13 +44,14 @@
     "history": {
         "title": "歷史記錄",
         "description": "您最近的下載（最近50條）",
-        "clear": "清除",
-        "viewSource": "檢視來源",
+        "clear": "清空",
+        "viewSource": "查看源",
         "redownload": "重新下載"
     },
     "errors": {
         "emptyUrl": "連結不能為空。",
         "invalidUrl": "請輸入有效的Bilibili或抖音連結。",
+        "unsupportedPlatform": "暫不支援此平台，請使用 Bilibili 或抖音連結。",
         "downloadError": "下載時發生未知錯誤。",
         "downloadFailed": "下載失敗",
         "videoLinkInvalid": "影片連結可能無效。",
@@ -54,11 +65,12 @@
         "linkFilled": "連結已貼上。",
         "clickToRedownload": "點擊下載按鈕以開始。",
         "douyinParseSuccess": "解析成功",
-        "manualDownloadLink": "由於抖音限制，請右鍵點此選擇「另存連結為」手動下載",
-        "recordDeleted": "記錄已刪除。"
+        "manualDownloadLink": "由於抖音限制，請右鍵這裡選擇'連結另存為'手動下載",
+        "recordDeleted": "記錄已刪除。",
+        "platformDetected": "檢測到 {platform} 連結"
     },
     "metadata": {
-        "title": "B站音訊提取 | 抖音影片下載 - 輕鬆提取哔哩哔哩影片MP3音訊及抖音無浮水印影片",
+        "title": "B站音訊提取 | 抖音影片下載 - 輕鬆提取嗶哩嗶哩影片MP3音訊及抖音無浮水印影片",
         "description": "免費線上B站音訊下載、抖音影片下載工具。輸入連結，一鍵提取並下載高品質MP3音訊檔案或無浮水印影片。支援B站BV/AV號及抖音分享連結。",
         "keywords": "B站音訊下載,抖音影片下載,嗶哩嗶哩音訊提取,Bilibili轉MP3,抖音去浮水印,影片下載器",
         "ogTitle": "B站音訊下載器 | 抖音影片下載器",

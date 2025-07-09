@@ -5,6 +5,16 @@
         "bilibiliButton": "Bilibili 下载器",
         "douyinButton": "抖音下载器"
     },
+    "unified": {
+        "pageTitle": "智能下载器",
+        "pageDescription": "粘贴视频链接，自动识别并下载。支持 Bilibili 音频和抖音视频。",
+        "placeholder": "请在此处粘贴视频链接...",
+        "placeholderBilibili": "请在此处粘贴B站视频链接...",
+        "placeholderDouyin": "请在此处粘贴抖音视频/图文链接...",
+        "platformDetected": "检测到",
+        "platformUnknown": "未识别平台",
+        "switchToUnified": "使用智能下载器"
+    },
     "bilibili": {
         "pageTitle": "Bilibili 音频下载器",
         "pageDescription": "粘贴Bilibili视频链接以提取并下载音频。"
@@ -41,6 +51,7 @@
     "errors": {
         "emptyUrl": "链接不能为空。",
         "invalidUrl": "请输入有效的Bilibili或抖音链接。",
+        "unsupportedPlatform": "暂不支持此平台，请使用 Bilibili 或抖音链接。",
         "downloadError": "下载时发生未知错误。",
         "downloadFailed": "下载失败",
         "videoLinkInvalid": "视频链接可能无效。",
@@ -55,7 +66,8 @@
         "clickToRedownload": "点击下载按钮以开始。",
         "douyinParseSuccess": "解析成功",
         "manualDownloadLink": "由于抖音限制，请右键这里选择'链接另存为'手动下载",
-        "recordDeleted": "记录已删除。"
+        "recordDeleted": "记录已删除。",
+        "platformDetected": "检测到 {platform} 链接"
     },
     "metadata": {
         "title": "B站音频提取 | 抖音视频下载 - 轻松提取哔哩哔哩视频MP3音频及抖音无水印视频",

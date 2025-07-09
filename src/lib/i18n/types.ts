@@ -5,6 +5,16 @@ export interface Dictionary {
         bilibiliButton: string;
         douyinButton: string;
     };
+    unified: {
+        pageTitle: string;
+        pageDescription: string;
+        placeholder: string;
+        placeholderBilibili: string;
+        placeholderDouyin: string;
+        platformDetected: string;
+        platformUnknown: string;
+        switchToUnified: string;
+    };
     bilibili: {
         pageTitle: string;
         pageDescription: string;
@@ -30,6 +40,7 @@ export interface Dictionary {
     errors: {
         emptyUrl: string;
         invalidUrl: string;
+        unsupportedPlatform: string;
         downloadFailed: string;
         clipboardFailed: string;
         clipboardPermission: string;
@@ -56,6 +67,7 @@ export interface Dictionary {
         douyinParseSuccess: string;
         manualDownloadLink: string;
         recordDeleted: string;
+        platformDetected: string;
     };
     metadata: {
         title: string;
