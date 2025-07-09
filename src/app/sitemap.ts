@@ -7,7 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return i18n.locales.map((locale) => ({
         url: `${baseUrl}/${locale}`,
         lastModified: new Date(),
-        changeFrequency: 'weekly' as const,
-        priority: locale === i18n.defaultLocale ? 1.0 : 0.8,
+        changeFrequency: 'monthly' as const,
+        priority: locale === i18n.defaultLocale ? 1.0 : 0.9,
     }))
 } 

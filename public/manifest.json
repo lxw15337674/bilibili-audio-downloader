@@ -1,7 +1,7 @@
 {
-    "name": "B站音频下载器",
-    "short_name": "B站音频",
-    "description": "免费在线 B 站音频下载工具，支持提取哔哩哔哩视频 MP3 音频",
+    "name": "B站音频下载器 | 抖音视频下载器",
+    "short_name": "B站抖音下载器",
+    "description": "免费在线B站音频下载、抖音视频下载工具。支持B站音频提取转MP3，抖音无水印视频下载，自动识别平台，一键高清下载。",
     "start_url": "/zh",
     "display": "standalone",
     "background_color": "#000000",
@@ -17,9 +17,11 @@
     ],
     "categories": [
         "productivity",
-        "utilities"
+        "utilities",
+        "multimedia",
+        "entertainment"
     ],
     "lang": "zh-CN",
     "scope": "/",
-    "id": "bilibili-audio-downloader"
+    "id": "bilibili-douyin-downloader"
 }

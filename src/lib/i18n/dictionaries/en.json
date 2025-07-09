@@ -70,11 +70,11 @@
         "platformDetected": "Detected {platform} link"
     },
     "metadata": {
-        "title": "Bilibili & Douyin Downloader - Easily Extract MP3 Audio from Bilibili and Videos from Douyin",
-        "description": "Free online tool to download Bilibili audio and Douyin videos. Paste a link to extract high-quality MP3 audio or download watermark-free videos.",
-        "keywords": "Bilibili audio download, Douyin video download, Bilibili to MP3, Douyin no-watermark",
-        "ogTitle": "Bilibili Audio & Douyin Video Downloader",
-        "ogDescription": "Free online tool for Bilibili audio and Douyin video downloads. One-click audio extraction from Bilibili and watermark-free video downloads from Douyin.",
+        "title": "Bilibili Audio & Douyin Video Downloader - Free Online MP3 & Video Download Tool",
+        "description": "Free online tool for Bilibili audio extraction and Douyin video downloads. Convert Bilibili videos to MP3, download Douyin videos without watermark. Auto-detect platform, one-click download.",
+        "keywords": "Bilibili audio download, Douyin video downloader, Douyin video download, Bilibili to MP3, Douyin no watermark, Douyin no-watermark, Douyin downloader, video downloader, audio extractor, free video download, online video downloader, Douyin video download, short video downloader, MP3 converter",
+        "ogTitle": "Bilibili Audio & Douyin Video Downloader - Free Online Tool",
+        "ogDescription": "Professional Bilibili audio and Douyin video download tool. Extract MP3 from Bilibili videos, download Douyin videos without watermark. Auto-detect platform, high-quality downloads.",
         "siteName": "Bilibili & Douyin Downloader"
     },
     "languages": {

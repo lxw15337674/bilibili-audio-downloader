@@ -37,15 +37,19 @@ export async function generateMetadata({
         title: dict.metadata.title,
         description: dict.metadata.description,
         keywords: dict.metadata.keywords.split(','),
-        authors: [{ name: 'Bilibili Audio Downloader' }],
-        creator: 'Bilibili Audio Downloader',
-        publisher: 'Bilibili Audio Downloader',
+        authors: [{ name: dict.metadata.siteName }],
+        creator: dict.metadata.siteName,
+        publisher: dict.metadata.siteName,
+        applicationName: dict.metadata.siteName,
+        generator: 'Next.js',
+        referrer: 'origin-when-cross-origin',
         formatDetection: {
             email: false,
             address: false,
             telephone: false,
         },
         metadataBase: new URL('https://bilibili-audio-downloader.vercel.app'),
+        category: 'utilities',
         openGraph: {
             title: dict.metadata.ogTitle,
             description: dict.metadata.ogDescription,
@@ -109,9 +113,20 @@ export default async function RootLayout({
                 <meta name="theme-color" content="#000000" />
                 <meta name="color-scheme" content="dark light" />
                 <meta name="google-adsense-account" content="ca-pub-9521447814904059" />
+                <meta name="mobile-web-app-capable" content="yes" />
+                <meta name="apple-mobile-web-app-capable" content="yes" />
+                <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+                <meta name="apple-mobile-web-app-title" content={dict.metadata.siteName} />
+                <meta name="application-name" content={dict.metadata.siteName} />
+                <meta name="msapplication-TileColor" content="#000000" />
+                <meta name="msapplication-config" content="/browserconfig.xml" />
+                <meta name="format-detection" content="telephone=no" />
+                <meta httpEquiv="x-ua-compatible" content="ie=edge" />
                 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
                 <link rel="apple-touch-icon" href="/favicon.svg" />
                 <link rel="manifest" href="/manifest.json" />
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 <StructuredData locale={locale} dict={dict} />
             </head>
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
