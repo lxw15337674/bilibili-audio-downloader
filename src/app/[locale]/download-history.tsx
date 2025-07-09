@@ -39,12 +39,12 @@ const getPlatformBadge = (url: string) => {
     switch (platform.platform) {
         case 'bilibili':
             return {
-                text: 'B站',
+                text: 'B站视频',
                 className: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
             };
         case 'douyin':
             return {
-                text: '抖音',
+                text: '抖音视频',
                 className: 'bg-pink-100 text-pink-700 dark:bg-pink-900 dark:text-pink-300'
             };
         default:
