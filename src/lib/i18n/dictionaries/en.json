@@ -21,7 +21,13 @@
     },
     "douyin": {
         "pageTitle": "Douyin Video Downloader",
-        "pageDescription": "Paste a Douyin video link to download the video without watermark."
+        "pageDescription": "Paste a Douyin video link to download the video without watermark.",
+        "parseResult": "Parse Result",
+        "copyLink": "Copy Link",
+        "openLink": "Open Link",
+        "copySuccess": "Copied to clipboard, you can paste it in a new tab",
+        "copyFailed": "Unable to copy to clipboard, please manually select and copy the link above",
+        "downloadTip": "💡 Tip: The download button is located in the \"...\" menu at the bottom right of the video page"
     },
     "page": {
         "title": "Bilibili & Douyin Downloader",
@@ -33,8 +39,8 @@
         "placeholder": "Paste Bilibili video link here...",
         "douyinPlaceholder": "Paste Douyin video/note link here...",
         "pasteButton": "Paste",
-        "downloadButton": "Download",
-        "downloading": "Downloading...",
+        "downloadButton": "Parse",
+        "downloading": "Parsing...",
         "fallbackTitle": "Bilibili_Audio"
     },
     "result": {
@@ -45,15 +51,18 @@
         "title": "History",
         "description": "Your recent downloads (last 50)",
         "clear": "Clear",
-        "viewSource": "View Source",
-        "redownload": "Re-download"
+        "cleared": "History cleared",
+        "viewSource": "View Original",
+        "redownload": "Re-download",
+        "linkFilled": "Link filled",
+        "clickToRedownload": "Click parse button to start re-parsing"
     },
     "errors": {
         "emptyUrl": "URL cannot be empty.",
         "invalidUrl": "Please enter a valid Bilibili or Douyin link.",
         "unsupportedPlatform": "Platform not supported. Please use Bilibili or Douyin links.",
-        "downloadError": "An unknown error occurred during download.",
-        "downloadFailed": "Download failed",
+        "downloadError": "An unknown error occurred during processing.",
+        "downloadFailed": "Processing failed",
         "videoLinkInvalid": "Video link may be invalid.",
         "getVideoInfoFailed": "Failed to get video information, please try again later.",
         "networkError": "Network error.",
@@ -63,11 +72,17 @@
     "toast": {
         "historyCleared": "Download history has been cleared.",
         "linkFilled": "Link pasted.",
-        "clickToRedownload": "Click the download button to start.",
+        "clickToRedownload": "Click the parse button to start.",
         "douyinParseSuccess": "Successfully parsed",
         "manualDownloadLink": "Due to Douyin restrictions, please right-click here and select 'Save link as...' to download manually",
         "recordDeleted": "Record has been deleted.",
-        "platformDetected": "Detected {platform} link"
+        "platformDetected": "Detected {platform} link",
+        "lowConfidenceDetection": "Low detection confidence",
+        "lowConfidenceDescription": "Will attempt to process as detected platform. Please check link format if it fails",
+        "linkFilledForRedownload": "Link filled",
+        "clickToRedownloadDesc": "Click parse button to start re-parsing",
+        "linkCopied": "Link copied",
+        "copyFailed": "Copy failed"
     },
     "metadata": {
         "title": "Bilibili Audio & Douyin Video Downloader - Free Online MP3 & Video Download Tool",

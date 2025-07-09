@@ -22,6 +22,12 @@ export interface Dictionary {
     douyin: {
         pageTitle: string;
         pageDescription: string;
+        parseResult: string;
+        copyLink: string;
+        openLink: string;
+        copySuccess: string;
+        copyFailed: string;
+        downloadTip: string;
     };
     page: {
         title: string;
@@ -57,8 +63,11 @@ export interface Dictionary {
         title: string;
         description: string;
         clear: string;
+        cleared: string;
         viewSource: string;
         redownload: string;
+        linkFilled: string;
+        clickToRedownload: string;
     };
     toast: {
         historyCleared: string;
@@ -68,6 +77,12 @@ export interface Dictionary {
         manualDownloadLink: string;
         recordDeleted: string;
         platformDetected: string;
+        lowConfidenceDetection: string;
+        lowConfidenceDescription: string;
+        linkFilledForRedownload: string;
+        clickToRedownloadDesc: string;
+        linkCopied: string;
+        copyFailed: string;
     };
     metadata: {
         title: string;

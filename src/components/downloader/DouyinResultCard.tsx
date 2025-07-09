@@ -14,16 +14,30 @@ export interface DouyinParseResult {
 interface DouyinResultCardProps {
     result: DouyinParseResult;
     onClose: () => void;
+    dict: {
+        douyin: {
+            parseResult: string;
+            copyLink: string;
+            openLink: string;
+            copySuccess: string;
+            copyFailed: string;
+            downloadTip: string;
+        };
+        toast: {
+            linkCopied: string;
+            copyFailed: string;
+        };
+    };
 }
 
-export function DouyinResultCard({ result, onClose }: DouyinResultCardProps) {
+export function DouyinResultCard({ result, onClose, dict }: DouyinResultCardProps) {
     const { toast } = useToast();
 
     return (
         <Card>
             <CardHeader className="flex flex-row items-center justify-between">
                 <div>
-                    <CardTitle>解析结果</CardTitle>
+                    <CardTitle>{dict.douyin.parseResult}</CardTitle>
                 </div>
                 <Button variant="ghost" size="sm" onClick={onClose}>
                     <X className="h-4 w-4" />
@@ -46,23 +60,23 @@ export function DouyinResultCard({ result, onClose }: DouyinResultCardProps) {
                                 try {
                                     await navigator.clipboard.writeText(result.downloadUrl);
                                     toast({
-                                        title: "链接已复制",
-                                        description: "已复制到剪贴板，可以粘贴到新标签页打开",
+                                        title: dict.toast.linkCopied,
+                                        description: dict.douyin.copySuccess,
                                         duration: 3000,
                                     });
                                 } catch (err) {
                                     console.error('Failed to copy to clipboard:', err);
                                     toast({
                                         variant: "destructive",
-                                        title: "复制失败",
-                                        description: "无法复制到剪贴板，请手动选择并复制上方链接",
+                                        title: dict.toast.copyFailed,
+                                        description: dict.douyin.copyFailed,
                                         duration: 5000,
                                     });
                                 }
                             }}
                         >
                             <Copy className="h-4 w-4 mr-2" />
-                            复制链接
+                            {dict.douyin.copyLink}
                         </Button>
                         <Button
                             variant="outline"
@@ -72,13 +86,13 @@ export function DouyinResultCard({ result, onClose }: DouyinResultCardProps) {
                             }}
                         >
                             <ExternalLink className="h-4 w-4 mr-2" />
-                            打开链接
+                            {dict.douyin.openLink}
                         </Button>
 
                     </div>
                     <div className="text-xs text-muted-foreground space-y-1">
                         <p className="text-center">
-                            💡 提示：下载按钮位于视频播放页面右下角的&ldquo;...&rdquo;菜单中
+                            {dict.douyin.downloadTip}
                         </p>
                     </div>
                 </div>

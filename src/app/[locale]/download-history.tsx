@@ -2,12 +2,12 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { format } from 'date-fns';
-import { ChevronDown, ChevronRight, ChevronsUpDown } from 'lucide-react';
+import { ChevronsUpDown } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
-import { detectPlatform, getPlatformDisplayName } from '@/lib/platformDetector';
+import { detectPlatform } from '@/lib/platformDetector';
 
 export interface DownloadRecord {
     url: string;
@@ -40,7 +40,7 @@ const getPlatformBadge = (url: string) => {
     switch (platform.platform) {
         case 'bilibili':
             return {
-                text: 'B站视频',
+                text: 'B站音频',
                 className: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
             };
         case 'douyin':
@@ -110,7 +110,7 @@ export function DownloadHistory({ dict, downloadHistory, clearHistory, onRedownl
                                             className="flex items-center justify-between p-3 rounded-lg border bg-card/50 hover:bg-card/80 transition-colors"
                                         >
                                             <div className="flex-1 min-w-0">
-                                                <div className="font-medium text-sm mb-1 truncate">
+                                                <div className="font-medium text-sm mb-1 truncate" title={record.title} >
                                                     {record.title}
                                                 </div>
                                                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
