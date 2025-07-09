@@ -2,7 +2,7 @@
   "name": "bilibili-audio-downloader",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev ",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -10,6 +10,7 @@
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.6.1",
     "@radix-ui/react-collapsible": "^1.1.11",
+    "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-toast": "^1.2.14",

@@ -1,4 +1,28 @@
 export interface Dictionary {
+    home: {
+        title: string;
+        description: string;
+        bilibiliButton: string;
+        douyinButton: string;
+    };
+    unified: {
+        pageTitle: string;
+        pageDescription: string;
+        placeholder: string;
+        placeholderBilibili: string;
+        placeholderDouyin: string;
+        platformDetected: string;
+        platformUnknown: string;
+        switchToUnified: string;
+    };
+    bilibili: {
+        pageTitle: string;
+        pageDescription: string;
+    };
+    douyin: {
+        pageTitle: string;
+        pageDescription: string;
+    };
     page: {
         title: string;
         description: string;
@@ -7,6 +31,7 @@ export interface Dictionary {
     };
     form: {
         placeholder: string;
+        douyinPlaceholder: string;
         pasteButton: string;
         downloadButton: string;
         downloading: string;
@@ -15,6 +40,7 @@ export interface Dictionary {
     errors: {
         emptyUrl: string;
         invalidUrl: string;
+        unsupportedPlatform: string;
         downloadFailed: string;
         clipboardFailed: string;
         clipboardPermission: string;
@@ -23,15 +49,25 @@ export interface Dictionary {
         getVideoInfoFailed: string;
         networkError: string;
     };
+    result: {
+        title: string;
+        downloadButton: string;
+    };
     history: {
         title: string;
         description: string;
         clear: string;
-        cleared: string;
         viewSource: string;
         redownload: string;
+    };
+    toast: {
+        historyCleared: string;
         linkFilled: string;
         clickToRedownload: string;
+        douyinParseSuccess: string;
+        manualDownloadLink: string;
+        recordDeleted: string;
+        platformDetected: string;
     };
     metadata: {
         title: string;

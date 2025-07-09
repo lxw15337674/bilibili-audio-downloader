@@ -1,8 +1,8 @@
 import { getDictionary } from "@/lib/i18n"
 import type { Locale } from "@/lib/i18n/config"
-import { HomeClient } from "./home-client"
+import { UnifiedDownloader } from "./unified-downloader"
 
-export default async function Home({
+export default async function HomePage({
     params,
 }: {
     params: Promise<{ locale: Locale }>
@@ -10,5 +10,5 @@ export default async function Home({
     const { locale } = await params
     const dict = await getDictionary(locale)
 
-    return <HomeClient locale={locale} dict={dict} />
+    return <UnifiedDownloader dict={dict} locale={locale} />
 } 

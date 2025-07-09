@@ -1,0 +1,173 @@
+'use client';
+
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { useLocalStorageState } from 'ahooks';
+import { format } from 'date-fns';
+import { ChevronDown, ChevronRight, ChevronsUpDown } from 'lucide-react';
+import { useToast } from '../../hooks/use-toast';
+import { detectPlatform, getPlatformDisplayName } from '@/lib/platformDetector';
+
+export interface DownloadRecord {
+    url: string;
+    title: string;
+    timestamp: number;
+}
+
+interface DownloadHistoryProps {
+    dict: {
+        history: {
+            title: string;
+            description: string;
+            clear: string;
+            cleared: string;
+            viewSource: string;
+            redownload: string;
+            linkFilled: string;
+            clickToRedownload: string;
+        };
+    };
+    onRedownload?: (url: string) => void;
+}
+
+// 获取平台标签样式
+const getPlatformBadge = (url: string) => {
+    const platform = detectPlatform(url);
+
+    switch (platform.platform) {
+        case 'bilibili':
+            return {
+                text: 'B站视频',
+                className: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
+            };
+        case 'douyin':
+            return {
+                text: '抖音视频',
+                className: 'bg-pink-100 text-pink-700 dark:bg-pink-900 dark:text-pink-300'
+            };
+        default:
+            return {
+                text: '未知',
+                className: 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'
+            };
+    }
+};
+
+export function DownloadHistory({ dict, onRedownload }: DownloadHistoryProps) {
+    const { toast } = useToast();
+    const { downloadHistory, clearHistory: clearHistoryHook } = useDownloadHistory();
+    const [isOpen, setIsOpen] = useState(true);
+
+    const clearHistory = () => {
+        clearHistoryHook();
+        toast({
+            title: dict.history.cleared,
+        });
+    };
+
+    const handleRedownload = (url: string) => {
+        onRedownload?.(url);
+        toast({
+            title: dict.history.linkFilled,
+            description: dict.history.clickToRedownload,
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    if (!downloadHistory || downloadHistory.length === 0) {
+        return null;
+    }
+
+    return (
+        <Card className="flex-1 min-h-0 flex flex-col">
+            <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+                <CardHeader className="flex flex-row items-center justify-between pb-2 shrink-0">
+                    <CollapsibleTrigger className="flex items-center gap-2 hover:bg-muted/50 rounded-md p-1 -m-1">
+                        <Button variant="ghost" size="icon" className="size-8">
+                            <ChevronsUpDown className="size-8" />
+                        </Button>
+                        <div className="space-y-1 text-left">
+                            <h2 className="text-lg font-semibold tracking-tight">
+                                <CardTitle>{dict.history.title} </CardTitle>
+                            </h2>
+                        </div>
+                    </CollapsibleTrigger>
+                    <Button variant="outline" size="sm" onClick={clearHistory}>
+                        {dict.history.clear}
+                    </Button>
+                </CardHeader>
+                <CollapsibleContent className="flex-1 min-h-0 flex flex-col">
+                    <CardContent className="flex-1 min-h-0 p-0">
+                        <div className="px-6 pb-6 overflow-y-auto scrollbar-hide">
+                            <div className="space-y-2">
+                                {downloadHistory.map((record, index) => {
+                                    const platformBadge = getPlatformBadge(record.url);
+                                    return (
+                                        <div
+                                            key={index}
+                                            className="flex items-center justify-between p-3 rounded-lg border bg-card/50 hover:bg-card/80 transition-colors"
+                                        >
+                                            <div className="flex-1 min-w-0">
+                                                <div className="font-medium text-sm mb-1 truncate">
+                                                    {record.title}
+                                                </div>
+                                                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                                    <span className={`px-2 py-0.5 text-xs font-medium rounded-md ${platformBadge.className}`}>
+                                                        {platformBadge.text}
+                                                    </span>
+                                                    <span>
+                                                        {format(new Date(record.timestamp), 'yyyy-MM-dd HH:mm')}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div className="flex gap-2 ml-4">
+                                                <Button
+                                                    variant="outline"
+                                                    size="sm"
+                                                    onClick={() => {
+                                                        window.open(record.url, '_blank');
+                                                    }}
+                                                >
+                                                    {dict.history.viewSource}
+                                                </Button>
+                                                <Button
+                                                    variant="outline"
+                                                    size="sm"
+                                                    onClick={() => handleRedownload(record.url)}
+                                                >
+                                                    {dict.history.redownload}
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </CardContent>
+                </CollapsibleContent>
+            </Collapsible>
+        </Card>
+    );
+}
+
+export function useDownloadHistory() {
+    const [downloadHistory, setDownloadHistory] = useLocalStorageState<DownloadRecord[]>('download-history', {
+        defaultValue: []
+    });
+
+    const addToHistory = (record: DownloadRecord) => {
+        setDownloadHistory([record, ...(downloadHistory || []).slice(0, 19)]);
+    };
+
+    const clearHistory = () => {
+        setDownloadHistory([]);
+    };
+
+    return {
+        downloadHistory,
+        addToHistory,
+        clearHistory
+    };
+}
