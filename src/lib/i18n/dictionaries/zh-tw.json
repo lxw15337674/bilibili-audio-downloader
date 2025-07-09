@@ -21,7 +21,13 @@
     },
     "douyin": {
         "pageTitle": "抖音影片下載器",
-        "pageDescription": "貼上抖音影片連結以下載無浮水印影片。"
+        "pageDescription": "貼上抖音影片連結以下載無浮水印影片。",
+        "parseResult": "解析結果",
+        "copyLink": "複製連結",
+        "openLink": "開啟連結",
+        "copySuccess": "已複製到剪貼簿，可以貼上到新分頁開啟",
+        "copyFailed": "無法複製到剪貼簿，請手動選擇並複製上方連結",
+        "downloadTip": "💡 提示：下載按鈕位於影片播放頁面右下角的\"...\"選單中"
     },
     "page": {
         "title": "Bilibili & 抖音 下載器",
@@ -33,8 +39,8 @@
         "placeholder": "請在此處貼上B站影片連結...",
         "douyinPlaceholder": "請在此處貼上抖音影片/圖文連結...",
         "pasteButton": "貼上",
-        "downloadButton": "下載",
-        "downloading": "下載中...",
+        "downloadButton": "解析",
+        "downloading": "解析中...",
         "fallbackTitle": "B站音訊"
     },
     "result": {
@@ -45,8 +51,11 @@
         "title": "歷史記錄",
         "description": "您最近的下載（最近50條）",
         "clear": "清空",
+        "cleared": "歷史記錄已清空",
         "viewSource": "查看源",
-        "redownload": "重新下載"
+        "redownload": "重新下載",
+        "linkFilled": "連結已填入",
+        "clickToRedownload": "點擊下載按鈕開始重新下載"
     },
     "errors": {
         "emptyUrl": "連結不能為空。",
@@ -67,7 +76,13 @@
         "douyinParseSuccess": "解析成功",
         "manualDownloadLink": "由於抖音限制，請右鍵這裡選擇'連結另存為'手動下載",
         "recordDeleted": "記錄已刪除。",
-        "platformDetected": "檢測到 {platform} 連結"
+        "platformDetected": "檢測到 {platform} 連結",
+        "lowConfidenceDetection": "檢測置信度較低",
+        "lowConfidenceDescription": "將嘗試按檢測到的平台處理，如果失敗請檢查連結格式",
+        "linkFilledForRedownload": "連結已填入",
+        "clickToRedownloadDesc": "點擊下載按鈕開始重新下載",
+        "linkCopied": "連結已複製",
+        "copyFailed": "複製失敗"
     },
     "metadata": {
         "title": "B站音訊提取 | 抖音影片下載 - 輕鬆提取嗶哩嗶哩影片MP3音訊及抖音無浮水印影片",

@@ -150,8 +150,8 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
             // 对于低置信度检测，显示警告但仍然尝试处理
             if (detectedPlatform.confidence < 0.6) {
                 toast({
-                    title: "检测置信度较低",
-                    description: "将尝试按检测到的平台处理，如果失败请检查链接格式",
+                    title: dict.toast.lowConfidenceDetection,
+                    description: dict.toast.lowConfidenceDescription,
                     duration: 3000,
                 });
             }
@@ -188,8 +188,8 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
     const handleRedownload = (url: string) => {
         setUrl(url);
         toast({
-            title: "链接已填入",
-            description: "点击下载按钮开始重新下载",
+            title: dict.toast.linkFilledForRedownload,
+            description: dict.toast.clickToRedownloadDesc,
         });
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -298,6 +298,20 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                         <DouyinResultCard
                             result={douyinResult}
                             onClose={closeDouyinResult}
+                            dict={{
+                                douyin: {
+                                    parseResult: dict.douyin.parseResult,
+                                    copyLink: dict.douyin.copyLink,
+                                    openLink: dict.douyin.openLink,
+                                    copySuccess: dict.douyin.copySuccess,
+                                    copyFailed: dict.douyin.copyFailed,
+                                    downloadTip: dict.douyin.downloadTip
+                                },
+                                toast: {
+                                    linkCopied: dict.toast.linkCopied,
+                                    copyFailed: dict.toast.copyFailed
+                                }
+                            }}
                         />
                     )}
 
@@ -308,11 +322,11 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                                 title: dict.history.title,
                                 description: dict.history.description,
                                 clear: dict.history.clear,
-                                cleared: "历史记录已清空",
+                                cleared: dict.history.cleared,
                                 viewSource: dict.history.viewSource,
                                 redownload: dict.history.redownload,
-                                linkFilled: "链接已填入",
-                                clickToRedownload: "点击下载按钮开始重新下载"
+                                linkFilled: dict.history.linkFilled,
+                                clickToRedownload: dict.history.clickToRedownload
                             }
                         }}
                         downloadHistory={downloadHistory || []}
