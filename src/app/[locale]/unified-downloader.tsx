@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, X, Download, Link as LinkIcon, Copy, ExternalLink } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import axios from 'axios';
 import type { Dictionary } from '@/lib/i18n/types';
 import type { Locale } from "@/lib/i18n/config";
@@ -15,17 +15,14 @@ import { API_ENDPOINTS } from '@/lib/config';
 import { downloadFile } from '@/lib/utils';
 import { detectPlatform, getPlatformDisplayName, normalizeUrl, type Platform, type PlatformInfo } from '@/lib/platformDetector';
 import { DownloadHistory, useDownloadHistory, type DownloadRecord } from './download-history';
+import { DouyinResultCard, type DouyinParseResult } from '@/components/downloader/DouyinResultCard';
 
 interface UnifiedDownloaderProps {
     dict: Dictionary;
     locale: Locale;
 }
 
-interface DouyinParseResult {
-    title: string;
-    downloadUrl: string;
-    originalUrl: string;
-}
+
 
 export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
     const [url, setUrl] = useState('');
@@ -94,12 +91,11 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
         const response = await axios.get(API_ENDPOINTS.douyin.parse, {
             params: { url: videoUrl }
         });
-
         if (response.data) {
             const result: DouyinParseResult = {
                 title: response.data.title,
                 downloadUrl: response.data.downloadUrl,
-                originalUrl: videoUrl
+                originalUrl: response.data.proxyDownloadUrl
             };
 
             setDouyinResult(result);
@@ -212,26 +208,6 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                                 {dict.unified.pageDescription}
                             </p>
 
-                            {/* 平台检测指示器 */}
-                            {url.trim() && (
-                                <div className="flex items-center justify-center gap-2 mt-2 animate-in fade-in duration-300">
-                                    <LinkIcon className="h-4 w-4" />
-                                    {platformInfo.platform !== 'unknown' && platformInfo.confidence > 0.6 ? (
-                                        <span className="text-sm text-green-600 dark:text-green-400 font-medium">
-                                            {dict.unified.platformDetected} {getPlatformDisplayName(platformInfo.platform)}
-                                        </span>
-                                    ) : platformInfo.confidence > 0.3 ? (
-                                        <span className="text-sm text-yellow-600 dark:text-yellow-400">
-                                            {dict.unified.platformDetected} {getPlatformDisplayName(platformInfo.platform)} (低置信度)
-                                        </span>
-                                    ) : (
-                                        <span className="text-sm text-orange-600 dark:text-orange-400">
-                                            {dict.unified.platformUnknown}
-                                        </span>
-                                    )}
-                                </div>
-                            )}
-
                             <p className="text-center text-xs text-muted-foreground pt-4">
                                 {dict.page.feedback}
                                 <a
@@ -310,74 +286,10 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
 
                     {/* 抖音下载结果卡片 */}
                     {douyinResult && (
-                        <Card>
-                            <CardHeader className="flex flex-row items-center justify-between">
-                                <div>
-                                    <CardTitle>{dict.result.title}</CardTitle>
-                                </div>
-                                <Button variant="ghost" size="sm" onClick={closeDouyinResult}>
-                                    <X className="h-4 w-4" />
-                                </Button>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="space-y-4">
-                                    <div>
-                                        <h3 className="font-medium break-all mb-3">{douyinResult.title}</h3>
-                                    </div>
-
-                                    <div>
-                                        <label className="text-sm font-medium text-muted-foreground">下载链接</label>
-                                        <div className="mt-2 p-3 bg-muted/30 rounded-md border">
-                                            <p className="text-sm break-all text-muted-foreground">
-                                                {douyinResult.downloadUrl}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div className="flex gap-2">
-                                        <Button
-                                            variant="outline"
-                                            className="flex-1"
-                                            onClick={() => {
-                                                window.open(douyinResult.downloadUrl, '_blank', 'noopener,noreferrer');
-                                            }}
-                                        >
-                                            <ExternalLink className="h-4 w-4 mr-2" />
-                                            打开链接
-                                        </Button>
-                                        <Button
-                                            variant="outline"
-                                            className="flex-1"
-                                            onClick={async () => {
-                                                try {
-                                                    await navigator.clipboard.writeText(douyinResult.downloadUrl);
-                                                    toast({
-                                                        title: "链接已复制",
-                                                        description: "已复制到剪贴板，可以粘贴到新标签页打开",
-                                                        duration: 3000,
-                                                    });
-                                                } catch (err) {
-                                                    console.error('Failed to copy to clipboard:', err);
-                                                    toast({
-                                                        variant: "destructive",
-                                                        title: "复制失败",
-                                                        description: "无法复制到剪贴板，请手动选择并复制上方链接",
-                                                        duration: 5000,
-                                                    });
-                                                }
-                                            }}
-                                        >
-                                            <Copy className="h-4 w-4 mr-2" />
-                                            复制链接
-                                        </Button>
-                                    </div>
-                                    <div className="text-xs text-muted-foreground space-y-1">
-                                        <p className="text-center">
-                                            💡 提示：下载按钮位于视频播放页面右下角的"..."菜单中
-                                        </p>
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card>
+                        <DouyinResultCard
+                            result={douyinResult}
+                            onClose={closeDouyinResult}
+                        />
                     )}
 
                     {/* 历史记录 */}
