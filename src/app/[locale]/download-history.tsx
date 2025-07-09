@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { useLocalStorageState } from 'ahooks';
 import { format } from 'date-fns';
 import { ChevronDown, ChevronRight, ChevronsUpDown } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
@@ -29,6 +28,8 @@ interface DownloadHistoryProps {
             clickToRedownload: string;
         };
     };
+    downloadHistory: DownloadRecord[];
+    clearHistory: () => void;
     onRedownload?: (url: string) => void;
 }
 
@@ -55,13 +56,12 @@ const getPlatformBadge = (url: string) => {
     }
 };
 
-export function DownloadHistory({ dict, onRedownload }: DownloadHistoryProps) {
+export function DownloadHistory({ dict, downloadHistory, clearHistory, onRedownload }: DownloadHistoryProps) {
     const { toast } = useToast();
-    const { downloadHistory, clearHistory: clearHistoryHook } = useDownloadHistory();
     const [isOpen, setIsOpen] = useState(true);
 
-    const clearHistory = () => {
-        clearHistoryHook();
+    const handleClearHistory = () => {
+        clearHistory();
         toast({
             title: dict.history.cleared,
         });
@@ -94,7 +94,7 @@ export function DownloadHistory({ dict, onRedownload }: DownloadHistoryProps) {
                             </h2>
                         </div>
                     </CollapsibleTrigger>
-                    <Button variant="outline" size="sm" onClick={clearHistory}>
+                    <Button variant="outline" size="sm" onClick={handleClearHistory}>
                         {dict.history.clear}
                     </Button>
                 </CardHeader>
@@ -102,7 +102,7 @@ export function DownloadHistory({ dict, onRedownload }: DownloadHistoryProps) {
                     <CardContent className="flex-1 min-h-0 p-0">
                         <div className="px-6 pb-6 overflow-y-auto scrollbar-hide">
                             <div className="space-y-2">
-                                {downloadHistory.map((record, index) => {
+                                {downloadHistory.map((record: DownloadRecord, index: number) => {
                                     const platformBadge = getPlatformBadge(record.url);
                                     return (
                                         <div
@@ -150,24 +150,4 @@ export function DownloadHistory({ dict, onRedownload }: DownloadHistoryProps) {
             </Collapsible>
         </Card>
     );
-}
-
-export function useDownloadHistory() {
-    const [downloadHistory, setDownloadHistory] = useLocalStorageState<DownloadRecord[]>('download-history', {
-        defaultValue: []
-    });
-
-    const addToHistory = (record: DownloadRecord) => {
-        setDownloadHistory([record, ...(downloadHistory || []).slice(0, 19)]);
-    };
-
-    const clearHistory = () => {
-        setDownloadHistory([]);
-    };
-
-    return {
-        downloadHistory,
-        addToHistory,
-        clearHistory
-    };
 }

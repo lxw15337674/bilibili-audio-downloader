@@ -14,8 +14,9 @@ import { LanguageSwitcher } from "@/components/language-switcher";
 import { API_ENDPOINTS } from '@/lib/config';
 import { downloadFile } from '@/lib/utils';
 import { detectPlatform, getPlatformDisplayName, normalizeUrl, type Platform, type PlatformInfo } from '@/lib/platformDetector';
-import { DownloadHistory, useDownloadHistory, type DownloadRecord } from './download-history';
+import { DownloadHistory, type DownloadRecord } from './download-history';
 import { DouyinResultCard, type DouyinParseResult } from '@/components/downloader/DouyinResultCard';
+import { useLocalStorageState } from 'ahooks';
 
 interface UnifiedDownloaderProps {
     dict: Dictionary;
@@ -32,8 +33,16 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
     const [douyinResult, setDouyinResult] = useState<DouyinParseResult | null>(null);
 
     const { toast } = useToast();
-    const { downloadHistory, addToHistory, clearHistory } = useDownloadHistory();
+    const [downloadHistory, setDownloadHistory] = useLocalStorageState<DownloadRecord[]>('download-history', {
+        defaultValue: []
+    });
+    const addToHistory = (record: DownloadRecord) => {
+        setDownloadHistory(prev => [record, ...(prev || []).slice(0, 29)]);
+    };
 
+    const clearDownloadHistory = () => {
+        setDownloadHistory([]);
+    };
     // 实时检测URL平台
     useEffect(() => {
         if (url.trim()) {
@@ -306,6 +315,8 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                                 clickToRedownload: "点击下载按钮开始重新下载"
                             }
                         }}
+                        downloadHistory={downloadHistory || []}
+                        clearHistory={clearDownloadHistory}
                         onRedownload={handleRedownload}
                     />
                 </div>
