@@ -53,7 +53,7 @@
         "clear": "清空",
         "cleared": "歷史記錄已清空",
         "viewSource": "查看原影片",
-        "redownload": "重新下載",
+        "redownload": "重新解析",
         "linkFilled": "連結已填入",
         "clickToRedownload": "點擊解析按鈕開始重新解析"
     },

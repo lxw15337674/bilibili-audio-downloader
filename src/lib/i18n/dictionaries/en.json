@@ -53,7 +53,7 @@
         "clear": "Clear",
         "cleared": "History cleared",
         "viewSource": "View Original",
-        "redownload": "Re-download",
+        "redownload": "Re-parse",
         "linkFilled": "Link filled",
         "clickToRedownload": "Click parse button to start re-parsing"
     },
