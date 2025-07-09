@@ -78,7 +78,7 @@ export function DouyinResultCard({ result, onClose }: DouyinResultCardProps) {
                     </div>
                     <div className="text-xs text-muted-foreground space-y-1">
                         <p className="text-center">
-                            💡 提示：下载按钮位于视频播放页面右下角的"..."菜单中
+                            💡 提示：下载按钮位于视频播放页面右下角的&ldquo;...&rdquo;菜单中
                         </p>
                     </div>
                 </div>
