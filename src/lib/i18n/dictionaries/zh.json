@@ -52,17 +52,17 @@
         "description": "您最近的下载（最近50条）",
         "clear": "清空",
         "cleared": "历史记录已清空",
-        "viewSource": "查看源",
+        "viewSource": "查看原视频",
         "redownload": "重新下载",
         "linkFilled": "链接已填入",
-        "clickToRedownload": "点击下载按钮开始重新下载"
+        "clickToRedownload": "点击解析按钮开始重新解析"
     },
     "errors": {
         "emptyUrl": "链接不能为空。",
         "invalidUrl": "请输入有效的Bilibili或抖音链接。",
         "unsupportedPlatform": "暂不支持此平台，请使用 Bilibili 或抖音链接。",
-        "downloadError": "下载时发生未知错误。",
-        "downloadFailed": "下载失败",
+        "downloadError": "处理时发生未知错误。",
+        "downloadFailed": "处理失败",
         "videoLinkInvalid": "视频链接可能无效。",
         "getVideoInfoFailed": "获取视频信息失败，请稍后重试。",
         "networkError": "网络错误。",
@@ -72,7 +72,7 @@
     "toast": {
         "historyCleared": "下载历史已清除。",
         "linkFilled": "链接已粘贴。",
-        "clickToRedownload": "点击下载按钮以开始。",
+        "clickToRedownload": "点击解析按钮以开始。",
         "douyinParseSuccess": "解析成功",
         "manualDownloadLink": "由于抖音限制，请右键这里选择'链接另存为'手动下载",
         "recordDeleted": "记录已删除。",
@@ -80,7 +80,7 @@
         "lowConfidenceDetection": "检测置信度较低",
         "lowConfidenceDescription": "将尝试按检测到的平台处理，如果失败请检查链接格式",
         "linkFilledForRedownload": "链接已填入",
-        "clickToRedownloadDesc": "点击下载按钮开始重新下载",
+        "clickToRedownloadDesc": "点击解析按钮开始重新解析",
         "linkCopied": "链接已复制",
         "copyFailed": "复制失败"
     },

@@ -2,12 +2,12 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { format } from 'date-fns';
-import { ChevronDown, ChevronRight, ChevronsUpDown } from 'lucide-react';
+import { ChevronsUpDown } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
-import { detectPlatform, getPlatformDisplayName } from '@/lib/platformDetector';
+import { detectPlatform } from '@/lib/platformDetector';
 
 export interface DownloadRecord {
     url: string;

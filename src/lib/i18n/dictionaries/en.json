@@ -52,17 +52,17 @@
         "description": "Your recent downloads (last 50)",
         "clear": "Clear",
         "cleared": "History cleared",
-        "viewSource": "View Source",
+        "viewSource": "View Original",
         "redownload": "Re-download",
         "linkFilled": "Link filled",
-        "clickToRedownload": "Click download button to start re-download"
+        "clickToRedownload": "Click parse button to start re-parsing"
     },
     "errors": {
         "emptyUrl": "URL cannot be empty.",
         "invalidUrl": "Please enter a valid Bilibili or Douyin link.",
         "unsupportedPlatform": "Platform not supported. Please use Bilibili or Douyin links.",
-        "downloadError": "An unknown error occurred during download.",
-        "downloadFailed": "Download failed",
+        "downloadError": "An unknown error occurred during processing.",
+        "downloadFailed": "Processing failed",
         "videoLinkInvalid": "Video link may be invalid.",
         "getVideoInfoFailed": "Failed to get video information, please try again later.",
         "networkError": "Network error.",
@@ -72,7 +72,7 @@
     "toast": {
         "historyCleared": "Download history has been cleared.",
         "linkFilled": "Link pasted.",
-        "clickToRedownload": "Click the download button to start.",
+        "clickToRedownload": "Click the parse button to start.",
         "douyinParseSuccess": "Successfully parsed",
         "manualDownloadLink": "Due to Douyin restrictions, please right-click here and select 'Save link as...' to download manually",
         "recordDeleted": "Record has been deleted.",
@@ -80,7 +80,7 @@
         "lowConfidenceDetection": "Low detection confidence",
         "lowConfidenceDescription": "Will attempt to process as detected platform. Please check link format if it fails",
         "linkFilledForRedownload": "Link filled",
-        "clickToRedownloadDesc": "Click download button to start re-download",
+        "clickToRedownloadDesc": "Click parse button to start re-parsing",
         "linkCopied": "Link copied",
         "copyFailed": "Copy failed"
     },
