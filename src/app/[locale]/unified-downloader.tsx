@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, X, Download, Link as LinkIcon } from 'lucide-react';
+import { Loader2, X, Download, Link as LinkIcon, Copy, ExternalLink } from 'lucide-react';
 import axios from 'axios';
 import type { Dictionary } from '@/lib/i18n/types';
 import type { Locale } from "@/lib/i18n/config";
@@ -322,23 +322,59 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                             <CardContent>
                                 <div className="space-y-4">
                                     <div>
-                                        <h3 className="font-medium break-all">{douyinResult.title}</h3>
+                                        <h3 className="font-medium break-all mb-3">{douyinResult.title}</h3>
+                                    </div>
+
+                                    <div>
+                                        <label className="text-sm font-medium text-muted-foreground">下载链接</label>
+                                        <div className="mt-2 p-3 bg-muted/30 rounded-md border">
+                                            <p className="text-sm break-all text-muted-foreground">
+                                                {douyinResult.downloadUrl}
+                                            </p>
+                                        </div>
                                     </div>
                                     <div className="flex gap-2">
-                                        <a
-                                            href={douyinResult.downloadUrl}
-                                            download={true}
+                                        <Button
+                                            variant="outline"
                                             className="flex-1"
+                                            onClick={() => {
+                                                window.open(douyinResult.downloadUrl, '_blank', 'noopener,noreferrer');
+                                            }}
                                         >
-                                            <Button className="w-full">
-                                                <Download className="h-4 w-4 mr-2" />
-                                                {dict.result.downloadButton}
-                                            </Button>
-                                        </a>
+                                            <ExternalLink className="h-4 w-4 mr-2" />
+                                            打开链接
+                                        </Button>
+                                        <Button
+                                            variant="outline"
+                                            className="flex-1"
+                                            onClick={async () => {
+                                                try {
+                                                    await navigator.clipboard.writeText(douyinResult.downloadUrl);
+                                                    toast({
+                                                        title: "链接已复制",
+                                                        description: "已复制到剪贴板，可以粘贴到新标签页打开",
+                                                        duration: 3000,
+                                                    });
+                                                } catch (err) {
+                                                    console.error('Failed to copy to clipboard:', err);
+                                                    toast({
+                                                        variant: "destructive",
+                                                        title: "复制失败",
+                                                        description: "无法复制到剪贴板，请手动选择并复制上方链接",
+                                                        duration: 5000,
+                                                    });
+                                                }
+                                            }}
+                                        >
+                                            <Copy className="h-4 w-4 mr-2" />
+                                            复制链接
+                                        </Button>
                                     </div>
-                                    <p className="text-xs text-muted-foreground text-center">
-                                        {dict.toast.manualDownloadLink}
-                                    </p>
+                                    <div className="text-xs text-muted-foreground space-y-1">
+                                        <p className="text-center">
+                                            💡 提示：下载按钮位于视频播放页面右下角的"..."菜单中
+                                        </p>
+                                    </div>
                                 </div>
                             </CardContent>
                         </Card>
