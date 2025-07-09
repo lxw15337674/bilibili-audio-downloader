@@ -81,5 +81,171 @@
         "zh": "简体中文",
         "zh-tw": "繁體中文",
         "en": "English"
+    },
+    "collapsible": {
+        "whyChooseUs": {
+            "title": "为什么选择我们？",
+            "description": "专业、安全、高效的 B 站音频提取工具，了解我们的技术优势"
+        },
+        "userGuide": {
+            "title": "使用指南",
+            "description": "简单三步完成下载，查看常见问题和使用技巧"
+        },
+        "privacyTerms": {
+            "title": "隐私与条款",
+            "description": "了解我们的隐私政策、使用条款和法律声明"
+        },
+        "expandHint": "点击查看详细内容",
+        "autoCollapseNotice": "内容将自动折叠以保持页面简洁"
+    },
+    "features": {
+        "title": "为什么选择我们的音频下载器？",
+        "subtitle": "专业、安全、高效的 B 站音频提取工具",
+        "quality": {
+            "title": "高品质音频",
+            "description": "自动选择最佳音频质量，支持高清晰度音频格式，确保您获得最佳的听觉体验。"
+        },
+        "speed": {
+            "title": "极速下载",
+            "description": "采用先进的音频提取技术，快速处理和转换，节省您的宝贵时间。"
+        },
+        "free": {
+            "title": "完全免费",
+            "description": "无需注册，无需付费，永久免费使用。支持批量下载历史记录管理。"
+        },
+        "privacy": {
+            "title": "隐私保护",
+            "description": "本地处理，不存储任何用户数据或视频内容，确保您的隐私安全。"
+        }
+    },
+    "steps": {
+        "title": "如何使用？",
+        "subtitle": "三步即可完成音频下载",
+        "step1": {
+            "title": "复制链接",
+            "description": "在 Bilibili 网站或 APP 中复制您想要下载音频的视频链接，支持 BV 号和 AV 号格式。"
+        },
+        "step2": {
+            "title": "粘贴链接",
+            "description": "将复制的链接粘贴到上方的输入框中，可以使用快捷粘贴按钮或手动输入。"
+        },
+        "step3": {
+            "title": "立即下载",
+            "description": "点击下载按钮，系统将自动提取音频并开始下载，文件会保存到您的默认下载目录。"
+        }
+    },
+    "technical": {
+        "title": "技术特色",
+        "subtitle": "先进技术确保最佳体验",
+        "extraction": {
+            "title": "智能音频提取",
+            "description": "使用先进的音频分离技术，从视频中提取高质量音频轨道。"
+        },
+        "formats": {
+            "title": "多格式支持",
+            "description": "支持 MP3、AAC 等主流音频格式，兼容各种播放设备。"
+        },
+        "compatibility": {
+            "title": "设备兼容",
+            "description": "支持桌面端和移动端访问，跨平台使用无障碍。"
+        },
+        "reliability": {
+            "title": "稳定可靠",
+            "description": "7x24 小时稳定运行，高可用性保证随时可用。"
+        }
+    },
+    "legal": {
+        "title": "使用声明",
+        "subtitle": "请合法合规使用本工具",
+        "personalUse": "本工具仅供个人学习和研究使用，请勿用于商业用途。",
+        "copyright": "请尊重原创作者的版权，下载的音频内容仅供个人欣赏。",
+        "support": "建议您支持原创作者，通过正当渠道获取和使用音频内容。",
+        "disclaimer": "使用本工具产生的任何法律后果由用户自行承担。"
+    },
+    "faq": {
+        "title": "常见问题",
+        "subtitle": "解答您的疑问",
+        "format": {
+            "question": "支持哪些链接格式？",
+            "answer": "支持标准的 Bilibili 视频链接，包括 BV 号和 AV 号格式，如：https://www.bilibili.com/video/BV1xx411c7mD"
+        },
+        "quality": {
+            "question": "音频质量如何？",
+            "answer": "自动选择视频的最高音频质量进行提取，通常为 128kbps 或更高品质的音频。"
+        },
+        "limit": {
+            "question": "有下载限制吗？",
+            "answer": "目前无下载次数限制，但请合理使用，避免对服务器造成过大压力。"
+        },
+        "safety": {
+            "question": "安全性如何保障？",
+            "answer": "本站不存储任何用户数据，处理过程在安全的服务器环境中进行，保护用户隐私。"
+        }
+    },
+    "navigation": {
+        "home": "首页",
+        "privacy": "隐私政策",
+        "terms": "服务条款",
+        "about": "关于我们",
+        "contact": "联系我们"
+    },
+    "privacy": {
+        "title": "隐私政策",
+        "lastUpdated": "最后更新：2025年1月",
+        "introduction": {
+            "title": "引言",
+            "content": "本隐私政策说明了 Bilibili 音频下载器（以下简称「我们」或「本服务」）如何收集、使用、存储和保护用户信息。我们深知隐私保护的重要性，承诺保护用户的个人信息安全。"
+        },
+        "collection": {
+            "title": "信息收集",
+            "subtitle": "我们收集的信息类型",
+            "noPersonalData": "我们不收集任何个人身份信息，包括但不限于姓名、邮箱、电话号码等。",
+            "technicalData": "我们可能收集技术信息，如 IP 地址、浏览器类型、设备信息等，仅用于服务优化和安全保护。",
+            "usageData": "我们可能收集服务使用统计信息，如访问次数、下载次数等，用于改进服务质量。"
+        },
+        "usage": {
+            "title": "信息使用",
+            "subtitle": "我们如何使用收集的信息",
+            "serviceProvision": "提供和维护音频下载服务",
+            "improvement": "改进和优化服务性能",
+            "security": "保护服务安全，防止滥用",
+            "analytics": "进行匿名数据分析，了解用户需求"
+        },
+        "storage": {
+            "title": "数据存储",
+            "subtitle": "数据存储和保护措施",
+            "noStorage": "我们不存储用户上传的视频链接或下载的音频文件。",
+            "temporary": "处理过程中的临时数据会在处理完成后立即删除。",
+            "security": "所有数据传输使用 HTTPS 加密协议保护。"
+        },
+        "cookies": {
+            "title": "Cookie 使用",
+            "subtitle": "Cookie 和类似技术的使用",
+            "localStorage": "我们使用本地存储保存您的下载历史记录，这些数据仅存储在您的设备上。",
+            "analytics": "我们可能使用第三方分析工具（如 Google Analytics）来了解网站使用情况。",
+            "ads": "我们使用 Google AdSense 展示广告，相关 Cookie 政策请参阅 Google 的隐私政策。"
+        },
+        "thirdParty": {
+            "title": "第三方服务",
+            "subtitle": "我们使用的第三方服务",
+            "analytics": "Google Analytics - 用于网站分析",
+            "ads": "Google AdSense - 用于展示广告",
+            "hosting": "Vercel - 用于网站托管"
+        },
+        "rights": {
+            "title": "用户权利",
+            "subtitle": "您的权利和选择",
+            "access": "由于我们不收集个人信息，无需提供数据访问功能。",
+            "deletion": "您可以随时清除浏览器中的本地存储数据。",
+            "optOut": "您可以通过浏览器设置禁用 Cookie 和 JavaScript。"
+        },
+        "updates": {
+            "title": "政策更新",
+            "content": "我们可能会不时更新本隐私政策。任何更改将在此页面公布，重大更改会在网站首页进行通知。"
+        },
+        "contact": {
+            "title": "联系我们",
+            "content": "如果您对本隐私政策有任何疑问，请通过 GitHub Issues 联系我们。"
+        }
     }
 }

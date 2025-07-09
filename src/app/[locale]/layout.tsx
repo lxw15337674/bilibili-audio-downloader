@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "../globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster"
@@ -140,7 +141,22 @@ export default async function RootLayout({
                     {children}
                 </ThemeProvider>
                 <Analytics />
+                <Script
+                    strategy="afterInteractive"
+                    src="https://www.googletagmanager.com/gtag/js?id=G-0BEHLKM3W5"
+                />
+                <Script
+                    id="google-analytics"
+                    strategy="afterInteractive"
+                >
+                    {`
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', 'G-0BEHLKM3W5');
+                    `}
+                </Script>
             </body>
         </html>
     );
-} 
+}

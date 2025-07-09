@@ -81,5 +81,171 @@
         "zh": "简体中文",
         "zh-tw": "繁體中文",
         "en": "English"
+    },
+    "collapsible": {
+        "whyChooseUs": {
+            "title": "Why Choose Us?",
+            "description": "Professional, secure, and efficient Bilibili audio extraction tool - discover our technical advantages"
+        },
+        "userGuide": {
+            "title": "User Guide",
+            "description": "Complete downloads in three simple steps, view FAQs and usage tips"
+        },
+        "privacyTerms": {
+            "title": "Privacy & Terms",
+            "description": "Learn about our privacy policy, terms of use, and legal statements"
+        },
+        "expandHint": "Click to view detailed content",
+        "autoCollapseNotice": "Content will auto-collapse to keep the page clean"
+    },
+    "features": {
+        "title": "Why Choose Our Audio Downloader?",
+        "subtitle": "Professional, secure, and efficient Bilibili audio extraction tool",
+        "quality": {
+            "title": "High-Quality Audio",
+            "description": "Automatically selects the best audio quality, supports high-definition audio formats to ensure you get the best listening experience."
+        },
+        "speed": {
+            "title": "Lightning Fast",
+            "description": "Uses advanced audio extraction technology for fast processing and conversion, saving your valuable time."
+        },
+        "free": {
+            "title": "Completely Free",
+            "description": "No registration required, no payment needed, free to use forever. Supports batch download history management."
+        },
+        "privacy": {
+            "title": "Privacy Protection",
+            "description": "Local processing, no user data or video content stored, ensuring your privacy and security."
+        }
+    },
+    "steps": {
+        "title": "How to Use?",
+        "subtitle": "Complete audio download in three simple steps",
+        "step1": {
+            "title": "Copy Link",
+            "description": "Copy the video link you want to download audio from on Bilibili website or APP. Supports both BV and AV number formats."
+        },
+        "step2": {
+            "title": "Paste Link",
+            "description": "Paste the copied link into the input box above. You can use the quick paste button or manually enter it."
+        },
+        "step3": {
+            "title": "Download Now",
+            "description": "Click the download button, the system will automatically extract audio and start downloading. Files will be saved to your default download directory."
+        }
+    },
+    "technical": {
+        "title": "Technical Features",
+        "subtitle": "Advanced technology ensures the best experience",
+        "extraction": {
+            "title": "Smart Audio Extraction",
+            "description": "Uses advanced audio separation technology to extract high-quality audio tracks from videos."
+        },
+        "formats": {
+            "title": "Multi-Format Support",
+            "description": "Supports mainstream audio formats like MP3, AAC, compatible with various playback devices."
+        },
+        "compatibility": {
+            "title": "Device Compatible",
+            "description": "Supports desktop and mobile access, cross-platform usage without barriers."
+        },
+        "reliability": {
+            "title": "Stable & Reliable",
+            "description": "24/7 stable operation with high availability ensuring it's always accessible."
+        }
+    },
+    "legal": {
+        "title": "Usage Statement",
+        "subtitle": "Please use this tool legally and compliantly",
+        "personalUse": "This tool is for personal learning and research use only, not for commercial purposes.",
+        "copyright": "Please respect the copyright of original creators, downloaded audio content is for personal enjoyment only.",
+        "support": "We recommend supporting original creators and obtaining audio content through legitimate channels.",
+        "disclaimer": "Users are responsible for any legal consequences arising from the use of this tool."
+    },
+    "faq": {
+        "title": "Frequently Asked Questions",
+        "subtitle": "Answers to your questions",
+        "format": {
+            "question": "What link formats are supported?",
+            "answer": "Supports standard Bilibili video links, including BV and AV number formats, e.g.: https://www.bilibili.com/video/BV1xx411c7mD"
+        },
+        "quality": {
+            "question": "What about audio quality?",
+            "answer": "Automatically selects the highest audio quality from the video for extraction, typically 128kbps or higher quality audio."
+        },
+        "limit": {
+            "question": "Are there download limits?",
+            "answer": "Currently no download limit, but please use reasonably to avoid excessive server pressure."
+        },
+        "safety": {
+            "question": "How is security guaranteed?",
+            "answer": "This site stores no user data, processing occurs in a secure server environment, protecting user privacy."
+        }
+    },
+    "navigation": {
+        "home": "Home",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service",
+        "about": "About Us",
+        "contact": "Contact Us"
+    },
+    "privacy": {
+        "title": "Privacy Policy",
+        "lastUpdated": "Last Updated: January 2025",
+        "introduction": {
+            "title": "Introduction",
+            "content": "This privacy policy explains how Bilibili Audio Downloader (referred to as 'we' or 'this service') collects, uses, stores and protects user information. We understand the importance of privacy protection and are committed to protecting users' personal information security."
+        },
+        "collection": {
+            "title": "Information Collection",
+            "subtitle": "Types of information we collect",
+            "noPersonalData": "We do not collect any personally identifiable information, including but not limited to names, emails, phone numbers, etc.",
+            "technicalData": "We may collect technical information such as IP addresses, browser types, device information, etc., solely for service optimization and security protection.",
+            "usageData": "We may collect service usage statistics such as access counts, download counts, etc., to improve service quality."
+        },
+        "usage": {
+            "title": "Information Usage",
+            "subtitle": "How we use collected information",
+            "serviceProvision": "Providing and maintaining audio download services",
+            "improvement": "Improving and optimizing service performance",
+            "security": "Protecting service security and preventing abuse",
+            "analytics": "Conducting anonymous data analysis to understand user needs"
+        },
+        "storage": {
+            "title": "Data Storage",
+            "subtitle": "Data storage and protection measures",
+            "noStorage": "We do not store user-uploaded video links or downloaded audio files.",
+            "temporary": "Temporary data during processing is immediately deleted after completion.",
+            "security": "All data transmission is protected using HTTPS encryption protocol."
+        },
+        "cookies": {
+            "title": "Cookie Usage",
+            "subtitle": "Use of cookies and similar technologies",
+            "localStorage": "We use local storage to save your download history, this data is only stored on your device.",
+            "analytics": "We may use third-party analytics tools (such as Google Analytics) to understand website usage.",
+            "ads": "We use Google AdSense to display advertisements, please refer to Google's privacy policy for related cookie policies."
+        },
+        "thirdParty": {
+            "title": "Third-Party Services",
+            "subtitle": "Third-party services we use",
+            "analytics": "Google Analytics - for website analysis",
+            "ads": "Google AdSense - for displaying advertisements",
+            "hosting": "Vercel - for website hosting"
+        },
+        "rights": {
+            "title": "User Rights",
+            "subtitle": "Your rights and choices",
+            "access": "Since we do not collect personal information, no data access functionality is needed.",
+            "deletion": "You can clear local storage data in your browser at any time.",
+            "optOut": "You can disable cookies and JavaScript through browser settings."
+        },
+        "updates": {
+            "title": "Policy Updates",
+            "content": "We may update this privacy policy from time to time. Any changes will be posted on this page, and major changes will be notified on the website homepage."
+        },
+        "contact": {
+            "title": "Contact Us",
+            "content": "If you have any questions about this privacy policy, please contact us through GitHub Issues."
+        }
     }
 }
