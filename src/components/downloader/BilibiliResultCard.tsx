@@ -49,6 +49,7 @@ export function BilibiliResultCard({
                     <div className="flex gap-2">
                         <Button
                             onClick={handleDownloadAudio}
+                            variant="outline"
                             className="flex-1 flex items-center justify-center gap-2"
                         >
                             <Music className="h-4 w-4" />

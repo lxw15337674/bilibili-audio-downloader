@@ -41,12 +41,12 @@ const getPlatformBadge = (platform: Platform) => {
         case 'bili':
         case 'bilibili':
             return {
-                text: 'B站音频',
+                text: 'bilibili',
                 className: 'bg-pink-100 text-pink-700 dark:bg-pink-900 dark:text-pink-300'
             };
         case 'douyin':
             return {
-                text: '抖音视频',
+                text: '抖音',
                 className: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
             };
         default:

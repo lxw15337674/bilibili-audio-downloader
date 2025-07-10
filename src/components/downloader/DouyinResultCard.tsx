@@ -81,6 +81,7 @@ export function DouyinResultCard({
                     <div className="flex gap-2">
                         <Button
                             disabled={true}
+                            variant="outline"
                             className="flex-1 flex items-center justify-center gap-2"
                         >
                             <Music className="h-4 w-4" />
@@ -95,7 +96,6 @@ export function DouyinResultCard({
                         </Button>
                         <Button
                             variant="outline"
-                            size="sm"
                             className="flex-1 flex items-center justify-center gap-2"
                             onClick={handleOpenLink}
                         >

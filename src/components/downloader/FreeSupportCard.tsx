@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Heart, Check } from 'lucide-react';
+import { Heart, Check, Shield, Info } from 'lucide-react';
 
 export function FreeSupportCard() {
     return (
@@ -30,9 +30,21 @@ export function FreeSupportCard() {
 
                 <div className="pt-2 border-t">
                     <div className="flex items-start gap-2">
-                        <div className="text-blue-500 mt-0.5">💡</div>
+                        <Shield className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <div className="text-sm">
+                            <p className="font-medium text-foreground">隐私保护承诺</p>
+                            <p className="text-muted-foreground">服务器不保存用户记录</p>
+                            <p className="text-muted-foreground">历史记录存在浏览器中</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="pt-2 border-t">
+                    <div className="flex items-start gap-2">
+                        <Info className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
                         <div className="text-sm text-muted-foreground">
-                            <p>本服务通过展示广告获得收益，用于支撑服务器和流量成本</p>
+                            <p>本服务通过展示广告获得收益</p>
+                            <p>用于支撑服务器和流量成本</p>
                         </div>
                     </div>
                 </div>

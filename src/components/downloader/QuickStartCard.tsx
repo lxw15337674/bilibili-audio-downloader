@@ -19,7 +19,7 @@ export function QuickStartCard() {
                     </div>
                     <div>
                         <p className="font-medium">复制视频链接</p>
-                        <p className="text-sm text-muted-foreground">从B站/抖音等平台复制视频分享链接</p>
+                        <p className="text-sm text-muted-foreground">从B站/抖音等平台复制视频链接</p>
                     </div>
                 </div>
                 <div className="flex items-start gap-3">
