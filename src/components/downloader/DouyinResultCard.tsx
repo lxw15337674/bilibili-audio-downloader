@@ -34,29 +34,9 @@ export function DouyinResultCard({
     onClose,
     dict
 }: DouyinResultCardProps) {
-    const { toast } = useToast();
 
     const handleDownload = () => {
         onDownload('video', originalUrl);
-    };
-
-    const handleCopyLink = async () => {
-        try {
-            await navigator.clipboard.writeText(downloadUrl);
-            toast({
-                title: dict.toast.linkCopied,
-                description: dict.douyin.copySuccess,
-                duration: 3000,
-            });
-        } catch (err) {
-            console.error('Failed to copy to clipboard:', err);
-            toast({
-                variant: "destructive",
-                title: dict.toast.copyFailed,
-                description: dict.douyin.copyFailed,
-                duration: 5000,
-            });
-        }
     };
 
     const handleOpenLink = () => {
@@ -70,6 +50,7 @@ export function DouyinResultCard({
                     <CardTitle className="text-lg">抖音解析结果</CardTitle>
                     <p className="text-sm text-muted-foreground mt-1 break-all">
                         {title}
+                        {originalUrl}
                     </p>
                 </div>
                 <Button variant="ghost" size="sm" onClick={onClose}>
