@@ -3,20 +3,16 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from '@/hooks/use-toast';
-import { X, Copy, ExternalLink } from 'lucide-react';
+import { X, Copy, ExternalLink, Video, AlertTriangle, Music } from 'lucide-react';
 
-export interface DouyinParseResult {
+interface DouyinResultCardProps {
     title: string;
     downloadUrl: string;
     originalUrl: string;
-}
-
-interface DouyinResultCardProps {
-    result: DouyinParseResult;
+    onDownload: (format: 'audio' | 'video', url: string) => void;
     onClose: () => void;
     dict: {
         douyin: {
-            parseResult: string;
             copyLink: string;
             openLink: string;
             copySuccess: string;
@@ -30,14 +26,51 @@ interface DouyinResultCardProps {
     };
 }
 
-export function DouyinResultCard({ result, onClose, dict }: DouyinResultCardProps) {
+export function DouyinResultCard({
+    title,
+    downloadUrl,
+    originalUrl,
+    onDownload,
+    onClose,
+    dict
+}: DouyinResultCardProps) {
     const { toast } = useToast();
+
+    const handleDownload = () => {
+        onDownload('video', originalUrl);
+    };
+
+    const handleCopyLink = async () => {
+        try {
+            await navigator.clipboard.writeText(downloadUrl);
+            toast({
+                title: dict.toast.linkCopied,
+                description: dict.douyin.copySuccess,
+                duration: 3000,
+            });
+        } catch (err) {
+            console.error('Failed to copy to clipboard:', err);
+            toast({
+                variant: "destructive",
+                title: dict.toast.copyFailed,
+                description: dict.douyin.copyFailed,
+                duration: 5000,
+            });
+        }
+    };
+
+    const handleOpenLink = () => {
+        window.open(downloadUrl, '_blank', 'noopener,noreferrer');
+    };
 
     return (
         <Card>
             <CardHeader className="flex flex-row items-center justify-between">
-                <div>
-                    <CardTitle>{dict.douyin.parseResult}</CardTitle>
+                <div className="flex-1 min-w-0">
+                    <CardTitle className="text-lg">抖音解析结果</CardTitle>
+                    <p className="text-sm text-muted-foreground mt-1 break-all">
+                        {title}
+                    </p>
                 </div>
                 <Button variant="ghost" size="sm" onClick={onClose}>
                     <X className="h-4 w-4" />
@@ -45,54 +78,40 @@ export function DouyinResultCard({ result, onClose, dict }: DouyinResultCardProp
             </CardHeader>
             <CardContent>
                 <div className="space-y-4">
-                    <div>
-                        <div className="p-3 bg-muted/30 rounded-md border">
-                            <p className="text-sm break-all text-muted-foreground">
-                                {result.downloadUrl}
-                            </p>
-                        </div>
-                    </div>
                     <div className="flex gap-2">
                         <Button
-                            variant="outline"
-                            className="flex-1"
-                            onClick={async () => {
-                                try {
-                                    await navigator.clipboard.writeText(result.downloadUrl);
-                                    toast({
-                                        title: dict.toast.linkCopied,
-                                        description: dict.douyin.copySuccess,
-                                        duration: 3000,
-                                    });
-                                } catch (err) {
-                                    console.error('Failed to copy to clipboard:', err);
-                                    toast({
-                                        variant: "destructive",
-                                        title: dict.toast.copyFailed,
-                                        description: dict.douyin.copyFailed,
-                                        duration: 5000,
-                                    });
-                                }
-                            }}
+                            disabled={true}
+                            className="flex-1 flex items-center justify-center gap-2"
                         >
-                            <Copy className="h-4 w-4 mr-2" />
-                            {dict.douyin.copyLink}
+                            <Music className="h-4 w-4" />
+                            下载音频
+                        </Button>
+                        <Button
+                            onClick={handleDownload}
+                            className="flex-1 flex items-center justify-center gap-2"
+                        >
+                            <Video className="h-4 w-4" />
+                            下载视频
                         </Button>
                         <Button
                             variant="outline"
-                            className="flex-1"
-                            onClick={() => {
-                                window.open(result.downloadUrl, '_blank', 'noopener,noreferrer');
-                            }}
+                            size="sm"
+                            className="flex-1 flex items-center justify-center gap-2"
+                            onClick={handleOpenLink}
                         >
-                            <ExternalLink className="h-4 w-4 mr-2" />
-                            {dict.douyin.openLink}
+                            <ExternalLink className="h-4 w-4" />
+                            打开链接
                         </Button>
-
                     </div>
-                    <div className="text-xs text-muted-foreground space-y-1">
-                        <p className="text-center">
-                            {dict.douyin.downloadTip}
+                    {/*限制说明 */}
+                    <div className="text-xs text-muted-foreground text-center space-y-1">
+                        <p className="flex items-center justify-center gap-1">
+                            <AlertTriangle className="h-3 w-3" />
+                            API限制：无法下载音频，需要下载视频后手动提取音频
+                        </p>
+                        <p className="flex items-center justify-center gap-1">
+                            <AlertTriangle className="h-3 w-3" />
+                            如果自动下载失败，请点击打开链接手动下载（下载功能在视频右下角）
                         </p>
                     </div>
                 </div>

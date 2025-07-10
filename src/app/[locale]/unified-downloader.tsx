@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -13,10 +13,20 @@ import type { Locale } from "@/lib/i18n/config";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { API_ENDPOINTS } from '@/lib/config';
 import { downloadFile } from '@/lib/utils';
-import { detectPlatform, getPlatformDisplayName, normalizeUrl, type Platform, type PlatformInfo } from '@/lib/platformDetector';
+
 import { DownloadHistory, type DownloadRecord } from './download-history';
-import { DouyinResultCard, type DouyinParseResult } from '@/components/downloader/DouyinResultCard';
+import { DouyinResultCard } from '@/components/downloader/DouyinResultCard';
+import { BilibiliResultCard } from '@/components/downloader/BilibiliResultCard';
 import { useLocalStorageState } from 'ahooks';
+import type { UnifiedParseResult } from '@/lib/types';
+import { Platform } from '@/lib/types';
+
+interface ParseResult {
+    title: string;
+    downloadUrl: string;
+    originalUrl: string;
+    platform: Platform;
+}
 
 interface UnifiedDownloaderProps {
     dict: Dictionary;
@@ -29,8 +39,7 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
     const [url, setUrl] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const [platformInfo, setPlatformInfo] = useState<PlatformInfo>({ platform: 'unknown', confidence: 0 });
-    const [douyinResult, setDouyinResult] = useState<DouyinParseResult | null>(null);
+    const [parseResult, setParseResult] = useState<ParseResult | null>(null);
 
     const { toast } = useToast();
     const [downloadHistory, setDownloadHistory] = useLocalStorageState<DownloadRecord[]>('download-history', {
@@ -43,85 +52,81 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
     const clearDownloadHistory = () => {
         setDownloadHistory([]);
     };
-    // 实时检测URL平台
-    useEffect(() => {
-        if (url.trim()) {
-            const info = detectPlatform(url.trim());
-            setPlatformInfo(info);
 
-            // 显示检测结果的提示
-            if (info.platform !== 'unknown' && info.confidence > 0.6) {
-                const platformName = getPlatformDisplayName(info.platform);
-                console.log(`Detected platform: ${platformName} (confidence: ${info.confidence})`);
-            }
-        } else {
-            setPlatformInfo({ platform: 'unknown', confidence: 0 });
+
+
+
+    // 统一解析处理：只解析不自动下载
+    const handleUnifiedParse = async (videoUrl: string) => {
+        // 调用解析接口获取视频信息
+        const parseResponse = await axios.get(`${API_ENDPOINTS.unified.parse}?url=${encodeURIComponent(videoUrl)}`);
+
+        if (!parseResponse.data || !parseResponse.data.success) {
+            throw new Error(parseResponse.data?.error || 'Failed to parse video');
         }
-    }, [url]);
 
-    // 获取动态placeholder
-    const getPlaceholder = () => {
-        if (platformInfo.platform === 'bilibili' && platformInfo.confidence > 0.6) {
-            return dict.unified.placeholderBilibili;
-        } else if (platformInfo.platform === 'douyin' && platformInfo.confidence > 0.6) {
-            return dict.unified.placeholderDouyin;
+        const parseResult: UnifiedParseResult = parseResponse.data;
+
+        if (!parseResult.data) {
+            throw new Error('No data returned from parse API');
         }
-        return dict.unified.placeholder;
-    };
 
-    // 处理B站下载
-    const handleBilibiliDownload = async (videoUrl: string) => {
-        const downloadUrl = `${API_ENDPOINTS.bilibili.download}?url=${encodeURIComponent(videoUrl)}`;
-        const urlMatch = videoUrl.match(/\/video\/([^/?]+)/);
-        const videoId = urlMatch ? urlMatch[1] : 'unknown';
-        const fallbackTitle = `${dict.form.fallbackTitle}_${videoId}`;
+        const { title, platform, downloadUrl, url } = parseResult.data;
 
-        const downloadPromise = new Promise<void>((resolve) => {
-            downloadFile(downloadUrl);
-            resolve();
+        // 显示结果卡片，让用户选择下载格式
+        setParseResult({
+            title: title,
+            downloadUrl: downloadUrl || '',
+            originalUrl: url,
+            platform: platform as Platform
         });
 
-        const titlePromise = axios.get(`${API_ENDPOINTS.bilibili.title}?url=${encodeURIComponent(videoUrl)}`)
-            .then(response => ({ title: response.data?.data?.title || fallbackTitle }))
-            .catch(() => ({ title: fallbackTitle }));
-
-        const [{ title }] = await Promise.all([titlePromise, downloadPromise]);
-
+        // 添加到下载历史
         const newRecord: DownloadRecord = {
             url: videoUrl,
-            title,
+            title: title || 'Unknown Title',
             timestamp: Date.now(),
+            platform: platform as Platform
         };
         addToHistory(newRecord);
+
+        // 显示成功提示
+        toast({
+            title: dict.toast.douyinParseSuccess,
+            description: `${platform}: ${title}`,
+            duration: 3000
+        });
     };
 
-    // 处理抖音下载
-    const handleDouyinDownload = async (videoUrl: string) => {
-        const response = await axios.get(API_ENDPOINTS.douyin.parse, {
-            params: { url: videoUrl }
-        });
-        if (response.data) {
-            const result: DouyinParseResult = {
-                title: response.data.title,
-                downloadUrl: response.data.downloadUrl,
-                originalUrl: response.data.proxyDownloadUrl
-            };
+    const closeParseResult = () => {
+        setParseResult(null);
+    };
 
-            setDouyinResult(result);
+    // 处理用户选择的下载格式
+    const handleDownload = async (format: 'audio' | 'video', originalUrl: string) => {
+        try {
+            let downloadUrl;
 
-            const newRecord: DownloadRecord = {
-                url: videoUrl,
-                title: response.data.title,
-                timestamp: Date.now(),
-            };
-            addToHistory(newRecord);
-
+            if (format === 'audio') {
+                // 调用音频下载API
+                downloadUrl = `${API_ENDPOINTS.unified.download}?url=${encodeURIComponent(originalUrl)}&type=audio`;
+            } else {
+                // 调用视频下载API
+                downloadUrl = `${API_ENDPOINTS.unified.download}?url=${encodeURIComponent(originalUrl)}&type=video`;
+            }
+            downloadFile(downloadUrl);
             toast({
-                title: dict.toast.douyinParseSuccess,
+                title: format === 'audio' ? '开始下载音频' : '开始下载视频',
+                description: '下载已开始，请稍候...',
                 duration: 3000
             });
-        } else {
-            throw new Error('Failed to parse Douyin video');
+        } catch (err) {
+            const errorMessage = err instanceof Error ? err.message : '下载失败';
+            toast({
+                variant: "destructive",
+                title: "下载失败",
+                description: errorMessage
+            });
         }
     };
 
@@ -129,7 +134,7 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
         e.preventDefault();
         setLoading(true);
         setError('');
-        setDouyinResult(null);
+        setParseResult(null);
 
         if (!url.trim()) {
             setError(dict.errors.emptyUrl);
@@ -138,36 +143,8 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
         }
 
         try {
-            const normalizedUrl = normalizeUrl(url.trim());
-            const detectedPlatform = detectPlatform(normalizedUrl);
-
-            if (detectedPlatform.confidence < 0.3) {
-                setError(dict.errors.unsupportedPlatform);
-                setLoading(false);
-                return;
-            }
-
-            // 对于低置信度检测，显示警告但仍然尝试处理
-            if (detectedPlatform.confidence < 0.6) {
-                toast({
-                    title: dict.toast.lowConfidenceDetection,
-                    description: dict.toast.lowConfidenceDescription,
-                    duration: 3000,
-                });
-            }
-
-            switch (detectedPlatform.platform) {
-                case 'bilibili':
-                    await handleBilibiliDownload(normalizedUrl);
-                    break;
-                case 'douyin':
-                    await handleDouyinDownload(normalizedUrl);
-                    break;
-                default:
-                    setError(dict.errors.unsupportedPlatform);
-                    setLoading(false);
-                    return;
-            }
+            // 使用统一接口处理所有平台，后端负责所有检测和处理
+            await handleUnifiedParse(url.trim());
 
             setUrl('');
         } catch (err) {
@@ -194,9 +171,7 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    const closeDouyinResult = () => {
-        setDouyinResult(null);
-    };
+
 
 
 
@@ -213,11 +188,11 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                             <h1 className="text-2xl text-center font-semibold tracking-tight">
                                 <CardTitle>{dict.unified.pageTitle}</CardTitle>
                             </h1>
-                            <p className="text-xs text-muted-foreground text-center pt-1">
+                            <p className="text-xs text-muted-foreground text-center ">
                                 {dict.unified.pageDescription}
                             </p>
 
-                            <p className="text-center text-xs text-muted-foreground pt-4">
+                            <p className="text-center text-xs text-muted-foreground ">
                                 {dict.page.feedback}
                                 <a
                                     href="https://github.com/lxw15337674/bilibili-audio-downloader-report/issues/new"
@@ -236,7 +211,7 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                                         id="url"
                                         value={url}
                                         onChange={(e) => setUrl(e.target.value)}
-                                        placeholder={getPlaceholder()}
+                                        placeholder={dict.unified.placeholder}
                                         required
                                         className="min-h-[80px] resize-none break-all"
                                     />
@@ -250,20 +225,10 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                                                     const text = await navigator.clipboard.readText();
                                                     setUrl(text);
 
-                                                    // 延迟检测平台并显示结果
-                                                    setTimeout(() => {
-                                                        const detected = detectPlatform(text.trim());
-                                                        if (detected.platform !== 'unknown' && detected.confidence > 0.6) {
-                                                            toast({
-                                                                title: dict.toast.linkFilled,
-                                                                description: `${dict.unified.platformDetected} ${getPlatformDisplayName(detected.platform)}`,
-                                                            });
-                                                        } else {
-                                                            toast({
-                                                                title: dict.toast.linkFilled,
-                                                            });
-                                                        }
-                                                    }, 100);
+                                                    // 显示链接已粘贴提示
+                                                    toast({
+                                                        title: dict.toast.linkFilled,
+                                                    });
                                                 } catch (err) {
                                                     console.error('Failed to read clipboard:', err);
                                                     toast({
@@ -293,42 +258,31 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                         </CardContent>
                     </Card>
 
-                    {/* 抖音下载结果卡片 */}
-                    {douyinResult && (
+                    {/* 抖音专用卡片 */}
+                    {parseResult && parseResult.platform.toLowerCase() === 'douyin' && (
                         <DouyinResultCard
-                            result={douyinResult}
-                            onClose={closeDouyinResult}
-                            dict={{
-                                douyin: {
-                                    parseResult: dict.douyin.parseResult,
-                                    copyLink: dict.douyin.copyLink,
-                                    openLink: dict.douyin.openLink,
-                                    copySuccess: dict.douyin.copySuccess,
-                                    copyFailed: dict.douyin.copyFailed,
-                                    downloadTip: dict.douyin.downloadTip
-                                },
-                                toast: {
-                                    linkCopied: dict.toast.linkCopied,
-                                    copyFailed: dict.toast.copyFailed
-                                }
-                            }}
+                            title={parseResult.title}
+                            downloadUrl={parseResult.downloadUrl}
+                            originalUrl={parseResult.originalUrl}
+                            onDownload={handleDownload}
+                            onClose={closeParseResult}
+                            dict={dict}
+                        />
+                    )}
+
+                    {/* B站专用卡片 */}
+                    {parseResult && parseResult.platform.toLowerCase() === 'bili' && (
+                        <BilibiliResultCard
+                            title={parseResult.title}
+                            originalUrl={parseResult.originalUrl}
+                            onDownload={handleDownload}
+                            onClose={closeParseResult}
                         />
                     )}
 
                     {/* 历史记录 */}
                     <DownloadHistory
-                        dict={{
-                            history: {
-                                title: dict.history.title,
-                                description: dict.history.description,
-                                clear: dict.history.clear,
-                                cleared: dict.history.cleared,
-                                viewSource: dict.history.viewSource,
-                                redownload: dict.history.redownload,
-                                linkFilled: dict.history.linkFilled,
-                                clickToRedownload: dict.history.clickToRedownload
-                            }
-                        }}
+                        dict={dict}
                         downloadHistory={downloadHistory || []}
                         clearHistory={clearDownloadHistory}
                         onRedownload={handleRedownload}

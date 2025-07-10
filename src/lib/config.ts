@@ -10,12 +10,9 @@
  * These paths are now relative to the Next.js server, which will proxy them.
  */
 export const API_ENDPOINTS = {
-    bilibili: {
-        download: '/v1/bilibili-audio/download',
-        title: '/v1/bilibili-video/info',
-    },
-    douyin: {
-        parse: '/v1/douyin/parse',
-        download: '/v1/douyin/download',
+    // 统一接口
+    unified: {
+        parse: '/v1/parse',
+        download: '/v1/download',
     },
 } as const;
