@@ -19,7 +19,7 @@ export interface UnifiedDownloadOptions {
     quality?: string;
 }
 
-export interface UnifiedApiResponse<T = any> {
+export interface UnifiedApiResponse<T = unknown> {
     success: boolean;
     data?: T;
     error?: string;

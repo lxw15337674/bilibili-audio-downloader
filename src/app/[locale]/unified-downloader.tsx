@@ -17,6 +17,10 @@ import { downloadFile } from '@/lib/utils';
 import { DownloadHistory, type DownloadRecord } from './download-history';
 import { DouyinResultCard } from '@/components/downloader/DouyinResultCard';
 import { BilibiliResultCard } from '@/components/downloader/BilibiliResultCard';
+import { QuickStartCard } from '@/components/downloader/QuickStartCard';
+import { PlatformGuideCard } from '@/components/downloader/PlatformGuideCard';
+import { FreeSupportCard } from '@/components/downloader/FreeSupportCard';
+import { HelpCards } from '@/components/downloader/HelpCards';
 import { useLocalStorageState } from 'ahooks';
 import type { UnifiedParseResult } from '@/lib/types';
 import { Platform } from '@/lib/types';
@@ -182,113 +186,152 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
             </div>
 
             <main className="flex-1 p-4 sm:p-6 md:p-8">
-                <div className="max-w-2xl mx-auto flex flex-col gap-4">
-                    <Card className="shrink-0">
-                        <CardHeader>
-                            <h1 className="text-2xl text-center font-semibold tracking-tight">
-                                <CardTitle>{dict.unified.pageTitle}</CardTitle>
-                            </h1>
-                            <p className="text-xs text-muted-foreground text-center ">
-                                {dict.unified.pageDescription}
-                            </p>
+                {/* PC端三栏布局，移动端垂直布局 */}
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
+                        {/* 左栏：快速入门指南 (PC端显示，移动端隐藏) */}
+                        <div className="hidden xl:block">
+                            <div className="sticky top-6 space-y-4">
+                                <QuickStartCard />
+                                <FreeSupportCard />
+                            </div>
+                        </div>
 
-                            <p className="text-center text-xs text-muted-foreground ">
-                                {dict.page.feedback}
-                                <a
-                                    href="https://github.com/lxw15337674/bilibili-audio-downloader-report/issues/new"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="underline"
-                                >
-                                    {dict.page.feedbackLinkText}
-                                </a>
-                            </p>
-                        </CardHeader>
-                        <CardContent>
-                            <form onSubmit={handleSubmit} className="space-y-6">
-                                <div className="space-y-2">
-                                    <Textarea
-                                        id="url"
-                                        value={url}
-                                        onChange={(e) => setUrl(e.target.value)}
-                                        placeholder={dict.unified.placeholder}
-                                        required
-                                        className="min-h-[80px] resize-none break-all"
-                                    />
-                                    <div className="flex gap-2">
-                                        <Button
-                                            type="button"
-                                            variant="outline"
-                                            className="flex-1"
-                                            onClick={async () => {
-                                                try {
-                                                    const text = await navigator.clipboard.readText();
-                                                    setUrl(text);
+                        {/* 中栏：主要功能区域 */}
+                        <div className="xl:col-span-2 flex flex-col gap-4">
+                            <Card className="shrink-0">
+                                <CardHeader>
+                                    <h1 className="text-2xl text-center font-semibold tracking-tight">
+                                        <CardTitle>{dict.unified.pageTitle}</CardTitle>
+                                    </h1>
+                                    <p className="text-xs text-muted-foreground text-center ">
+                                        {dict.unified.pageDescription}
+                                    </p>
 
-                                                    // 显示链接已粘贴提示
-                                                    toast({
-                                                        title: dict.toast.linkFilled,
-                                                    });
-                                                } catch (err) {
-                                                    console.error('Failed to read clipboard:', err);
-                                                    toast({
-                                                        variant: "destructive",
-                                                        title: dict.errors.clipboardFailed,
-                                                        description: dict.errors.clipboardPermission,
-                                                    });
-                                                }
-                                            }}
+                                    <p className="text-center text-xs text-muted-foreground ">
+                                        {dict.page.feedback}
+                                        <a
+                                            href="https://github.com/lxw15337674/bilibili-audio-downloader-report/issues/new"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="underline"
                                         >
-                                            {dict.form.pasteButton}
-                                        </Button>
-                                        <Button
-                                            type="submit"
-                                            className="flex-1 flex items-center justify-center gap-2"
-                                            disabled={loading || !url.trim()}
-                                        >
-                                            {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-                                            {loading ? dict.form.downloading : dict.form.downloadButton}
-                                        </Button>
-                                    </div>
-                                </div>
-                                {error && (
-                                    <p className="text-sm text-destructive text-center">{error}</p>
-                                )}
-                            </form>
-                        </CardContent>
-                    </Card>
+                                            {dict.page.feedbackLinkText}
+                                        </a>
+                                    </p>
+                                </CardHeader>
+                                <CardContent>
+                                    <form onSubmit={handleSubmit} className="space-y-6">
+                                        <div className="space-y-2">
+                                            <Textarea
+                                                id="url"
+                                                value={url}
+                                                onChange={(e) => setUrl(e.target.value)}
+                                                placeholder={dict.unified.placeholder}
+                                                required
+                                                className="min-h-[80px] resize-none break-all"
+                                            />
+                                            <div className="flex gap-2">
+                                                <Button
+                                                    type="button"
+                                                    variant="outline"
+                                                    className="flex-1"
+                                                    onClick={async () => {
+                                                        try {
+                                                            const text = await navigator.clipboard.readText();
+                                                            setUrl(text);
 
-                    {/* 抖音专用卡片 */}
-                    {parseResult && parseResult.platform.toLowerCase() === 'douyin' && (
-                        <DouyinResultCard
-                            title={parseResult.title}
-                            downloadUrl={parseResult.downloadUrl}
-                            originalUrl={parseResult.originalUrl}
-                            onDownload={handleDownload}
-                            onClose={closeParseResult}
-                            dict={dict}
-                        />
-                    )}
+                                                            // 显示链接已粘贴提示
+                                                            toast({
+                                                                title: dict.toast.linkFilled,
+                                                            });
+                                                        } catch (err) {
+                                                            console.error('Failed to read clipboard:', err);
+                                                            toast({
+                                                                variant: "destructive",
+                                                                title: dict.errors.clipboardFailed,
+                                                                description: dict.errors.clipboardPermission,
+                                                            });
+                                                        }
+                                                    }}
+                                                >
+                                                    {dict.form.pasteButton}
+                                                </Button>
+                                                <Button
+                                                    type="submit"
+                                                    className="flex-1 flex items-center justify-center gap-2"
+                                                    disabled={loading || !url.trim()}
+                                                >
+                                                    {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+                                                    {loading ? dict.form.downloading : dict.form.downloadButton}
+                                                </Button>
+                                            </div>
+                                        </div>
+                                        {error && (
+                                            <p className="text-sm text-destructive text-center">{error}</p>
+                                        )}
+                                    </form>
+                                </CardContent>
+                            </Card>
 
-                    {/* B站专用卡片 */}
-                    {parseResult && parseResult.platform.toLowerCase() === 'bili' && (
-                        <BilibiliResultCard
-                            title={parseResult.title}
-                            originalUrl={parseResult.originalUrl}
-                            onDownload={handleDownload}
-                            onClose={closeParseResult}
-                        />
-                    )}
+                            {/* 抖音专用卡片 */}
+                            {parseResult && parseResult.platform.toLowerCase() === 'douyin' && (
+                                <DouyinResultCard
+                                    title={parseResult.title}
+                                    downloadUrl={parseResult.downloadUrl}
+                                    originalUrl={parseResult.originalUrl}
+                                    onDownload={handleDownload}
+                                    onClose={closeParseResult}
+                                    dict={dict}
+                                />
+                            )}
 
-                    {/* 历史记录 */}
-                    <DownloadHistory
-                        dict={dict}
-                        downloadHistory={downloadHistory || []}
-                        clearHistory={clearDownloadHistory}
-                        onRedownload={handleRedownload}
-                    />
+                            {/* B站专用卡片 */}
+                            {parseResult && parseResult.platform.toLowerCase() === 'bili' && (
+                                <BilibiliResultCard
+                                    title={parseResult.title}
+                                    originalUrl={parseResult.originalUrl}
+                                    onDownload={handleDownload}
+                                    onClose={closeParseResult}
+                                />
+                            )}
+
+                            {/* 历史记录 */}
+                            <DownloadHistory
+                                dict={dict}
+                                downloadHistory={downloadHistory || []}
+                                clearHistory={clearDownloadHistory}
+                                onRedownload={handleRedownload}
+                            />
+
+                            {/* 移动端帮助卡片 - 放在历史记录下方 */}
+                            <div className="xl:hidden space-y-4">
+                                <QuickStartCard />
+                                <FreeSupportCard />
+                                <PlatformGuideCard />
+                            </div>
+                        </div>
+
+                        {/* 右栏：平台支持指南 (PC端显示，移动端隐藏) */}
+                        <div className="hidden xl:block">
+                            <div className="sticky top-6">
+                                <PlatformGuideCard />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </main>
+
+            {/* 页面底部版权说明 */}
+            <footer className="border-t bg-muted/30 py-6 mt-8">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+                    <div className="text-center text-xs text-muted-foreground space-y-1">
+                        <p>版权说明：视频版权归相关网站及作者所有</p>
+                        <p>本站不提供和存储任何视频及图片</p>
+                        <p>Copyright © 2025</p>
+                    </div>
+                </div>
+            </footer>
         </div>
     );
 } 
