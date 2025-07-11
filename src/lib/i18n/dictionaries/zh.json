@@ -166,6 +166,23 @@
             "tip": "提示：复制分享链接即可，无需手动修改"
         }
     },
+    "freeSupport": {
+        "title": "永久免费服务",
+        "features": {
+            "freeToUse": "完全免费使用",
+            "noRegistration": "无需注册登录",
+            "unlimitedDownloads": "不限下载次数"
+        },
+        "privacy": {
+            "title": "隐私保护承诺",
+            "noUserRecords": "服务器不保存用户记录",
+            "localStorage": "历史记录存在浏览器中"
+        },
+        "revenue": {
+            "adsSupport": "本服务通过展示广告获得收益",
+            "serverCosts": "用于支撑服务器和流量成本"
+        }
+    },
     "seo": {
         "features": {
             "en": [

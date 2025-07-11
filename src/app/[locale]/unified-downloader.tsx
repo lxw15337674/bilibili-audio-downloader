@@ -193,7 +193,7 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                         <div className="hidden xl:block">
                             <div className="sticky top-6 space-y-4">
                                 <QuickStartCard dict={dict} />
-                                <FreeSupportCard />
+                                <FreeSupportCard dict={dict} />
                             </div>
                         </div>
 
@@ -307,7 +307,7 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                             {/* 移动端帮助卡片 - 放在历史记录下方 */}
                             <div className="xl:hidden space-y-4">
                                 <QuickStartCard dict={dict} />
-                                <FreeSupportCard />
+                                <FreeSupportCard dict={dict} />
                                 <PlatformGuideCard dict={dict} />
                             </div>
                         </div>

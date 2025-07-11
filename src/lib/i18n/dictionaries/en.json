@@ -166,6 +166,23 @@
             "tip": "Tip: Just copy the share link, no manual modification needed"
         }
     },
+    "freeSupport": {
+        "title": "Permanently Free Service",
+        "features": {
+            "freeToUse": "Completely free to use",
+            "noRegistration": "No registration required",
+            "unlimitedDownloads": "Unlimited downloads"
+        },
+        "privacy": {
+            "title": "Privacy Protection Commitment",
+            "noUserRecords": "Server does not store user records",
+            "localStorage": "History stored in browser"
+        },
+        "revenue": {
+            "adsSupport": "This service is monetized through ads",
+            "serverCosts": "To support server and traffic costs"
+        }
+    },
     "seo": {
         "features": {
             "en": [

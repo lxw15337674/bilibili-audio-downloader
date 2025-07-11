@@ -136,6 +136,23 @@ export interface Dictionary {
             tip: string;
         };
     };
+    freeSupport: {
+        title: string;
+        features: {
+            freeToUse: string;
+            noRegistration: string;
+            unlimitedDownloads: string;
+        };
+        privacy: {
+            title: string;
+            noUserRecords: string;
+            localStorage: string;
+        };
+        revenue: {
+            adsSupport: string;
+            serverCosts: string;
+        };
+    };
     seo: {
         features: {
             en: string[];

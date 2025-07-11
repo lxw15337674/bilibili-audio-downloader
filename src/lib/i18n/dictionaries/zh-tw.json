@@ -166,6 +166,23 @@
             "tip": "提示：複製分享連結即可，無需手動修改"
         }
     },
+    "freeSupport": {
+        "title": "永久免費服務",
+        "features": {
+            "freeToUse": "完全免費使用",
+            "noRegistration": "無需註冊登入",
+            "unlimitedDownloads": "不限下載次數"
+        },
+        "privacy": {
+            "title": "隱私保護承諾",
+            "noUserRecords": "伺服器不保存用戶記錄",
+            "localStorage": "歷史記錄存在瀏覽器中"
+        },
+        "revenue": {
+            "adsSupport": "本服務通過展示廣告獲得收益",
+            "serverCosts": "用於支撐伺服器和流量成本"
+        }
+    },
     "seo": {
         "features": {
             "en": [

@@ -2,29 +2,34 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Heart, Check, Shield, Info } from 'lucide-react';
+import type { Dictionary } from '@/lib/i18n/types';
 
-export function FreeSupportCard() {
+interface FreeSupportCardProps {
+    dict: Dictionary;
+}
+
+export function FreeSupportCard({ dict }: FreeSupportCardProps) {
     return (
         <Card>
             <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-lg">
                     <Heart className="h-5 w-5 text-primary" />
-                    永久免费服务
+                    {dict.freeSupport.title}
                 </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
                 <div className="space-y-2">
                     <div className="flex items-center gap-2">
                         <Check className="h-4 w-4 text-green-500" />
-                        <span className="text-sm">完全免费使用</span>
+                        <span className="text-sm">{dict.freeSupport.features.freeToUse}</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <Check className="h-4 w-4 text-green-500" />
-                        <span className="text-sm">无需注册登录</span>
+                        <span className="text-sm">{dict.freeSupport.features.noRegistration}</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <Check className="h-4 w-4 text-green-500" />
-                        <span className="text-sm">不限下载次数</span>
+                        <span className="text-sm">{dict.freeSupport.features.unlimitedDownloads}</span>
                     </div>
                 </div>
 
@@ -32,9 +37,9 @@ export function FreeSupportCard() {
                     <div className="flex items-start gap-2">
                         <Shield className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
                         <div className="text-sm">
-                            <p className="font-medium text-foreground">隐私保护承诺</p>
-                            <p className="text-muted-foreground">服务器不保存用户记录</p>
-                            <p className="text-muted-foreground">历史记录存在浏览器中</p>
+                            <p className="font-medium text-foreground">{dict.freeSupport.privacy.title}</p>
+                            <p className="text-muted-foreground">{dict.freeSupport.privacy.noUserRecords}</p>
+                            <p className="text-muted-foreground">{dict.freeSupport.privacy.localStorage}</p>
                         </div>
                     </div>
                 </div>
@@ -43,8 +48,8 @@ export function FreeSupportCard() {
                     <div className="flex items-start gap-2">
                         <Info className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
                         <div className="text-sm text-muted-foreground">
-                            <p>本服务通过展示广告获得收益</p>
-                            <p>用于支撑服务器和流量成本</p>
+                            <p>{dict.freeSupport.revenue.adsSupport}</p>
+                            <p>{dict.freeSupport.revenue.serverCosts}</p>
                         </div>
                     </div>
                 </div>
