@@ -32,6 +32,7 @@
     },
     "history": {
         "title": "历史记录",
+        "description": "历史记录功能说明",
         "clear": "清空",
         "cleared": "历史记录已清空",
         "viewSource": "查看原视频",

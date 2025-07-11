@@ -8,6 +8,7 @@ import { format } from 'date-fns';
 import { ChevronsUpDown } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
 import { Platform } from '../../lib/types';
+import { Dictionary } from '../../lib/i18n/types';
 
 export interface DownloadRecord {
     url: string;
@@ -17,18 +18,7 @@ export interface DownloadRecord {
 }
 
 interface DownloadHistoryProps {
-    dict: {
-        history: {
-            title: string;
-            description: string;
-            clear: string;
-            cleared: string;
-            viewSource: string;
-            redownload: string;
-            linkFilled: string;
-            clickToRedownload: string;
-        };
-    };
+    dict: Dictionary;
     downloadHistory: DownloadRecord[];
     clearHistory: () => void;
     onRedownload?: (url: string) => void;

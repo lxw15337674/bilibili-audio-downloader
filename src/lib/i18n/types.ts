@@ -16,15 +16,8 @@ export interface Dictionary {
         pageTitle: string;
         pageDescription: string;
         placeholder: string;
-        placeholderBilibili: string;
-        placeholderDouyin: string;
-        platformDetected: string;
-        platformUnknown: string;
-        switchToUnified: string;
     };
     page: {
-        title: string;
-        description: string;
         feedback: string;
         feedbackLinkText: string;
         copyrightVideo: string;
@@ -32,28 +25,20 @@ export interface Dictionary {
         copyrightYear: string;
     };
     form: {
-        placeholder: string;
-        douyinPlaceholder: string;
         pasteButton: string;
         downloadButton: string;
         downloading: string;
-        fallbackTitle: string;
     };
     errors: {
         emptyUrl: string;
-        invalidUrl: string;
-        unsupportedPlatform: string;
+        downloadError: string;
         downloadFailed: string;
+        getVideoInfoFailed: string;
         clipboardFailed: string;
         clipboardPermission: string;
-        downloadError: string;
-        videoLinkInvalid: string;
-        getVideoInfoFailed: string;
-        networkError: string;
     };
     history: {
         title: string;
-        description: string;
         clear: string;
         cleared: string;
         viewSource: string;
@@ -62,20 +47,10 @@ export interface Dictionary {
         clickToRedownload: string;
     };
     toast: {
-        historyCleared: string;
         linkFilled: string;
-        clickToRedownload: string;
         douyinParseSuccess: string;
-        manualDownloadLink: string;
-        recordDeleted: string;
-        platformDetected: string;
-        lowConfidenceDetection: string;
-        lowConfidenceDescription: string;
         linkFilledForRedownload: string;
         clickToRedownloadDesc: string;
-        linkCopied: string;
-        copyFailed: string;
-        downloadFailed: string;
     };
     metadata: {
         title: string;
@@ -91,15 +66,6 @@ export interface Dictionary {
         en: string;
     };
     douyin: {
-        parseResult: string;
-        downloadAudio: string;
-        downloadVideo: string;
-        openLink: string;
-        copyLink: string;
-        copySuccess: string;
-        copyFailed: string;
-        downloadTip: string;
-        apiLimitAudio: string;
         apiLimitDownload: string;
     };
     guide: {
