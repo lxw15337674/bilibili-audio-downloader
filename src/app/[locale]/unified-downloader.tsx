@@ -219,7 +219,6 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                                     </form>
                                 </CardContent>
                             </Card>
-
                             <ResultCard
                                 result={parseResult}
                                     onClose={closeParseResult}
