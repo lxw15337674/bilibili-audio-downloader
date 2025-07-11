@@ -128,7 +128,7 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
             const errorMessage = err instanceof Error ? err.message : '下载失败';
             toast({
                 variant: "destructive",
-                title: "下载失败",
+                title: dict.toast.downloadFailed,
                 description: errorMessage
             });
         }
@@ -192,7 +192,7 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                         {/* 左栏：快速入门指南 (PC端显示，移动端隐藏) */}
                         <div className="hidden xl:block">
                             <div className="sticky top-6 space-y-4">
-                                <QuickStartCard />
+                                <QuickStartCard dict={dict} />
                                 <FreeSupportCard />
                             </div>
                         </div>
@@ -306,16 +306,16 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
 
                             {/* 移动端帮助卡片 - 放在历史记录下方 */}
                             <div className="xl:hidden space-y-4">
-                                <QuickStartCard />
+                                <QuickStartCard dict={dict} />
                                 <FreeSupportCard />
-                                <PlatformGuideCard />
+                                <PlatformGuideCard dict={dict} />
                             </div>
                         </div>
 
                         {/* 右栏：平台支持指南 (PC端显示，移动端隐藏) */}
                         <div className="hidden xl:block">
                             <div className="sticky top-6">
-                                <PlatformGuideCard />
+                                <PlatformGuideCard dict={dict} />
                             </div>
                         </div>
                     </div>
@@ -326,9 +326,9 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
             <footer className="border-t bg-muted/30 py-6 mt-8">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
                     <div className="text-center text-xs text-muted-foreground space-y-1">
-                        <p>版权说明：视频版权归相关网站及作者所有</p>
-                        <p>本站不提供和存储任何视频及图片</p>
-                        <p>Copyright © 2025</p>
+                        <p>{dict.page.copyrightVideo}</p>
+                        <p>{dict.page.copyrightStorage}</p>
+                        <p>{dict.page.copyrightYear}</p>
                     </div>
                 </div>
             </footer>

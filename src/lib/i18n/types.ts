@@ -15,25 +15,14 @@ export interface Dictionary {
         platformUnknown: string;
         switchToUnified: string;
     };
-    bilibili: {
-        pageTitle: string;
-        pageDescription: string;
-    };
-    douyin: {
-        pageTitle: string;
-        pageDescription: string;
-        parseResult: string;
-        copyLink: string;
-        openLink: string;
-        copySuccess: string;
-        copyFailed: string;
-        downloadTip: string;
-    };
     page: {
         title: string;
         description: string;
         feedback: string;
         feedbackLinkText: string;
+        copyrightVideo: string;
+        copyrightStorage: string;
+        copyrightYear: string;
     };
     form: {
         placeholder: string;
@@ -54,10 +43,6 @@ export interface Dictionary {
         videoLinkInvalid: string;
         getVideoInfoFailed: string;
         networkError: string;
-    };
-    result: {
-        title: string;
-        downloadButton: string;
     };
     history: {
         title: string;
@@ -83,6 +68,7 @@ export interface Dictionary {
         clickToRedownloadDesc: string;
         linkCopied: string;
         copyFailed: string;
+        downloadFailed: string;
     };
     metadata: {
         title: string;
@@ -97,170 +83,89 @@ export interface Dictionary {
         'zh-tw': string;
         en: string;
     };
-    collapsible: {
-        whyChooseUs: {
-            title: string;
-            description: string;
-        };
-        userGuide: {
-            title: string;
-            description: string;
-        };
-        privacyTerms: {
-            title: string;
-            description: string;
-        };
-        expandHint: string;
-        autoCollapseNotice: string;
+    douyin: {
+        parseResult: string;
+        downloadAudio: string;
+        downloadVideo: string;
+        openLink: string;
+        copyLink: string;
+        copySuccess: string;
+        copyFailed: string;
+        downloadTip: string;
+        apiLimitAudio: string;
+        apiLimitDownload: string;
     };
-    features: {
-        title: string;
-        subtitle: string;
-        quality: {
+    guide: {
+        quickStart: {
             title: string;
-            description: string;
+            steps: Array<{
+                title: string;
+                description: string;
+            }>;
         };
-        speed: {
+        platformSupport: {
             title: string;
-            description: string;
+            bilibili: {
+                name: string;
+                features: string[];
+                limitations: string[];
+            };
+            douyin: {
+                name: string;
+                features: string[];
+                limitations: string[];
+            };
+            urlExamples: {
+                title: string;
+                bilibili: string[];
+                douyin: string[];
+            };
+            tip: string;
+            comingSoon: string;
         };
-        free: {
+        linkFormats: {
             title: string;
-            description: string;
-        };
-        privacy: {
-            title: string;
-            description: string;
-        };
-    };
-    steps: {
-        title: string;
-        subtitle: string;
-        step1: {
-            title: string;
-            description: string;
-        };
-        step2: {
-            title: string;
-            description: string;
-        };
-        step3: {
-            title: string;
-            description: string;
-        };
-    };
-    technical: {
-        title: string;
-        subtitle: string;
-        extraction: {
-            title: string;
-            description: string;
-        };
-        formats: {
-            title: string;
-            description: string;
-        };
-        compatibility: {
-            title: string;
-            description: string;
-        };
-        reliability: {
-            title: string;
-            description: string;
+            bilibili: {
+                title: string;
+                examples: string[];
+            };
+            douyin: {
+                title: string;
+                examples: string[];
+            };
+            tip: string;
         };
     };
-    legal: {
-        title: string;
-        subtitle: string;
-        personalUse: string;
-        copyright: string;
-        support: string;
-        disclaimer: string;
-    };
-    faq: {
-        title: string;
-        subtitle: string;
-        format: {
-            question: string;
-            answer: string;
+    seo: {
+        features: {
+            en: string[];
+            zh: string[];
         };
-        quality: {
-            question: string;
-            answer: string;
+        faq: {
+            en: Array<{
+                question: string;
+                answer: string;
+            }>;
+            zh: Array<{
+                question: string;
+                answer: string;
+            }>;
         };
-        limit: {
-            question: string;
-            answer: string;
-        };
-        safety: {
-            question: string;
-            answer: string;
-        };
-    };
-    navigation: {
-        home: string;
-        privacy: string;
-        terms: string;
-        about: string;
-        contact: string;
-    };
-    privacy: {
-        title: string;
-        lastUpdated: string;
-        introduction: {
-            title: string;
-            content: string;
-        };
-        collection: {
-            title: string;
-            subtitle: string;
-            noPersonalData: string;
-            technicalData: string;
-            usageData: string;
-        };
-        usage: {
-            title: string;
-            subtitle: string;
-            serviceProvision: string;
-            improvement: string;
-            security: string;
-            analytics: string;
-        };
-        storage: {
-            title: string;
-            subtitle: string;
-            noStorage: string;
-            temporary: string;
-            security: string;
-        };
-        cookies: {
-            title: string;
-            subtitle: string;
-            localStorage: string;
-            analytics: string;
-            ads: string;
-        };
-        thirdParty: {
-            title: string;
-            subtitle: string;
-            analytics: string;
-            ads: string;
-            hosting: string;
-        };
-        rights: {
-            title: string;
-            subtitle: string;
-            access: string;
-            deletion: string;
-            optOut: string;
-        };
-        updates: {
-            title: string;
-            content: string;
-        };
-        contact: {
-            title: string;
-            content: string;
+        howTo: {
+            title: {
+                en: string;
+                zh: string;
+            };
+            steps: {
+                en: Array<{
+                    name: string;
+                    text: string;
+                }>;
+                zh: Array<{
+                    name: string;
+                    text: string;
+                }>;
+            };
         };
     };
 } 

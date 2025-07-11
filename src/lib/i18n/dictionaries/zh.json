@@ -15,25 +15,14 @@
         "platformUnknown": "未识别平台",
         "switchToUnified": "使用智能下载器"
     },
-    "bilibili": {
-        "pageTitle": "Bilibili 音频下载器",
-        "pageDescription": "粘贴Bilibili视频链接以提取并下载音频。"
-    },
-    "douyin": {
-        "pageTitle": "抖音视频下载器",
-        "pageDescription": "粘贴抖音视频链接以下载无水印视频。",
-        "parseResult": "解析结果",
-        "copyLink": "复制链接",
-        "openLink": "打开链接",
-        "copySuccess": "已复制到剪贴板，可以粘贴到新标签页打开",
-        "copyFailed": "无法复制到剪贴板，请手动选择并复制上方链接",
-        "downloadTip": "💡 提示：下载按钮位于视频播放页面右下角的\"...\"菜单中"
-    },
     "page": {
         "title": "Bilibili & 抖音 下载器",
         "description": "下载历史记录保存在您的浏览器本地，服务器不会保留任何信息。",
         "feedback": "如有反馈或建议，请到 ",
-        "feedbackLinkText": "GitHub 提交 issue"
+        "feedbackLinkText": "GitHub 提交 issue",
+        "copyrightVideo": "版权说明：视频版权归相关网站及作者所有",
+        "copyrightStorage": "本站不提供和存储任何视频及图片",
+        "copyrightYear": "Copyright © 2025"
     },
     "form": {
         "placeholder": "请在此处粘贴B站视频链接...",
@@ -42,20 +31,6 @@
         "downloadButton": "解析",
         "downloading": "解析中...",
         "fallbackTitle": "B站音频"
-    },
-    "result": {
-        "title": "下载结果",
-        "downloadButton": "下载视频"
-    },
-    "history": {
-        "title": "历史记录",
-        "description": "您最近的下载（最近50条）",
-        "clear": "清空",
-        "cleared": "历史记录已清空",
-        "viewSource": "查看原视频",
-        "redownload": "重新解析",
-        "linkFilled": "链接已填入",
-        "clickToRedownload": "点击解析按钮开始重新解析"
     },
     "errors": {
         "emptyUrl": "链接不能为空。",
@@ -68,6 +43,16 @@
         "networkError": "网络错误。",
         "clipboardFailed": "读取剪贴板失败。",
         "clipboardPermission": "请检查剪贴板权限是否已授予。"
+    },
+    "history": {
+        "title": "历史记录",
+        "description": "您最近的下载（最近50条）",
+        "clear": "清空",
+        "cleared": "历史记录已清空",
+        "viewSource": "查看原视频",
+        "redownload": "重新解析",
+        "linkFilled": "链接已填入",
+        "clickToRedownload": "点击解析按钮开始重新解析"
     },
     "toast": {
         "historyCleared": "下载历史已清除。",
@@ -82,7 +67,8 @@
         "linkFilledForRedownload": "链接已填入",
         "clickToRedownloadDesc": "点击解析按钮开始重新解析",
         "linkCopied": "链接已复制",
-        "copyFailed": "复制失败"
+        "copyFailed": "复制失败",
+        "downloadFailed": "下载失败"
     },
     "metadata": {
         "title": "B站音频提取 | 抖音视频下载 - 轻松提取哔哩哔哩视频MP3音频及抖音无水印视频",
@@ -97,170 +83,185 @@
         "zh-tw": "繁體中文",
         "en": "English"
     },
-    "collapsible": {
-        "whyChooseUs": {
-            "title": "为什么选择我们？",
-            "description": "专业、安全、高效的 B 站音频提取工具，了解我们的技术优势"
-        },
-        "userGuide": {
-            "title": "使用指南",
-            "description": "简单三步完成下载，查看常见问题和使用技巧"
-        },
-        "privacyTerms": {
-            "title": "隐私与条款",
-            "description": "了解我们的隐私政策、使用条款和法律声明"
-        },
-        "expandHint": "点击查看详细内容",
-        "autoCollapseNotice": "内容将自动折叠以保持页面简洁"
+    "douyin": {
+        "parseResult": "抖音解析结果",
+        "downloadAudio": "下载音频",
+        "downloadVideo": "下载视频",
+        "openLink": "打开链接",
+        "copyLink": "复制链接",
+        "copySuccess": "已复制到剪贴板，可以粘贴到新标签页打开",
+        "copyFailed": "无法复制到剪贴板，请手动选择并复制上方链接",
+        "downloadTip": "💡 提示：下载按钮位于视频播放页面右下角的\"...\"菜单中",
+        "apiLimitAudio": "API限制：无法下载音频，需要下载视频后手动提取音频",
+        "apiLimitDownload": "如果自动下载失败，请点击打开链接手动下载（下载功能在视频右下角）"
     },
-    "features": {
-        "title": "为什么选择我们的音频下载器？",
-        "subtitle": "专业、安全、高效的 B 站音频提取工具",
-        "quality": {
-            "title": "高品质音频",
-            "description": "自动选择最佳音频质量，支持高清晰度音频格式，确保您获得最佳的听觉体验。"
+    "guide": {
+        "quickStart": {
+            "title": "三步轻松下载",
+            "steps": [
+                {
+                    "title": "复制视频链接",
+                    "description": "从B站/抖音等平台复制视频链接"
+                },
+                {
+                    "title": "粘贴并解析",
+                    "description": "在输入框粘贴链接，点击解析按钮"
+                },
+                {
+                    "title": "选择下载",
+                    "description": "选择音频或视频格式开始下载"
+                }
+            ]
         },
-        "speed": {
-            "title": "极速下载",
-            "description": "采用先进的音频提取技术，快速处理和转换，节省您的宝贵时间。"
+        "platformSupport": {
+            "title": "平台支持指南",
+            "bilibili": {
+                "name": "哔哩哔哩 (bilibili.com)",
+                "features": [
+                    "✅ 支持音频下载"
+                ],
+                "limitations": [
+                    "⚠️ 支持视频下载（由于b站限制，视频不包含音频流，需要再下载音频，再手动合并音频流）"
+                ]
+            },
+            "douyin": {
+                "name": "抖音 (douyin.com)",
+                "features": [
+                    "✅ 支持视频下载"
+                ],
+                "limitations": [
+                    "⚠️ 不支持音频提取，需要下载视频后手动提取音频"
+                ]
+            },
+            "urlExamples": {
+                "title": "🔗 链接格式：",
+                "bilibili": [
+                    "https://www.bilibili.com/video/BV1xx411c7mD",
+                    "https://b23.tv/BV1xx411c7mD (短链接)"
+                ],
+                "douyin": [
+                    "https://www.douyin.com/jingxuan?modal_id=7522057669591485738",
+                    "https://v.douyin.com/fiU6t9rA3QU/ (短链接)"
+                ]
+            },
+            "tip": "使用提示：复制分享链接即可，无需手动修改",
+            "comingSoon": "🔄 更多平台即将支持..."
         },
-        "free": {
-            "title": "完全免费",
-            "description": "无需注册，无需付费，永久免费使用。支持批量下载历史记录管理。"
-        },
-        "privacy": {
-            "title": "隐私保护",
-            "description": "本地处理，不存储任何用户数据或视频内容，确保您的隐私安全。"
+        "linkFormats": {
+            "title": "支持的链接格式",
+            "bilibili": {
+                "title": "🔗 B站链接示例：",
+                "examples": [
+                    "https://www.bilibili.com/video/BV1xx411c7mD",
+                    "https://b23.tv/BV1xx411c7mD (短链接)"
+                ]
+            },
+            "douyin": {
+                "title": "🔗 抖音链接示例：",
+                "examples": [
+                    "https://www.douyin.com/jingxuan?modal_id=7522057669591485738",
+                    "https://v.douyin.com/fiU6t9rA3QU/ (短链接)"
+                ]
+            },
+            "tip": "提示：复制分享链接即可，无需手动修改"
         }
     },
-    "steps": {
-        "title": "如何使用？",
-        "subtitle": "三步即可完成音频下载",
-        "step1": {
-            "title": "复制链接",
-            "description": "在 Bilibili 网站或 APP 中复制您想要下载音频的视频链接，支持 BV 号和 AV 号格式。"
+    "seo": {
+        "features": {
+            "en": [
+                "Extract MP3 audio from Bilibili videos",
+                "Download Douyin videos without watermark",
+                "Auto-detect video platform",
+                "High-quality audio and video downloads",
+                "Free online tool",
+                "No registration required",
+                "Support multiple video formats",
+                "Browser-based processing"
+            ],
+            "zh": [
+                "提取B站视频MP3音频",
+                "下载抖音无水印视频",
+                "自动识别视频平台",
+                "高清音频视频下载",
+                "免费在线工具",
+                "无需注册",
+                "支持多种视频格式",
+                "浏览器处理"
+            ]
         },
-        "step2": {
-            "title": "粘贴链接",
-            "description": "将复制的链接粘贴到上方的输入框中，可以使用快捷粘贴按钮或手动输入。"
+        "faq": {
+            "en": [
+                {
+                    "question": "How to download Bilibili audio?",
+                    "answer": "Paste the Bilibili video link into the input field, click download, and the MP3 audio will be extracted and downloaded automatically."
+                },
+                {
+                    "question": "How to download Douyin videos without watermark?",
+                    "answer": "Paste the Douyin video link, the tool will automatically detect the platform and provide a watermark-free download link."
+                },
+                {
+                    "question": "Is this tool free to use?",
+                    "answer": "Yes, this is a completely free online tool with no registration required. You can download unlimited videos and audio files."
+                }
+            ],
+            "zh": [
+                {
+                    "question": "如何下载B站音频？",
+                    "answer": "将B站视频链接粘贴到输入框中，点击下载，系统会自动提取并下载MP3音频文件。"
+                },
+                {
+                    "question": "如何下载抖音无水印视频？",
+                    "answer": "粘贴抖音视频链接，工具会自动识别平台并提供无水印下载链接。"
+                },
+                {
+                    "question": "这个工具免费吗？",
+                    "answer": "是的，这是一个完全免费的在线工具，无需注册。您可以无限制下载视频和音频文件。"
+                }
+            ]
         },
-        "step3": {
-            "title": "立即下载",
-            "description": "点击下载按钮，系统将自动提取音频并开始下载，文件会保存到您的默认下载目录。"
-        }
-    },
-    "technical": {
-        "title": "技术特色",
-        "subtitle": "先进技术确保最佳体验",
-        "extraction": {
-            "title": "智能音频提取",
-            "description": "使用先进的音频分离技术，从视频中提取高质量音频轨道。"
-        },
-        "formats": {
-            "title": "多格式支持",
-            "description": "支持 MP3、AAC 等主流音频格式，兼容各种播放设备。"
-        },
-        "compatibility": {
-            "title": "设备兼容",
-            "description": "支持桌面端和移动端访问，跨平台使用无障碍。"
-        },
-        "reliability": {
-            "title": "稳定可靠",
-            "description": "7x24 小时稳定运行，高可用性保证随时可用。"
-        }
-    },
-    "legal": {
-        "title": "使用声明",
-        "subtitle": "请合法合规使用本工具",
-        "personalUse": "本工具仅供个人学习和研究使用，请勿用于商业用途。",
-        "copyright": "请尊重原创作者的版权，下载的音频内容仅供个人欣赏。",
-        "support": "建议您支持原创作者，通过正当渠道获取和使用音频内容。",
-        "disclaimer": "使用本工具产生的任何法律后果由用户自行承担。"
-    },
-    "faq": {
-        "title": "常见问题",
-        "subtitle": "解答您的疑问",
-        "format": {
-            "question": "支持哪些链接格式？",
-            "answer": "支持标准的 Bilibili 视频链接，包括 BV 号和 AV 号格式，如：https://www.bilibili.com/video/BV1xx411c7mD"
-        },
-        "quality": {
-            "question": "音频质量如何？",
-            "answer": "自动选择视频的最高音频质量进行提取，通常为 128kbps 或更高品质的音频。"
-        },
-        "limit": {
-            "question": "有下载限制吗？",
-            "answer": "目前无下载次数限制，但请合理使用，避免对服务器造成过大压力。"
-        },
-        "safety": {
-            "question": "安全性如何保障？",
-            "answer": "本站不存储任何用户数据，处理过程在安全的服务器环境中进行，保护用户隐私。"
-        }
-    },
-    "navigation": {
-        "home": "首页",
-        "privacy": "隐私政策",
-        "terms": "服务条款",
-        "about": "关于我们",
-        "contact": "联系我们"
-    },
-    "privacy": {
-        "title": "隐私政策",
-        "lastUpdated": "最后更新：2025年1月",
-        "introduction": {
-            "title": "引言",
-            "content": "本隐私政策说明了 Bilibili 音频下载器（以下简称「我们」或「本服务」）如何收集、使用、存储和保护用户信息。我们深知隐私保护的重要性，承诺保护用户的个人信息安全。"
-        },
-        "collection": {
-            "title": "信息收集",
-            "subtitle": "我们收集的信息类型",
-            "noPersonalData": "我们不收集任何个人身份信息，包括但不限于姓名、邮箱、电话号码等。",
-            "technicalData": "我们可能收集技术信息，如 IP 地址、浏览器类型、设备信息等，仅用于服务优化和安全保护。",
-            "usageData": "我们可能收集服务使用统计信息，如访问次数、下载次数等，用于改进服务质量。"
-        },
-        "usage": {
-            "title": "信息使用",
-            "subtitle": "我们如何使用收集的信息",
-            "serviceProvision": "提供和维护音频下载服务",
-            "improvement": "改进和优化服务性能",
-            "security": "保护服务安全，防止滥用",
-            "analytics": "进行匿名数据分析，了解用户需求"
-        },
-        "storage": {
-            "title": "数据存储",
-            "subtitle": "数据存储和保护措施",
-            "noStorage": "我们不存储用户上传的视频链接或下载的音频文件。",
-            "temporary": "处理过程中的临时数据会在处理完成后立即删除。",
-            "security": "所有数据传输使用 HTTPS 加密协议保护。"
-        },
-        "cookies": {
-            "title": "Cookie 使用",
-            "subtitle": "Cookie 和类似技术的使用",
-            "localStorage": "我们使用本地存储保存您的下载历史记录，这些数据仅存储在您的设备上。",
-            "analytics": "我们可能使用第三方分析工具（如 Google Analytics）来了解网站使用情况。",
-            "ads": "我们使用 Google AdSense 展示广告，相关 Cookie 政策请参阅 Google 的隐私政策。"
-        },
-        "thirdParty": {
-            "title": "第三方服务",
-            "subtitle": "我们使用的第三方服务",
-            "analytics": "Google Analytics - 用于网站分析",
-            "ads": "Google AdSense - 用于展示广告",
-            "hosting": "Vercel - 用于网站托管"
-        },
-        "rights": {
-            "title": "用户权利",
-            "subtitle": "您的权利和选择",
-            "access": "由于我们不收集个人信息，无需提供数据访问功能。",
-            "deletion": "您可以随时清除浏览器中的本地存储数据。",
-            "optOut": "您可以通过浏览器设置禁用 Cookie 和 JavaScript。"
-        },
-        "updates": {
-            "title": "政策更新",
-            "content": "我们可能会不时更新本隐私政策。任何更改将在此页面公布，重大更改会在网站首页进行通知。"
-        },
-        "contact": {
-            "title": "联系我们",
-            "content": "如果您对本隐私政策有任何疑问，请通过 GitHub Issues 联系我们。"
+        "howTo": {
+            "title": {
+                "en": "How to download Bilibili audio and Douyin videos",
+                "zh": "如何下载B站音频和抖音视频"
+            },
+            "steps": {
+                "en": [
+                    {
+                        "name": "Copy video link",
+                        "text": "Copy the Bilibili or Douyin video link from your browser"
+                    },
+                    {
+                        "name": "Paste link",
+                        "text": "Paste the video link into the input field on our website"
+                    },
+                    {
+                        "name": "Auto-detect platform",
+                        "text": "The tool will automatically detect whether it's Bilibili or Douyin"
+                    },
+                    {
+                        "name": "Download",
+                        "text": "Click the download button to get your MP3 audio or watermark-free video"
+                    }
+                ],
+                "zh": [
+                    {
+                        "name": "复制视频链接",
+                        "text": "从浏览器复制B站或抖音视频链接"
+                    },
+                    {
+                        "name": "粘贴链接",
+                        "text": "将视频链接粘贴到网站的输入框中"
+                    },
+                    {
+                        "name": "自动识别平台",
+                        "text": "工具会自动识别是B站还是抖音"
+                    },
+                    {
+                        "name": "下载",
+                        "text": "点击下载按钮获取MP3音频或无水印视频"
+                    }
+                ]
+            }
         }
     }
 }

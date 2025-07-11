@@ -15,25 +15,14 @@
         "platformUnknown": "Unknown platform",
         "switchToUnified": "Use Smart Downloader"
     },
-    "bilibili": {
-        "pageTitle": "Bilibili Audio Downloader",
-        "pageDescription": "Paste a Bilibili video link to extract and download the audio."
-    },
-    "douyin": {
-        "pageTitle": "Douyin Video Downloader",
-        "pageDescription": "Paste a Douyin video link to download the video without watermark.",
-        "parseResult": "Parse Result",
-        "copyLink": "Copy Link",
-        "openLink": "Open Link",
-        "copySuccess": "Copied to clipboard, you can paste it in a new tab",
-        "copyFailed": "Unable to copy to clipboard, please manually select and copy the link above",
-        "downloadTip": "💡 Tip: The download button is located in the \"...\" menu at the bottom right of the video page"
-    },
     "page": {
         "title": "Bilibili & Douyin Downloader",
         "description": "Download history is saved locally in your browser, no server-side data retention.",
         "feedback": "For feedback or suggestions, please ",
-        "feedbackLinkText": "submit an issue on GitHub"
+        "feedbackLinkText": "submit an issue on GitHub",
+        "copyrightVideo": "Copyright Notice: Video copyrights belong to relevant websites and authors",
+        "copyrightStorage": "This site does not provide or store any videos or images",
+        "copyrightYear": "Copyright © 2025"
     },
     "form": {
         "placeholder": "Paste Bilibili video link here...",
@@ -42,20 +31,6 @@
         "downloadButton": "Parse",
         "downloading": "Parsing...",
         "fallbackTitle": "Bilibili_Audio"
-    },
-    "result": {
-        "title": "Download Result",
-        "downloadButton": "Download Video"
-    },
-    "history": {
-        "title": "History",
-        "description": "Your recent downloads (last 50)",
-        "clear": "Clear",
-        "cleared": "History cleared",
-        "viewSource": "View Original",
-        "redownload": "Re-parse",
-        "linkFilled": "Link filled",
-        "clickToRedownload": "Click parse button to start re-parsing"
     },
     "errors": {
         "emptyUrl": "URL cannot be empty.",
@@ -68,6 +43,16 @@
         "networkError": "Network error.",
         "clipboardFailed": "Failed to read clipboard.",
         "clipboardPermission": "Please check if clipboard permission is granted."
+    },
+    "history": {
+        "title": "History",
+        "description": "Your recent downloads (last 50)",
+        "clear": "Clear",
+        "cleared": "History cleared",
+        "viewSource": "View Original",
+        "redownload": "Re-parse",
+        "linkFilled": "Link filled",
+        "clickToRedownload": "Click parse button to start re-parsing"
     },
     "toast": {
         "historyCleared": "Download history has been cleared.",
@@ -82,7 +67,8 @@
         "linkFilledForRedownload": "Link filled",
         "clickToRedownloadDesc": "Click parse button to start re-parsing",
         "linkCopied": "Link copied",
-        "copyFailed": "Copy failed"
+        "copyFailed": "Copy failed",
+        "downloadFailed": "Download failed"
     },
     "metadata": {
         "title": "Bilibili Audio & Douyin Video Downloader - Free Online MP3 & Video Download Tool",
@@ -97,170 +83,185 @@
         "zh-tw": "繁體中文",
         "en": "English"
     },
-    "collapsible": {
-        "whyChooseUs": {
-            "title": "Why Choose Us?",
-            "description": "Professional, secure, and efficient Bilibili audio extraction tool - discover our technical advantages"
-        },
-        "userGuide": {
-            "title": "User Guide",
-            "description": "Complete downloads in three simple steps, view FAQs and usage tips"
-        },
-        "privacyTerms": {
-            "title": "Privacy & Terms",
-            "description": "Learn about our privacy policy, terms of use, and legal statements"
-        },
-        "expandHint": "Click to view detailed content",
-        "autoCollapseNotice": "Content will auto-collapse to keep the page clean"
+    "douyin": {
+        "parseResult": "Douyin Parse Result",
+        "downloadAudio": "Download Audio",
+        "downloadVideo": "Download Video",
+        "openLink": "Open Link",
+        "copyLink": "Copy Link",
+        "copySuccess": "Copied to clipboard, you can paste it in a new tab",
+        "copyFailed": "Unable to copy to clipboard, please manually select and copy the link above",
+        "downloadTip": "💡 Tip: The download button is located in the \"...\" menu at the bottom right of the video page",
+        "apiLimitAudio": "API limitation: Cannot download audio, need to download video first then extract audio manually",
+        "apiLimitDownload": "If automatic download fails, please click open link to download manually (download feature is in the bottom right corner of the video)"
     },
-    "features": {
-        "title": "Why Choose Our Audio Downloader?",
-        "subtitle": "Professional, secure, and efficient Bilibili audio extraction tool",
-        "quality": {
-            "title": "High-Quality Audio",
-            "description": "Automatically selects the best audio quality, supports high-definition audio formats to ensure you get the best listening experience."
+    "guide": {
+        "quickStart": {
+            "title": "Easy 3-Step Download",
+            "steps": [
+                {
+                    "title": "Copy Video Link",
+                    "description": "Copy video link from Bilibili/Douyin platforms"
+                },
+                {
+                    "title": "Paste and Parse",
+                    "description": "Paste link in input box, click parse button"
+                },
+                {
+                    "title": "Select Download",
+                    "description": "Choose audio or video format to start download"
+                }
+            ]
         },
-        "speed": {
-            "title": "Lightning Fast",
-            "description": "Uses advanced audio extraction technology for fast processing and conversion, saving your valuable time."
+        "platformSupport": {
+            "title": "Platform Support Guide",
+            "bilibili": {
+                "name": "Bilibili (bilibili.com)",
+                "features": [
+                    "✅ Audio download supported"
+                ],
+                "limitations": [
+                    "⚠️ Video download supported (Due to Bilibili restrictions, videos don't contain audio streams, need to download audio separately and manually merge)"
+                ]
+            },
+            "douyin": {
+                "name": "Douyin (douyin.com)",
+                "features": [
+                    "✅ Video download supported"
+                ],
+                "limitations": [
+                    "⚠️ Audio extraction not supported, need to extract audio manually after downloading video"
+                ]
+            },
+            "urlExamples": {
+                "title": "🔗 Link formats:",
+                "bilibili": [
+                    "https://www.bilibili.com/video/BV1xx411c7mD",
+                    "https://b23.tv/BV1xx411c7mD (short link)"
+                ],
+                "douyin": [
+                    "https://www.douyin.com/jingxuan?modal_id=7522057669591485738",
+                    "https://v.douyin.com/fiU6t9rA3QU/ (short link)"
+                ]
+            },
+            "tip": "Usage tip: Just copy the share link, no manual modification needed",
+            "comingSoon": "🔄 More platforms coming soon..."
         },
-        "free": {
-            "title": "Completely Free",
-            "description": "No registration required, no payment needed, free to use forever. Supports batch download history management."
-        },
-        "privacy": {
-            "title": "Privacy Protection",
-            "description": "Local processing, no user data or video content stored, ensuring your privacy and security."
+        "linkFormats": {
+            "title": "Supported Link Formats",
+            "bilibili": {
+                "title": "🔗 Bilibili link examples:",
+                "examples": [
+                    "https://www.bilibili.com/video/BV1xx411c7mD",
+                    "https://b23.tv/BV1xx411c7mD (short link)"
+                ]
+            },
+            "douyin": {
+                "title": "🔗 Douyin link examples:",
+                "examples": [
+                    "https://www.douyin.com/jingxuan?modal_id=7522057669591485738",
+                    "https://v.douyin.com/fiU6t9rA3QU/ (short link)"
+                ]
+            },
+            "tip": "Tip: Just copy the share link, no manual modification needed"
         }
     },
-    "steps": {
-        "title": "How to Use?",
-        "subtitle": "Complete audio download in three simple steps",
-        "step1": {
-            "title": "Copy Link",
-            "description": "Copy the video link you want to download audio from on Bilibili website or APP. Supports both BV and AV number formats."
+    "seo": {
+        "features": {
+            "en": [
+                "Extract MP3 audio from Bilibili videos",
+                "Download Douyin videos without watermark",
+                "Auto-detect video platform",
+                "High-quality audio and video downloads",
+                "Free online tool",
+                "No registration required",
+                "Support multiple video formats",
+                "Browser-based processing"
+            ],
+            "zh": [
+                "提取B站视频MP3音频",
+                "下载抖音无水印视频",
+                "自动识别视频平台",
+                "高清音频视频下载",
+                "免费在线工具",
+                "无需注册",
+                "支持多种视频格式",
+                "浏览器处理"
+            ]
         },
-        "step2": {
-            "title": "Paste Link",
-            "description": "Paste the copied link into the input box above. You can use the quick paste button or manually enter it."
+        "faq": {
+            "en": [
+                {
+                    "question": "How to download Bilibili audio?",
+                    "answer": "Paste the Bilibili video link into the input field, click download, and the MP3 audio will be extracted and downloaded automatically."
+                },
+                {
+                    "question": "How to download Douyin videos without watermark?",
+                    "answer": "Paste the Douyin video link, the tool will automatically detect the platform and provide a watermark-free download link."
+                },
+                {
+                    "question": "Is this tool free to use?",
+                    "answer": "Yes, this is a completely free online tool with no registration required. You can download unlimited videos and audio files."
+                }
+            ],
+            "zh": [
+                {
+                    "question": "如何下载B站音频？",
+                    "answer": "将B站视频链接粘贴到输入框中，点击下载，系统会自动提取并下载MP3音频文件。"
+                },
+                {
+                    "question": "如何下载抖音无水印视频？",
+                    "answer": "粘贴抖音视频链接，工具会自动识别平台并提供无水印下载链接。"
+                },
+                {
+                    "question": "这个工具免费吗？",
+                    "answer": "是的，这是一个完全免费的在线工具，无需注册。您可以无限制下载视频和音频文件。"
+                }
+            ]
         },
-        "step3": {
-            "title": "Download Now",
-            "description": "Click the download button, the system will automatically extract audio and start downloading. Files will be saved to your default download directory."
-        }
-    },
-    "technical": {
-        "title": "Technical Features",
-        "subtitle": "Advanced technology ensures the best experience",
-        "extraction": {
-            "title": "Smart Audio Extraction",
-            "description": "Uses advanced audio separation technology to extract high-quality audio tracks from videos."
-        },
-        "formats": {
-            "title": "Multi-Format Support",
-            "description": "Supports mainstream audio formats like MP3, AAC, compatible with various playback devices."
-        },
-        "compatibility": {
-            "title": "Device Compatible",
-            "description": "Supports desktop and mobile access, cross-platform usage without barriers."
-        },
-        "reliability": {
-            "title": "Stable & Reliable",
-            "description": "24/7 stable operation with high availability ensuring it's always accessible."
-        }
-    },
-    "legal": {
-        "title": "Usage Statement",
-        "subtitle": "Please use this tool legally and compliantly",
-        "personalUse": "This tool is for personal learning and research use only, not for commercial purposes.",
-        "copyright": "Please respect the copyright of original creators, downloaded audio content is for personal enjoyment only.",
-        "support": "We recommend supporting original creators and obtaining audio content through legitimate channels.",
-        "disclaimer": "Users are responsible for any legal consequences arising from the use of this tool."
-    },
-    "faq": {
-        "title": "Frequently Asked Questions",
-        "subtitle": "Answers to your questions",
-        "format": {
-            "question": "What link formats are supported?",
-            "answer": "Supports standard Bilibili video links, including BV and AV number formats, e.g.: https://www.bilibili.com/video/BV1xx411c7mD"
-        },
-        "quality": {
-            "question": "What about audio quality?",
-            "answer": "Automatically selects the highest audio quality from the video for extraction, typically 128kbps or higher quality audio."
-        },
-        "limit": {
-            "question": "Are there download limits?",
-            "answer": "Currently no download limit, but please use reasonably to avoid excessive server pressure."
-        },
-        "safety": {
-            "question": "How is security guaranteed?",
-            "answer": "This site stores no user data, processing occurs in a secure server environment, protecting user privacy."
-        }
-    },
-    "navigation": {
-        "home": "Home",
-        "privacy": "Privacy Policy",
-        "terms": "Terms of Service",
-        "about": "About Us",
-        "contact": "Contact Us"
-    },
-    "privacy": {
-        "title": "Privacy Policy",
-        "lastUpdated": "Last Updated: January 2025",
-        "introduction": {
-            "title": "Introduction",
-            "content": "This privacy policy explains how Bilibili Audio Downloader (referred to as 'we' or 'this service') collects, uses, stores and protects user information. We understand the importance of privacy protection and are committed to protecting users' personal information security."
-        },
-        "collection": {
-            "title": "Information Collection",
-            "subtitle": "Types of information we collect",
-            "noPersonalData": "We do not collect any personally identifiable information, including but not limited to names, emails, phone numbers, etc.",
-            "technicalData": "We may collect technical information such as IP addresses, browser types, device information, etc., solely for service optimization and security protection.",
-            "usageData": "We may collect service usage statistics such as access counts, download counts, etc., to improve service quality."
-        },
-        "usage": {
-            "title": "Information Usage",
-            "subtitle": "How we use collected information",
-            "serviceProvision": "Providing and maintaining audio download services",
-            "improvement": "Improving and optimizing service performance",
-            "security": "Protecting service security and preventing abuse",
-            "analytics": "Conducting anonymous data analysis to understand user needs"
-        },
-        "storage": {
-            "title": "Data Storage",
-            "subtitle": "Data storage and protection measures",
-            "noStorage": "We do not store user-uploaded video links or downloaded audio files.",
-            "temporary": "Temporary data during processing is immediately deleted after completion.",
-            "security": "All data transmission is protected using HTTPS encryption protocol."
-        },
-        "cookies": {
-            "title": "Cookie Usage",
-            "subtitle": "Use of cookies and similar technologies",
-            "localStorage": "We use local storage to save your download history, this data is only stored on your device.",
-            "analytics": "We may use third-party analytics tools (such as Google Analytics) to understand website usage.",
-            "ads": "We use Google AdSense to display advertisements, please refer to Google's privacy policy for related cookie policies."
-        },
-        "thirdParty": {
-            "title": "Third-Party Services",
-            "subtitle": "Third-party services we use",
-            "analytics": "Google Analytics - for website analysis",
-            "ads": "Google AdSense - for displaying advertisements",
-            "hosting": "Vercel - for website hosting"
-        },
-        "rights": {
-            "title": "User Rights",
-            "subtitle": "Your rights and choices",
-            "access": "Since we do not collect personal information, no data access functionality is needed.",
-            "deletion": "You can clear local storage data in your browser at any time.",
-            "optOut": "You can disable cookies and JavaScript through browser settings."
-        },
-        "updates": {
-            "title": "Policy Updates",
-            "content": "We may update this privacy policy from time to time. Any changes will be posted on this page, and major changes will be notified on the website homepage."
-        },
-        "contact": {
-            "title": "Contact Us",
-            "content": "If you have any questions about this privacy policy, please contact us through GitHub Issues."
+        "howTo": {
+            "title": {
+                "en": "How to download Bilibili audio and Douyin videos",
+                "zh": "如何下载B站音频和抖音视频"
+            },
+            "steps": {
+                "en": [
+                    {
+                        "name": "Copy video link",
+                        "text": "Copy the Bilibili or Douyin video link from your browser"
+                    },
+                    {
+                        "name": "Paste link",
+                        "text": "Paste the video link into the input field on our website"
+                    },
+                    {
+                        "name": "Auto-detect platform",
+                        "text": "The tool will automatically detect whether it's Bilibili or Douyin"
+                    },
+                    {
+                        "name": "Download",
+                        "text": "Click the download button to get your MP3 audio or watermark-free video"
+                    }
+                ],
+                "zh": [
+                    {
+                        "name": "复制视频链接",
+                        "text": "从浏览器复制B站或抖音视频链接"
+                    },
+                    {
+                        "name": "粘贴链接",
+                        "text": "将视频链接粘贴到网站的输入框中"
+                    },
+                    {
+                        "name": "自动识别平台",
+                        "text": "工具会自动识别是B站还是抖音"
+                    },
+                    {
+                        "name": "下载",
+                        "text": "点击下载按钮获取MP3音频或无水印视频"
+                    }
+                ]
+            }
         }
     }
 }
