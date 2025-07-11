@@ -6,18 +6,11 @@
         "douyinButton": "Douyin Downloader"
     },
     "unified": {
-        "pageTitle": "Smart Downloader",
+        "pageTitle": "Social Media Downloader",
         "pageDescription": "Paste video links and automatically detect platform. Supports Bilibili audio and Douyin videos.",
-        "placeholder": "Paste video link here...",
-        "placeholderBilibili": "Paste Bilibili video link here...",
-        "placeholderDouyin": "Paste Douyin video/note link here...",
-        "platformDetected": "Detected",
-        "platformUnknown": "Unknown platform",
-        "switchToUnified": "Use Smart Downloader"
+        "placeholder": "Paste video link here..."
     },
     "page": {
-        "title": "Bilibili & Douyin Downloader",
-        "description": "Download history is saved locally in your browser, no server-side data retention.",
         "feedback": "For feedback or suggestions, please ",
         "feedbackLinkText": "submit an issue on GitHub",
         "copyrightVideo": "Copyright Notice: Video copyrights belong to relevant websites and authors",
@@ -25,28 +18,20 @@
         "copyrightYear": "Copyright © 2025"
     },
     "form": {
-        "placeholder": "Paste Bilibili video link here...",
-        "douyinPlaceholder": "Paste Douyin video/note link here...",
         "pasteButton": "Paste",
         "downloadButton": "Parse",
-        "downloading": "Parsing...",
-        "fallbackTitle": "Bilibili_Audio"
+        "downloading": "Parsing..."
     },
     "errors": {
         "emptyUrl": "URL cannot be empty.",
-        "invalidUrl": "Please enter a valid Bilibili or Douyin link.",
-        "unsupportedPlatform": "Platform not supported. Please use Bilibili or Douyin links.",
         "downloadError": "An unknown error occurred during processing.",
         "downloadFailed": "Processing failed",
-        "videoLinkInvalid": "Video link may be invalid.",
         "getVideoInfoFailed": "Failed to get video information, please try again later.",
-        "networkError": "Network error.",
         "clipboardFailed": "Failed to read clipboard.",
         "clipboardPermission": "Please check if clipboard permission is granted."
     },
     "history": {
         "title": "History",
-        "description": "Your recent downloads (last 50)",
         "clear": "Clear",
         "cleared": "History cleared",
         "viewSource": "View Original",
@@ -55,27 +40,17 @@
         "clickToRedownload": "Click parse button to start re-parsing"
     },
     "toast": {
-        "historyCleared": "Download history has been cleared.",
         "linkFilled": "Link pasted.",
-        "clickToRedownload": "Click the parse button to start.",
         "douyinParseSuccess": "Successfully parsed",
-        "manualDownloadLink": "Due to Douyin restrictions, please right-click here and select 'Save link as...' to download manually",
-        "recordDeleted": "Record has been deleted.",
-        "platformDetected": "Detected {platform} link",
-        "lowConfidenceDetection": "Low detection confidence",
-        "lowConfidenceDescription": "Will attempt to process as detected platform. Please check link format if it fails",
         "linkFilledForRedownload": "Link filled",
-        "clickToRedownloadDesc": "Click parse button to start re-parsing",
-        "linkCopied": "Link copied",
-        "copyFailed": "Copy failed",
-        "downloadFailed": "Download failed"
+        "clickToRedownloadDesc": "Click parse button to start re-parsing"
     },
     "metadata": {
-        "title": "Bilibili Audio & Douyin Video Downloader - Free Online MP3 & Video Download Tool",
-        "description": "Free online tool for Bilibili audio extraction and Douyin video downloads. Convert Bilibili videos to MP3, download Douyin videos without watermark. Auto-detect platform, one-click download.",
-        "keywords": "Bilibili audio download, Douyin video downloader, Douyin video download, Bilibili to MP3, Douyin no watermark, Douyin no-watermark, Douyin downloader, video downloader, audio extractor, free video download, online video downloader, Douyin video download, short video downloader, MP3 converter",
-        "ogTitle": "Bilibili Audio & Douyin Video Downloader - Free Online Tool",
-        "ogDescription": "Professional Bilibili audio and Douyin video download tool. Extract MP3 from Bilibili videos, download Douyin videos without watermark. Auto-detect platform, high-quality downloads.",
+        "title": "Bilibili Audio & Video Downloader | Douyin Video Downloader - Free Online Tool",
+        "description": "Free online tool for Bilibili audio and video downloads, and Douyin video downloads. Supports Bilibili audio to MP3, Bilibili video download, Douyin no-watermark video download, and video parsing. Paste link, auto-detect platform, high-quality downloads.",
+        "keywords": "Bilibili audio download, Bilibili video download, Douyin video downloader, Bilibili audio extractor, Bilibili to MP3, Douyin no watermark, Douyin downloader, video downloader, audio extractor, free video download, online video downloader, short video downloader, Bilibili MP3, Douyin video parsing, MP3 converter",
+        "ogTitle": "Bilibili Audio & Video Downloader | Douyin Video Downloader - Free Online Tool",
+        "ogDescription": "Professional Bilibili audio and video, and Douyin video download tool. Supports Bilibili to MP3, Bilibili video download, Douyin no-watermark video download, auto-detect platform, one-click high-quality download.",
         "siteName": "Bilibili & Douyin Downloader"
     },
     "languages": {
@@ -84,15 +59,6 @@
         "en": "English"
     },
     "douyin": {
-        "parseResult": "Douyin Parse Result",
-        "downloadAudio": "Download Audio",
-        "downloadVideo": "Download Video",
-        "openLink": "Open Link",
-        "copyLink": "Copy Link",
-        "copySuccess": "Copied to clipboard, you can paste it in a new tab",
-        "copyFailed": "Unable to copy to clipboard, please manually select and copy the link above",
-        "downloadTip": "💡 Tip: The download button is located in the \"...\" menu at the bottom right of the video page",
-        "apiLimitAudio": "API limitation: Cannot download audio, need to download video first then extract audio manually",
         "apiLimitDownload": "If automatic download fails, please click open link to download manually (download feature is in the bottom right corner of the video)"
     },
     "guide": {
@@ -121,8 +87,7 @@
                     "✅ Video download supported",
                     "✅ Audio download supported"
                 ],
-                "limitations": [
-                ]
+                "limitations": []
             },
             "douyin": {
                 "name": "Douyin (douyin.com)",

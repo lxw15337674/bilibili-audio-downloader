@@ -6,18 +6,11 @@
         "douyinButton": "抖音下载器"
     },
     "unified": {
-        "pageTitle": "智能下载器",
-        "pageDescription": "粘贴视频链接，自动识别并下载。支持 Bilibili 音频和抖音视频。",
-        "placeholder": "请在此处粘贴视频链接...",
-        "placeholderBilibili": "请在此处粘贴B站视频链接...",
-        "placeholderDouyin": "请在此处粘贴抖音视频/图文链接...",
-        "platformDetected": "检测到",
-        "platformUnknown": "未识别平台",
-        "switchToUnified": "使用智能下载器"
+        "pageTitle": "社交媒体下载器",
+        "pageDescription": "粘贴视频链接，自动识别并下载。支持 Bilibili、抖音视频。",
+        "placeholder": "请在此处粘贴视频链接..."
     },
     "page": {
-        "title": "Bilibili & 抖音 下载器",
-        "description": "下载历史记录保存在您的浏览器本地，服务器不会保留任何信息。",
         "feedback": "如有反馈或建议，请到 ",
         "feedbackLinkText": "GitHub 提交 issue",
         "copyrightVideo": "版权说明：视频版权归相关网站及作者所有",
@@ -25,28 +18,20 @@
         "copyrightYear": "Copyright © 2025"
     },
     "form": {
-        "placeholder": "请在此处粘贴B站视频链接...",
-        "douyinPlaceholder": "请在此处粘贴抖音视频/图文链接...",
         "pasteButton": "粘贴",
         "downloadButton": "解析",
-        "downloading": "解析中...",
-        "fallbackTitle": "B站音频"
+        "downloading": "解析中..."
     },
     "errors": {
         "emptyUrl": "链接不能为空。",
-        "invalidUrl": "请输入有效的Bilibili或抖音链接。",
-        "unsupportedPlatform": "暂不支持此平台，请使用 Bilibili 或抖音链接。",
         "downloadError": "处理时发生未知错误。",
         "downloadFailed": "处理失败",
-        "videoLinkInvalid": "视频链接可能无效。",
         "getVideoInfoFailed": "获取视频信息失败，请稍后重试。",
-        "networkError": "网络错误。",
         "clipboardFailed": "读取剪贴板失败。",
         "clipboardPermission": "请检查剪贴板权限是否已授予。"
     },
     "history": {
         "title": "历史记录",
-        "description": "您最近的下载（最近50条）",
         "clear": "清空",
         "cleared": "历史记录已清空",
         "viewSource": "查看原视频",
@@ -55,27 +40,17 @@
         "clickToRedownload": "点击解析按钮开始重新解析"
     },
     "toast": {
-        "historyCleared": "下载历史已清除。",
         "linkFilled": "链接已粘贴。",
-        "clickToRedownload": "点击解析按钮以开始。",
         "douyinParseSuccess": "解析成功",
-        "manualDownloadLink": "由于抖音限制，请右键这里选择'链接另存为'手动下载",
-        "recordDeleted": "记录已删除。",
-        "platformDetected": "检测到 {platform} 链接",
-        "lowConfidenceDetection": "检测置信度较低",
-        "lowConfidenceDescription": "将尝试按检测到的平台处理，如果失败请检查链接格式",
         "linkFilledForRedownload": "链接已填入",
-        "clickToRedownloadDesc": "点击解析按钮开始重新解析",
-        "linkCopied": "链接已复制",
-        "copyFailed": "复制失败",
-        "downloadFailed": "下载失败"
+        "clickToRedownloadDesc": "点击解析按钮开始重新解析"
     },
     "metadata": {
-        "title": "B站音频提取 | 抖音视频下载 - 轻松提取哔哩哔哩视频MP3音频及抖音无水印视频",
-        "description": "免费在线B站音频下载、抖音视频下载工具。支持B站音频提取转MP3，抖音无水印视频下载，抖音视频解析。一键粘贴链接，自动识别平台，高清无损下载。",
-        "keywords": "B站音频下载,抖音视频下载,哔哩哔哩音频提取,Bilibili转MP3,抖音去水印,抖音无水印下载,抖音下载器,抖音视频解析,短视频下载,抖音下载工具,B站MP3提取,视频下载器,抖音去水印工具,在线视频下载,免费视频下载",
-        "ogTitle": "B站音频下载器 | 抖音视频下载器 - 免费在线工具",
-        "ogDescription": "专业的B站音频和抖音视频下载工具。支持B站视频转MP3音频，抖音无水印视频下载，自动识别链接平台，一键高清下载。",
+        "title": "B站音频视频下载 | 抖音视频下载 - 轻松提取哔哩哔哩视频MP3音频及视频、抖音无水印视频",
+        "description": "免费在线B站音频、视频下载、抖音视频下载工具。支持B站音频提取转MP3、B站视频下载、抖音无水印视频下载、抖音视频解析。一键粘贴链接，自动识别平台，高清无损下载。",
+        "keywords": "B站音频下载,B站视频下载,抖音视频下载,哔哩哔哩音频提取,Bilibili转MP3,抖音去水印,抖音无水印下载,抖音下载器,抖音视频解析,短视频下载,抖音下载工具,B站MP3提取,视频下载器,抖音去水印工具,在线视频下载,免费视频下载,B站音频视频下载器,抖音视频下载器,免费在线工具",
+        "ogTitle": "B站音频视频下载器 | 抖音视频下载器 - 免费在线工具",
+        "ogDescription": "专业的B站音频、视频和抖音视频下载工具。支持B站视频转MP3音频、B站视频下载、抖音无水印视频下载，自动识别链接平台，一键高清下载。",
         "siteName": "B站抖音下载器"
     },
     "languages": {
@@ -84,15 +59,6 @@
         "en": "English"
     },
     "douyin": {
-        "parseResult": "抖音解析结果",
-        "downloadAudio": "下载音频",
-        "downloadVideo": "下载视频",
-        "openLink": "打开链接",
-        "copyLink": "复制链接",
-        "copySuccess": "已复制到剪贴板，可以粘贴到新标签页打开",
-        "copyFailed": "无法复制到剪贴板，请手动选择并复制上方链接",
-        "downloadTip": "💡 提示：下载按钮位于视频播放页面右下角的\"...\"菜单中",
-        "apiLimitAudio": "API限制：无法下载音频，需要下载视频后手动提取音频",
         "apiLimitDownload": "如果直接下载失败或速度慢，请点击备用直链手动下载（下载功能在视频右下角）"
     },
     "guide": {
