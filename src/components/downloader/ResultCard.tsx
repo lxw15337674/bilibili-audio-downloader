@@ -12,7 +12,6 @@ interface ResultCardProps {
 
 export function ResultCard({ result, onClose, dict }: ResultCardProps) {
     if (!result) return null;
-    console.log(result)
     return (
         <Card>
             <CardHeader className="flex flex-row items-center justify-between">
