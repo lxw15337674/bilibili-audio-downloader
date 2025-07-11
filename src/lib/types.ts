@@ -7,7 +7,9 @@ export interface UnifiedParseResult {
     data?: {
         title: string;
         platform: string;
-        downloadUrl: string | null;
+        downloadAudioUrl: string | null;
+        downloadVideoUrl: string | null;
+        originDownloadVideoUrl: string | null;
         url: string;
     };
     error?: string;
