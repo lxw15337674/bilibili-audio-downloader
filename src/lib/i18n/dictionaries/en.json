@@ -118,10 +118,10 @@
             "bilibili": {
                 "name": "Bilibili (bilibili.com)",
                 "features": [
+                    "✅ Video download supported",
                     "✅ Audio download supported"
                 ],
                 "limitations": [
-                    "⚠️ Video download supported (Due to Bilibili platform restrictions, the video has no audio. Please download the audio file and use a tool to merge audio and video)"
                 ]
             },
             "douyin": {
@@ -286,5 +286,11 @@
                 ]
             }
         }
+    },
+    "result": {
+        "title": "Parse Result",
+        "downloadVideo": "Download Video",
+        "downloadAudio": "Download Audio",
+        "originDownloadVideo": "Backup Direct Link"
     }
 }

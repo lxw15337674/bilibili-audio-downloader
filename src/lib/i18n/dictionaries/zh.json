@@ -93,7 +93,7 @@
         "copyFailed": "无法复制到剪贴板，请手动选择并复制上方链接",
         "downloadTip": "💡 提示：下载按钮位于视频播放页面右下角的\"...\"菜单中",
         "apiLimitAudio": "API限制：无法下载音频，需要下载视频后手动提取音频",
-        "apiLimitDownload": "如果自动下载失败，请点击打开链接手动下载（下载功能在视频右下角）"
+        "apiLimitDownload": "如果直接下载失败或速度慢，请点击备用直链手动下载（下载功能在视频右下角）"
     },
     "guide": {
         "quickStart": {
@@ -118,11 +118,10 @@
             "bilibili": {
                 "name": "哔哩哔哩 (bilibili.com)",
                 "features": [
+                    "✅ 支持视频下载",
                     "✅ 支持音频下载"
                 ],
-                "limitations": [
-                    "⚠️ 支持视频下载（受B站平台限制，视频无音频，建议下载音频文件并用工具合并）"
-                ]
+                "limitations": []
             },
             "douyin": {
                 "name": "抖音 (douyin.com)",
@@ -286,5 +285,11 @@
                 ]
             }
         }
+    },
+    "result": {
+        "title": "解析结果",
+        "downloadVideo": "下载视频",
+        "downloadAudio": "下载音频",
+        "originDownloadVideo": "备用直链"
     }
 }

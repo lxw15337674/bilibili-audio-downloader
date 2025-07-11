@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -12,38 +12,26 @@ import type { Dictionary } from '@/lib/i18n/types';
 import type { Locale } from "@/lib/i18n/config";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { API_ENDPOINTS } from '@/lib/config';
-import { downloadFile } from '@/lib/utils';
 
 import { DownloadHistory, type DownloadRecord } from './download-history';
-import { DouyinResultCard } from '@/components/downloader/DouyinResultCard';
-import { BilibiliResultCard } from '@/components/downloader/BilibiliResultCard';
+import { ResultCard } from '@/components/downloader/ResultCard';
 import { QuickStartCard } from '@/components/downloader/QuickStartCard';
 import { PlatformGuideCard } from '@/components/downloader/PlatformGuideCard';
 import { FreeSupportCard } from '@/components/downloader/FreeSupportCard';
-import { HelpCards } from '@/components/downloader/HelpCards';
 import { useLocalStorageState } from 'ahooks';
 import type { UnifiedParseResult } from '@/lib/types';
 import { Platform } from '@/lib/types';
-
-interface ParseResult {
-    title: string;
-    downloadUrl: string;
-    originalUrl: string;
-    platform: Platform;
-}
 
 interface UnifiedDownloaderProps {
     dict: Dictionary;
     locale: Locale;
 }
 
-
-
 export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
     const [url, setUrl] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const [parseResult, setParseResult] = useState<ParseResult | null>(null);
+    const [parseResult, setParseResult] = useState<UnifiedParseResult['data'] | null>(null);
 
     const { toast } = useToast();
     const [downloadHistory, setDownloadHistory] = useLocalStorageState<DownloadRecord[]>('download-history', {
@@ -57,9 +45,6 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
         setDownloadHistory([]);
     };
 
-
-
-
     // 统一解析处理：只解析不自动下载
     const handleUnifiedParse = async (videoUrl: string) => {
         // 调用解析接口获取视频信息
@@ -69,69 +54,34 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
             throw new Error(parseResponse.data?.error || 'Failed to parse video');
         }
 
-        const parseResult: UnifiedParseResult = parseResponse.data;
+        const apiResult: UnifiedParseResult = parseResponse.data;
 
-        if (!parseResult.data) {
+        if (!apiResult.data) {
             throw new Error('No data returned from parse API');
         }
 
-        const { title, platform, downloadUrl, url } = parseResult.data;
-
-        // 显示结果卡片，让用户选择下载格式
-        setParseResult({
-            title: title,
-            downloadUrl: downloadUrl || '',
-            originalUrl: url,
-            platform: platform as Platform
-        });
+        // 直接保存完整 parseResult.data，便于 ResultCard 渲染所有字段
+        setParseResult(apiResult.data);
 
         // 添加到下载历史
         const newRecord: DownloadRecord = {
             url: videoUrl,
-            title: title || 'Unknown Title',
+            title: apiResult.data.title || 'Unknown Title',
             timestamp: Date.now(),
-            platform: platform as Platform
+            platform: apiResult.data.platform as Platform
         };
         addToHistory(newRecord);
 
         // 显示成功提示
         toast({
             title: dict.toast.douyinParseSuccess,
-            description: `${platform}: ${title}`,
+            description: `${apiResult.data.platform}: ${apiResult.data.title}`,
             duration: 3000
         });
     };
 
     const closeParseResult = () => {
         setParseResult(null);
-    };
-
-    // 处理用户选择的下载格式
-    const handleDownload = async (format: 'audio' | 'video', originalUrl: string) => {
-        try {
-            let downloadUrl;
-
-            if (format === 'audio') {
-                // 调用音频下载API
-                downloadUrl = `${API_ENDPOINTS.unified.download}?url=${encodeURIComponent(originalUrl)}&type=audio`;
-            } else {
-                // 调用视频下载API
-                downloadUrl = `${API_ENDPOINTS.unified.download}?url=${encodeURIComponent(originalUrl)}&type=video`;
-            }
-            downloadFile(downloadUrl);
-            toast({
-                title: format === 'audio' ? '开始下载音频' : '开始下载视频',
-                description: '下载已开始，请稍候...',
-                duration: 3000
-            });
-        } catch (err) {
-            const errorMessage = err instanceof Error ? err.message : '下载失败';
-            toast({
-                variant: "destructive",
-                title: dict.toast.downloadFailed,
-                description: errorMessage
-            });
-        }
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -174,10 +124,6 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
         });
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
-
-
-
-
 
     return (
         <div className="min-h-screen flex flex-col bg-background">
@@ -274,27 +220,11 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                                 </CardContent>
                             </Card>
 
-                            {/* 抖音专用卡片 */}
-                            {parseResult && parseResult.platform.toLowerCase() === 'douyin' && (
-                                <DouyinResultCard
-                                    title={parseResult.title}
-                                    downloadUrl={parseResult.downloadUrl}
-                                    originalUrl={parseResult.originalUrl}
-                                    onDownload={handleDownload}
+                            <ResultCard
+                                result={parseResult}
                                     onClose={closeParseResult}
                                     dict={dict}
-                                />
-                            )}
-
-                            {/* B站专用卡片 */}
-                            {parseResult && parseResult.platform.toLowerCase() === 'bili' && (
-                                <BilibiliResultCard
-                                    title={parseResult.title}
-                                    originalUrl={parseResult.originalUrl}
-                                    onDownload={handleDownload}
-                                    onClose={closeParseResult}
-                                />
-                            )}
+                            />
 
                             {/* 历史记录 */}
                             <DownloadHistory

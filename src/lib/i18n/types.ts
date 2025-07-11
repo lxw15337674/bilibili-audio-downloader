@@ -1,3 +1,10 @@
+export interface ResultDict {
+    title: string;
+    downloadVideo: string;
+    downloadAudio: string;
+    originDownloadVideo: string;
+}
+
 export interface Dictionary {
     home: {
         title: string;
@@ -191,4 +198,5 @@ export interface Dictionary {
             };
         };
     };
+    result: ResultDict;
 } 

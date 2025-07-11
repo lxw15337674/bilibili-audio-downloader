@@ -118,11 +118,10 @@
             "bilibili": {
                 "name": "嗶哩嗶哩 (bilibili.com)",
                 "features": [
+                    "✅ 支援影片下載",
                     "✅ 支援音訊下載"
                 ],
-                "limitations": [
-                    "⚠️ 支援影片下載（受B站平台限制，影片無音訊，建議下載音訊檔後用工具合併音訊與影片）"
-                ]
+                "limitations": []
             },
             "douyin": {
                 "name": "抖音 (douyin.com)",
@@ -286,5 +285,11 @@
                 ]
             }
         }
+    },
+    "result": {
+        "title": "解析結果",
+        "downloadVideo": "下載影片",
+        "downloadAudio": "下載音訊",
+        "originDownloadVideo": "備用直鏈"
     }
 }

@@ -24,7 +24,7 @@ export function PlatformGuideCard({ dict }: PlatformGuideCardProps) {
                         <div className="flex-1">
                             <p className="font-medium">{dict.guide.platformSupport.bilibili.name}</p>
                             <div className="text-sm text-muted-foreground space-y-1 mt-1">
-                                {dict.guide.platformSupport.bilibili.limitations.map((limitation, index) => (
+                                {dict.guide.platformSupport.bilibili?.limitations.map((limitation, index) => (
                                     <p key={index}>{limitation}</p>
                                 ))}
                                 {dict.guide.platformSupport.bilibili.features.map((feature, index) => (
