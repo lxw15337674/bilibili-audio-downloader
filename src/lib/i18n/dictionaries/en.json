@@ -121,7 +121,7 @@
                     "✅ Audio download supported"
                 ],
                 "limitations": [
-                    "⚠️ Video download supported (Due to Bilibili restrictions, videos don't contain audio streams, need to download audio separately and manually merge)"
+                    "⚠️ Video download supported (Due to Bilibili platform restrictions, the video has no audio. Please download the audio file and use a tool to merge audio and video)"
                 ]
             },
             "douyin": {
@@ -130,8 +130,15 @@
                     "✅ Video download supported"
                 ],
                 "limitations": [
-                    "⚠️ Audio extraction not supported, need to extract audio manually after downloading video"
-                ]
+                    "⚠️ Due to Douyin platform restrictions, audio cannot be downloaded directly. Please download the video first and use a tool to extract the audio."
+                ],
+                "tip": {
+                    "text": "Recommended audio extraction tool: ",
+                    "tool": {
+                        "name": "Clipchamp",
+                        "url": "https://www.clipchamp.com/en/"
+                    }
+                }
             },
             "urlExamples": {
                 "title": "🔗 Link formats:",
@@ -144,7 +151,6 @@
                     "https://v.douyin.com/fiU6t9rA3QU/ (short link)"
                 ]
             },
-            "tip": "Usage tip: Just copy the share link, no manual modification needed",
             "comingSoon": "🔄 More platforms coming soon..."
         },
         "linkFormats": {

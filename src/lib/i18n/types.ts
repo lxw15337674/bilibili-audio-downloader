@@ -114,13 +114,19 @@ export interface Dictionary {
                 name: string;
                 features: string[];
                 limitations: string[];
+                tip: {
+                    text: string;
+                    tool: {
+                        name: string;
+                        url: string;
+                    };
+                };
             };
             urlExamples: {
                 title: string;
                 bilibili: string[];
                 douyin: string[];
             };
-            tip: string;
             comingSoon: string;
         };
         linkFormats: {

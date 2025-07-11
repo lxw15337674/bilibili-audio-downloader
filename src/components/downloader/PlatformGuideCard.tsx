@@ -68,13 +68,18 @@ export function PlatformGuideCard({ dict }: PlatformGuideCardProps) {
                     </div>
                 </div>
 
-                {/* 使用提示 */}
-                <div className="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-950 rounded-md">
-                    <div className="text-blue-500 mt-0.5">💡</div>
-                    <p className="text-sm text-blue-700 dark:text-blue-300">
-                        {dict.guide.platformSupport.tip}
-                    </p>
-                </div>
+                {/* 抖音使用提示 */}
+                {dict.guide.platformSupport.douyin.tip && (
+                    <div className="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-950 rounded-md">
+                        <div className="text-blue-500 mt-0.5">💡</div>
+                        <p className="text-sm text-blue-700 dark:text-blue-300">
+                            {dict.guide.platformSupport.douyin.tip.text}
+                            <a href={dict.guide.platformSupport.douyin.tip.tool.url} target="_blank" rel="noopener noreferrer" className="underline font-medium">
+                                {dict.guide.platformSupport.douyin.tip.tool.name}
+                            </a>
+                        </p>
+                    </div>
+                )}
 
                 {/* 更多平台预告 */}
                 <div className="text-center text-sm text-muted-foreground pt-2 border-t">
