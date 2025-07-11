@@ -7,12 +7,13 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { format } from 'date-fns';
 import { ChevronsUpDown } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
-import { detectPlatform } from '@/lib/platformDetector';
+import { Platform } from '../../lib/types';
 
 export interface DownloadRecord {
     url: string;
     title: string;
     timestamp: number;
+    platform: Platform;
 }
 
 interface DownloadHistoryProps {
@@ -34,19 +35,19 @@ interface DownloadHistoryProps {
 }
 
 // 获取平台标签样式
-const getPlatformBadge = (url: string) => {
-    const platform = detectPlatform(url);
+const getPlatformBadge = (platform: Platform) => {
 
-    switch (platform.platform) {
+    switch (platform) {
+        case 'bili':
         case 'bilibili':
             return {
-                text: 'B站音频',
-                className: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
+                text: 'bilibili',
+                className: 'bg-pink-100 text-pink-700 dark:bg-pink-900 dark:text-pink-300'
             };
         case 'douyin':
             return {
-                text: '抖音视频',
-                className: 'bg-pink-100 text-pink-700 dark:bg-pink-900 dark:text-pink-300'
+                text: '抖音',
+                className: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
             };
         default:
             return {
@@ -103,7 +104,7 @@ export function DownloadHistory({ dict, downloadHistory, clearHistory, onRedownl
                         <div className="px-6 pb-6 overflow-y-auto scrollbar-hide">
                             <div className="space-y-2">
                                 {downloadHistory.map((record: DownloadRecord, index: number) => {
-                                    const platformBadge = getPlatformBadge(record.url);
+                                    const platformBadge = getPlatformBadge(record.platform);
                                     return (
                                         <div
                                             key={index}
