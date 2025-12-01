@@ -1,0 +1,58 @@
+{
+  "versions": [
+    {
+      "version": "1.2.0",
+      "date": "2025-12-01",
+      "changes": {
+        "zh": [
+          "支持B站多P视频下载",
+          "显示视频时长"
+        ],
+        "en": [
+          "Support Bilibili multi-part video download",
+          "Display video duration"
+        ],
+        "zh-tw": [
+          "支援B站多P影片下載",
+          "顯示影片時長"
+        ]
+      }
+    },
+    {
+      "version": "1.1.0",
+      "date": "",
+      "changes": {
+        "zh": [
+          "新增抖音视频下载功能",
+          "自动识别视频平台"
+        ],
+        "en": [
+          "Add Douyin video download",
+          "Auto-detect video platform"
+        ],
+        "zh-tw": [
+          "新增抖音影片下載功能",
+          "自動識別影片平台"
+        ]
+      }
+    },
+    {
+      "version": "1.0.0",
+      "date": "",
+      "changes": {
+        "zh": [
+          "首次发布",
+          "支持B站视频音频下载"
+        ],
+        "en": [
+          "Initial release",
+          "Support Bilibili audio and video download"
+        ],
+        "zh-tw": [
+          "首次發佈",
+          "支援B站影片音訊下載"
+        ]
+      }
+    }
+  ]
+}

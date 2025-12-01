@@ -257,6 +257,10 @@
         "title": "解析结果",
         "downloadVideo": "下载视频",
         "downloadAudio": "下载音频",
-        "originDownloadVideo": "备用直链"
+        "originDownloadVideo": "备用直链",
+        "totalParts": "共 {count} 个分P"
+    },
+    "changelog": {
+        "title": "更新日志"
     }
 }

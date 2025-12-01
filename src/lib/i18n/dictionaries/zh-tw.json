@@ -257,6 +257,10 @@
         "title": "解析結果",
         "downloadVideo": "下載影片",
         "downloadAudio": "下載音訊",
-        "originDownloadVideo": "備用直鏈"
+        "originDownloadVideo": "備用直鏈",
+        "totalParts": "共 {count} 個分P"
+    },
+    "changelog": {
+        "title": "更新日誌"
     }
 }
