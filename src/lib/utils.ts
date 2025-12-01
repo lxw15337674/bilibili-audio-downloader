@@ -18,3 +18,13 @@ export function downloadFile(url: string) {
   a.click();
   document.body.removeChild(a);
 }
+
+/**
+ * 格式化时长（秒 -> mm:ss）
+ * @param seconds 秒数
+ */
+export function formatDuration(seconds: number): string {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${mins}:${secs.toString().padStart(2, '0')}`;
+}

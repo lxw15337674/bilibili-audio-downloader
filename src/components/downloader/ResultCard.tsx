@@ -3,16 +3,7 @@ import { Button } from "@/components/ui/button";
 import { AlertTriangle, X } from 'lucide-react';
 import type { Dictionary } from '@/lib/i18n/types';
 import { UnifiedParseResult, PageInfo } from "../../lib/types";
-import { downloadFile } from "../../lib/utils";
-
-/**
- * 格式化时长（秒 -> mm:ss）
- */
-function formatDuration(seconds: number): string {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-}
+import { downloadFile, formatDuration } from "../../lib/utils";
 
 interface ResultCardProps {
     result: UnifiedParseResult['data'] | null | undefined
