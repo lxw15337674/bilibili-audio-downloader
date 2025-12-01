@@ -49,7 +49,7 @@ export function HomeClient({ locale, dict }: HomeClientProps) {
                     <p className="text-center text-xs text-muted-foreground">
                         {dict.page.feedback}
                         <a
-                            href="https://github.com/lxw15337674/bilibili-audio-downloader-report/issues/new"
+                            href="https://github.com/lxw15337674/bilibili-audio-downloader/issues/new"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="underline"
