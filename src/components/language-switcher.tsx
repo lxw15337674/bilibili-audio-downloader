@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Globe, ChevronDown, Check } from 'lucide-react'
 import type { Locale } from '@/lib/i18n/config'
 import type { Dictionary } from '@/lib/i18n/types'
+import { LOCALE_COOKIE_NAME, LOCALE_COOKIE_MAX_AGE } from '@/lib/constants'
 
 interface LanguageSwitcherProps {
     currentLocale: Locale
@@ -31,7 +32,7 @@ export function LanguageSwitcher({ currentLocale, dict }: LanguageSwitcherProps)
         const newPath = `/${locale}${pathWithoutLocale}`
 
         // 设置 Cookie
-        document.cookie = `preferred-locale=${locale}; path=/; max-age=31536000; SameSite=Lax${window.location.protocol === 'https:' ? '; Secure' : ''
+        document.cookie = `${LOCALE_COOKIE_NAME}=${locale}; path=/; max-age=${LOCALE_COOKIE_MAX_AGE}; SameSite=Lax${window.location.protocol === 'https:' ? '; Secure' : ''
             }`
 
         // 路由跳转

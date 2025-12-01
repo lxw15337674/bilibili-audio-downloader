@@ -1,5 +1,3 @@
-'use client';
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Globe } from 'lucide-react';
 import type { Dictionary } from '@/lib/i18n/types';

@@ -22,6 +22,7 @@ import { ChangelogDialog } from '@/components/changelog-dialog';
 import { useLocalStorageState } from 'ahooks';
 import type { UnifiedParseResult } from '@/lib/types';
 import { Platform } from '@/lib/types';
+import { DOWNLOAD_HISTORY_MAX_COUNT, DOWNLOAD_HISTORY_STORAGE_KEY } from '@/lib/constants';
 
 interface UnifiedDownloaderProps {
     dict: Dictionary;
@@ -35,11 +36,11 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
     const [parseResult, setParseResult] = useState<UnifiedParseResult['data'] | null>(null);
 
     const { toast } = useToast();
-    const [downloadHistory, setDownloadHistory] = useLocalStorageState<DownloadRecord[]>('download-history', {
+    const [downloadHistory, setDownloadHistory] = useLocalStorageState<DownloadRecord[]>(DOWNLOAD_HISTORY_STORAGE_KEY, {
         defaultValue: []
     });
     const addToHistory = (record: DownloadRecord) => {
-        setDownloadHistory(prev => [record, ...(prev || []).slice(0, 29)]);
+        setDownloadHistory(prev => [record, ...(prev || []).slice(0, DOWNLOAD_HISTORY_MAX_COUNT - 1)]);
     };
 
     const clearDownloadHistory = () => {
