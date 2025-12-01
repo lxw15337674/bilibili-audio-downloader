@@ -3,6 +3,7 @@ export interface ResultDict {
     downloadVideo: string;
     downloadAudio: string;
     originDownloadVideo: string;
+    totalParts?: string;
 }
 
 export interface Dictionary {
@@ -165,4 +166,7 @@ export interface Dictionary {
         };
     };
     result: ResultDict;
+    changelog?: {
+        title: string;
+    };
 } 

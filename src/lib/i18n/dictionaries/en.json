@@ -257,6 +257,10 @@
         "title": "Parse Result",
         "downloadVideo": "Download Video",
         "downloadAudio": "Download Audio",
-        "originDownloadVideo": "Backup Direct Link"
+        "originDownloadVideo": "Backup Direct Link",
+        "totalParts": "Total {count} parts"
+    },
+    "changelog": {
+        "title": "Changelog"
     }
 }
