@@ -129,18 +129,20 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
 
     return (
         <div className="min-h-screen flex flex-col bg-background">
-            <div className="absolute top-4 right-4 z-10 flex items-center gap-1">
-                <ChangelogDialog locale={locale} dict={dict} />
-                <LanguageSwitcher currentLocale={locale} dict={dict} />
+            <div className="sticky top-0 z-10 bg-background/95 backdrop-blur-sm border-b">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-3 flex justify-end items-center gap-1">
+                    <ChangelogDialog locale={locale} dict={dict} />
+                    <LanguageSwitcher currentLocale={locale} dict={dict} />
+                </div>
             </div>
 
-            <main className="flex-1 p-4 sm:p-6 md:p-8">
+            <main className="flex-1 p-4 sm:p-6 md:p-8 pt-6">
                 {/* PC端三栏布局，移动端垂直布局 */}
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
                         {/* 左栏：快速入门指南 (PC端显示，移动端隐藏) */}
                         <div className="hidden xl:block">
-                            <div className="sticky top-6 space-y-4">
+                            <div className="sticky top-20 space-y-4">
                                 <QuickStartCard dict={dict} />
                                 <FreeSupportCard dict={dict} />
                             </div>
@@ -246,7 +248,7 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
 
                         {/* 右栏：平台支持指南 (PC端显示，移动端隐藏) */}
                         <div className="hidden xl:block">
-                            <div className="sticky top-6">
+                            <div className="sticky top-20">
                                 <PlatformGuideCard dict={dict} />
                             </div>
                         </div>

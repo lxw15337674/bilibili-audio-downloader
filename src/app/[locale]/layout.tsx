@@ -4,7 +4,6 @@ import Script from "next/script";
 import "../globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster"
-import { Analytics } from "@vercel/analytics/next"
 import { getDictionary } from "@/lib/i18n"
 import type { Locale } from "@/lib/i18n/config"
 import { i18n } from "@/lib/i18n/config"
@@ -124,8 +123,8 @@ export default async function RootLayout({
                 <meta name="msapplication-config" content="/browserconfig.xml" />
                 <meta name="format-detection" content="telephone=no" />
                 <meta httpEquiv="x-ua-compatible" content="ie=edge" />
-                <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-                <link rel="apple-touch-icon" href="/favicon.svg" />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+                <link rel="apple-touch-icon" href="/favicon.ico" />
                 <link rel="manifest" href="/manifest.json" />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -141,7 +140,6 @@ export default async function RootLayout({
                 >
                     {children}
                 </ThemeProvider>
-                <Analytics />
                 <Script
                     strategy="afterInteractive"
                     src="https://www.googletagmanager.com/gtag/js?id=G-0BEHLKM3W5"
