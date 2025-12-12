@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { i18n } from '@/lib/i18n/config'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://bilibili-audio-downloader.vercel.app'
+    const baseUrl = 'https://downloader.bhwa233.com'
 
     return i18n.locales.map((locale) => ({
         url: `${baseUrl}/${locale}`,

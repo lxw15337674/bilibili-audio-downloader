@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: ['/api/', '/_next/'],
         },
-        sitemap: 'https://bilibili-audio-downloader.vercel.app/sitemap.xml',
+        sitemap: 'https://downloader.bhwa233.com/sitemap.xml',
     }
 } 

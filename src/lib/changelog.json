@@ -1,6 +1,21 @@
 {
   "versions": [
     {
+      "version": "1.2.1",
+      "date": "2025-12-12",
+      "changes": {
+        "zh": [
+          "更换独立域名"
+        ],
+        "en": [
+          "Switch to independent domain"
+        ],
+        "zh-tw": [
+          "更換獨立域名"
+        ]
+      }
+    },
+    {
       "version": "1.2.0",
       "date": "2025-12-01",
       "changes": {

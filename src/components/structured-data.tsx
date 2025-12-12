@@ -13,13 +13,13 @@ export function StructuredData({ locale, dict }: StructuredDataProps) {
         "name": dict.metadata.siteName,
         "alternateName": locale === 'en' ? "Bilibili & Douyin Downloader" : "Bilibili抖音下载器",
         "description": dict.metadata.description,
-        "url": `https://bilibili-audio-downloader.vercel.app/${locale}`,
+        "url": `https://downloader.bhwa233.com/${locale}`,
         "inLanguage": locale === 'zh' ? 'zh-CN' : locale === 'zh-tw' ? 'zh-TW' : 'en-US',
         "potentialAction": {
             "@type": "SearchAction",
             "target": {
                 "@type": "EntryPoint",
-                "urlTemplate": `https://bilibili-audio-downloader.vercel.app/${locale}`
+                "urlTemplate": `https://downloader.bhwa233.com/${locale}`
             },
             "query-input": "required name=search_term_string"
         },
@@ -38,7 +38,7 @@ export function StructuredData({ locale, dict }: StructuredDataProps) {
         "@type": "WebApplication",
         "name": dict.metadata.siteName,
         "description": dict.metadata.description,
-        "url": `https://bilibili-audio-downloader.vercel.app/${locale}`,
+        "url": `https://downloader.bhwa233.com/${locale}`,
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Any",
         "permissions": "browser",
