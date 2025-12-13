@@ -62,6 +62,18 @@
     "douyin": {
         "apiLimitDownload": "如果自動下載失敗，請點擊開啟連結手動下載（下載功能在影片右下角）"
     },
+    "extractAudio": {
+        "button": "提取音訊",
+        "loading": "載入中...",
+        "downloading": "下載中 {progress}%",
+        "converting": "轉換中 {progress}%",
+        "completed": "提取完成",
+        "retry": "重試",
+        "errorLoad": "載入音訊處理器失敗，請重新整理頁面重試",
+        "errorDownload": "下載影片失敗，請使用備用連結手動下載後用其他工具提取",
+        "errorConvert": "音訊轉換失敗，影片格式可能不支援",
+        "errorMemory": "影片檔案過大，瀏覽器記憶體不足，建議使用桌面工具"
+    },
     "guide": {
         "quickStart": {
             "title": "三步輕鬆下載",
@@ -93,18 +105,13 @@
             "douyin": {
                 "name": "抖音 (douyin.com)",
                 "features": [
-                    "✅ 支援影片下載"
+                    "✅ 支援影片下載",
+                    "✅ 支援音訊提取（瀏覽器端轉換）"
                 ],
                 "limitations": [
-                    "⚠️ 受抖音平台限制，無法直接下載音訊。請先下載影片，再用工具提取音訊。"
-                ],
-                "tip": {
-                    "text": "音訊提取推薦工具：",
-                    "tool": {
-                        "name": "Clipchamp",
-                        "url": "https://www.clipchamp.com/zh-tw/"
-                    }
-                }
+                    "💡 音訊提取流程：載入處理器(首次約30MB) → 下載影片 → 轉換音訊",
+                    "⏱️ 影片越大，音訊提取處理時間越長，請耐心等待"
+                ]
             },
             "urlExamples": {
                 "title": "🔗 連結格式：",

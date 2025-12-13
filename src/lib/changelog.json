@@ -1,6 +1,21 @@
 {
   "versions": [
     {
+      "version": "1.3.0",
+      "date": "2025-12-13",
+      "changes": {
+        "zh": [
+          "新增抖音视频音频提取功能（浏览器端转换）"
+        ],
+        "en": [
+          "Add Douyin video audio extraction (browser-side conversion)"
+        ],
+        "zh-tw": [
+          "新增抖音影片音訊提取功能（瀏覽器端轉換）"
+        ]
+      }
+    },
+    {
       "version": "1.2.1",
       "date": "2025-12-12",
       "changes": {

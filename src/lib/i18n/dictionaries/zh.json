@@ -62,6 +62,18 @@
     "douyin": {
         "apiLimitDownload": "如果直接下载失败或速度慢，请点击备用直链手动下载（下载功能在视频右下角）"
     },
+    "extractAudio": {
+        "button": "提取音频",
+        "loading": "加载中...",
+        "downloading": "下载中 {progress}%",
+        "converting": "转换中 {progress}%",
+        "completed": "提取完成",
+        "retry": "重试",
+        "errorLoad": "加载音频处理器失败，请刷新页面重试",
+        "errorDownload": "下载视频失败，请使用备用链接手动下载后用其他工具提取",
+        "errorConvert": "音频转换失败，视频格式可能不支持",
+        "errorMemory": "视频文件过大，浏览器内存不足，建议使用桌面工具"
+    },
     "guide": {
         "quickStart": {
             "title": "三步轻松下载",
@@ -93,18 +105,13 @@
             "douyin": {
                 "name": "抖音 (douyin.com)",
                 "features": [
-                    "✅ 支持视频下载"
+                    "✅ 支持视频下载",
+                    "✅ 支持音频提取（浏览器端转换）"
                 ],
                 "limitations": [
-                    "⚠️ 受抖音平台限制，无法直接下载音频。请先下载视频，再用工具提取音频。"
-                ],
-                "tip": {
-                    "text": "音频提取推荐工具：",
-                    "tool": {
-                        "name": "Clipchamp",
-                        "url": "https://www.clipchamp.com/zh-hans/"
-                    }
-                }
+                    "💡 音频提取流程：加载处理器(首次约30MB) → 下载视频 → 转换音频",
+                    "⏱️ 视频越大，音频提取处理时间越长，请耐心等待"
+                ]
             },
             "urlExamples": {
                 "title": "🔗 链接格式：",

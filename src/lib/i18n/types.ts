@@ -69,6 +69,18 @@ export interface Dictionary {
     douyin: {
         apiLimitDownload: string;
     };
+    extractAudio: {
+        button: string;
+        loading: string;
+        downloading: string;
+        converting: string;
+        completed: string;
+        retry: string;
+        errorLoad: string;
+        errorDownload: string;
+        errorConvert: string;
+        errorMemory: string;
+    };
     guide: {
         quickStart: {
             title: string;
@@ -88,7 +100,7 @@ export interface Dictionary {
                 name: string;
                 features: string[];
                 limitations: string[];
-                tip: {
+                tip?: {
                     text: string;
                     tool: {
                         name: string;

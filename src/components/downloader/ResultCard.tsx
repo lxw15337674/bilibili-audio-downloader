@@ -4,6 +4,7 @@ import { AlertTriangle, X } from 'lucide-react';
 import type { Dictionary } from '@/lib/i18n/types';
 import { UnifiedParseResult, PageInfo } from "../../lib/types";
 import { downloadFile, formatDuration } from "../../lib/utils";
+import { ExtractAudioButton } from "./ExtractAudioButton";
 
 interface ResultCardProps {
     result: UnifiedParseResult['data'] | null | undefined
@@ -53,6 +54,8 @@ export function ResultCard({ result, onClose, dict }: ResultCardProps) {
  * 单P视频的下载按钮
  */
 function SinglePartButtons({ result, dict }: { result: NonNullable<UnifiedParseResult['data']>; dict: Dictionary }) {
+    const isDouyin = result.platform === 'douyin';
+
     return (
         <>
             <div className="flex gap-2">
@@ -75,6 +78,14 @@ function SinglePartButtons({ result, dict }: { result: NonNullable<UnifiedParseR
                     >
                         {dict.result.downloadAudio}
                     </Button>
+                )}
+
+                {isDouyin && result.downloadVideoUrl && (
+                    <ExtractAudioButton
+                        videoUrl={result.downloadVideoUrl}
+                        title={result.title}
+                        dict={dict}
+                    />
                 )}
 
                 {result.originDownloadVideoUrl && (

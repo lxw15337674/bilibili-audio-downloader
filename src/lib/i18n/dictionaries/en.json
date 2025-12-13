@@ -62,6 +62,18 @@
     "douyin": {
         "apiLimitDownload": "If automatic download fails, please click open link to download manually (download feature is in the bottom right corner of the video)"
     },
+    "extractAudio": {
+        "button": "Extract Audio",
+        "loading": "Loading...",
+        "downloading": "Downloading {progress}%",
+        "converting": "Converting {progress}%",
+        "completed": "Extraction Complete",
+        "retry": "Retry",
+        "errorLoad": "Failed to load audio processor, please refresh and try again",
+        "errorDownload": "Failed to download video, please use backup link and extract with other tools",
+        "errorConvert": "Audio conversion failed, video format may not be supported",
+        "errorMemory": "Video file too large, browser memory insufficient, please use desktop tools"
+    },
     "guide": {
         "quickStart": {
             "title": "Easy 3-Step Download",
@@ -93,18 +105,13 @@
             "douyin": {
                 "name": "Douyin (douyin.com)",
                 "features": [
-                    "✅ Video download supported"
+                    "✅ Video download supported",
+                    "✅ Audio extraction supported (browser-side conversion)"
                 ],
                 "limitations": [
-                    "⚠️ Due to Douyin platform restrictions, audio cannot be downloaded directly. Please download the video first and use a tool to extract the audio."
-                ],
-                "tip": {
-                    "text": "Recommended audio extraction tool: ",
-                    "tool": {
-                        "name": "Clipchamp",
-                        "url": "https://www.clipchamp.com/en/"
-                    }
-                }
+                    "💡 Audio extraction process: Load processor (~30MB first time) → Download video → Convert to audio",
+                    "⏱️ Larger videos require longer audio extraction time, please be patient"
+                ]
             },
             "urlExamples": {
                 "title": "🔗 Link formats:",
