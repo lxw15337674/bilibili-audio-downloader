@@ -5,16 +5,12 @@ import { Progress } from '@/components/ui/progress';
 import { Loader2, Music, AlertCircle, CheckCircle } from 'lucide-react';
 import { useFFmpeg, FFmpegStatus } from '@/hooks/use-ffmpeg';
 import type { Dictionary } from '@/lib/i18n/types';
+import { formatBytes } from '@/lib/utils';
 
 interface ExtractAudioButtonProps {
   videoUrl: string;
   title: string;
   dict: Dictionary;
-}
-
-// 格式化字节大小为 MB
-function formatBytes(bytes: number): string {
-  return (bytes / (1024 * 1024)).toFixed(1);
 }
 
 export function ExtractAudioButton({ videoUrl, title, dict }: ExtractAudioButtonProps) {
@@ -42,9 +38,7 @@ export function ExtractAudioButton({ videoUrl, title, dict }: ExtractAudioButton
       case 'downloading':
         // 简洁版：显示百分比和大小
         if (progressInfo?.loaded && progressInfo?.total) {
-          const loadedMB = formatBytes(progressInfo.loaded);
-          const totalMB = formatBytes(progressInfo.total);
-          return `下载中 ${progress}% (${loadedMB} MB / ${totalMB} MB)`;
+          return `下载中 ${progress}% (${formatBytes(progressInfo.loaded)} / ${formatBytes(progressInfo.total)})`;
         }
         return dict.extractAudio.downloading.replace('{progress}', String(progress));
       case 'converting':

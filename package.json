@@ -32,14 +32,14 @@
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "server-only": "^0.0.1",
+    "sonner": "^2.0.7",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
-    "@types/jszip": "^3.4.1",
     "@types/negotiator": "^0.6.4",
-    "@types/node": "^20.19.26",
+    "@types/node": "^20.19.27",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "eslint": "^9.39.2",

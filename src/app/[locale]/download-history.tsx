@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { format } from 'date-fns';
 import { ChevronsUpDown } from 'lucide-react';
-import { useToast } from '../../hooks/use-toast';
+import { toast } from 'sonner';
 import { Platform } from '../../lib/types';
 import { Dictionary } from '../../lib/i18n/types';
 
@@ -52,20 +52,16 @@ const getPlatformBadge = (platform: Platform, dict: Dictionary) => {
 };
 
 export function DownloadHistory({ dict, downloadHistory, clearHistory, onRedownload }: DownloadHistoryProps) {
-    const { toast } = useToast();
     const [isOpen, setIsOpen] = useState(true);
 
     const handleClearHistory = () => {
         clearHistory();
-        toast({
-            title: dict.history.cleared,
-        });
+        toast.success(dict.history.cleared);
     };
 
     const handleRedownload = (url: string) => {
         onRedownload?.(url);
-        toast({
-            title: dict.history.linkFilled,
+        toast(dict.history.linkFilled, {
             description: dict.history.clickToRedownload,
         });
         window.scrollTo({ top: 0, behavior: 'smooth' });

@@ -28,7 +28,12 @@
         "downloadFailed": "處理失敗",
         "getVideoInfoFailed": "獲取影片資訊失敗，請稍後重試。",
         "clipboardFailed": "讀取剪貼簿失敗。",
-        "clipboardPermission": "請檢查剪貼簿權限是否已授予。"
+        "clipboardPermission": "請檢查剪貼簿權限是否已授予。",
+        "allImagesLoadFailed": "所有圖片載入失敗，無法打包下載",
+        "packageFailed": "打包失敗，請重試",
+        "confirmPartialDownload": "有 {failCount} 張圖片載入失敗，是否下載其餘 {successCount} 張圖片？",
+        "continue": "繼續",
+        "cancel": "取消"
     },
     "history": {
         "title": "歷史記錄",
@@ -288,7 +293,15 @@
         "totalParts": "共 {count} 個分P",
         "downloadImage": "下載圖片",
         "imageNote": "圖文筆記",
-        "imageCount": "共 {count} 張圖片"
+        "imageCount": "共 {count} 張圖片",
+        "packaging": "打包中",
+        "packageDownload": "打包下載",
+        "loading": "載入中",
+        "loadFailed": "載入失敗",
+        "viewLargeImage": "查看大圖",
+        "imageLoadingProgress": "載入中 {loaded}/{total}",
+        "imageAutoLoadedTip": "💡 圖片已自動載入，點擊下載按鈕保存",
+        "packagingProgress": "正在打包第 {current}/{total} 張圖片"
     },
     "changelog": {
         "title": "更新日誌"

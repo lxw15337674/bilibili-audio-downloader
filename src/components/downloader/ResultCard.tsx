@@ -3,11 +3,12 @@ import { Button } from "@/components/ui/button";
 import { AlertTriangle, X, Download, Loader2, Package } from 'lucide-react';
 import type { Dictionary } from '@/lib/i18n/types';
 import { UnifiedParseResult, PageInfo } from "../../lib/types";
-import { downloadFile, formatDuration } from "../../lib/utils";
+import { downloadFile, formatDuration, sanitizeFilename } from "../../lib/utils";
 import { ExtractAudioButton } from "./ExtractAudioButton";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import JSZip from 'jszip';
+import { toast } from 'sonner';
 
 interface ResultCardProps {
     result: UnifiedParseResult['data'] | null | undefined
@@ -182,25 +183,30 @@ function MultiPartList({ pages, currentPage, dict }: { pages: PageInfo[]; curren
  * 小红书图文笔记的图片网格
  */
 function ImageNoteGrid({ images, title, dict }: { images: string[]; title: string; dict: Dictionary }) {
-    const [imageBlobs, setImageBlobs] = useState<Map<number, string>>(new Map());
-    const [loadingStates, setLoadingStates] = useState<Map<number, boolean>>(new Map());
-    const [errorStates, setErrorStates] = useState<Map<number, boolean>>(new Map());
+    // 合并的状态类型
+    type ImageLoadState = {
+        loading: boolean;
+        error: boolean;
+        blobUrl: string | null;
+    };
+
+    const [imageStates, setImageStates] = useState<Map<number, ImageLoadState>>(new Map());
     const [isPackaging, setIsPackaging] = useState(false);
     const [packagingProgress, setPackagingProgress] = useState(0);
 
+    // 使用 ref 管理 blob URLs，避免依赖问题
+    const blobUrlsRef = useRef<Set<string>>(new Set());
+
     useEffect(() => {
         // 初始化加载状态
-        const initialLoading = new Map<number, boolean>();
+        const initialStates = new Map<number, ImageLoadState>();
         images.forEach((_, index) => {
-            initialLoading.set(index, true);
+            initialStates.set(index, { loading: true, error: false, blobUrl: null });
         });
-        setLoadingStates(initialLoading);
+        setImageStates(initialStates);
 
         // 获取所有图片
         const fetchImages = async () => {
-            const newBlobs = new Map<number, string>();
-            const newErrors = new Map<number, boolean>();
-
             await Promise.all(
                 images.map(async (imageUrl, index) => {
                     try {
@@ -211,40 +217,44 @@ function ImageNoteGrid({ images, title, dict }: { images: string[]; title: strin
                             }
                         });
                         const blobUrl = URL.createObjectURL(response.data);
-                        newBlobs.set(index, blobUrl);
-                        newErrors.set(index, false);
+
+                        // 存储到 ref 用于清理
+                        blobUrlsRef.current.add(blobUrl);
+
+                        // 更新状态
+                        setImageStates(prev => {
+                            const updated = new Map(prev);
+                            updated.set(index, { loading: false, error: false, blobUrl });
+                            return updated;
+                        });
                     } catch (error) {
                         console.error(`Failed to load image ${index}:`, error);
-                        newErrors.set(index, true);
-                    } finally {
-                        setLoadingStates(prev => {
+                        setImageStates(prev => {
                             const updated = new Map(prev);
-                            updated.set(index, false);
+                            updated.set(index, { loading: false, error: true, blobUrl: null });
                             return updated;
                         });
                     }
                 })
             );
-
-            setImageBlobs(newBlobs);
-            setErrorStates(newErrors);
         };
 
         fetchImages();
 
         // 清理函数：释放所有 blob URLs
         return () => {
-            imageBlobs.forEach(blobUrl => {
+            blobUrlsRef.current.forEach(blobUrl => {
                 URL.revokeObjectURL(blobUrl);
             });
+            blobUrlsRef.current.clear();
         };
     }, [images]);
 
     const handleDownload = (index: number, originalUrl: string) => {
-        const blobUrl = imageBlobs.get(index);
-        if (blobUrl) {
+        const state = imageStates.get(index);
+        if (state?.blobUrl) {
             // 如果有 blob，直接下载
-            downloadFile(blobUrl, `${title}-${index + 1}.jpg`);
+            downloadFile(state.blobUrl, `${sanitizeFilename(title)}-${index + 1}.jpg`);
         } else {
             // 否则在新标签打开原始 URL
             window.open(originalUrl, '_blank');
@@ -262,15 +272,16 @@ function ImageNoteGrid({ images, title, dict }: { images: string[]; title: strin
 
             // 遍历所有图片，添加到 zip
             for (let index = 0; index < images.length; index++) {
-                const blobUrl = imageBlobs.get(index);
-                const hasError = errorStates.get(index);
+                const state = imageStates.get(index);
+                const blobUrl = state?.blobUrl;
+                const hasError = state?.error;
 
                 if (blobUrl && !hasError) {
                     try {
                         // 从 blob URL 获取实际的 blob 数据
                         const response = await fetch(blobUrl);
                         const blob = await response.blob();
-                        zip.file(`${title}-${index + 1}.jpg`, blob);
+                        zip.file(`${sanitizeFilename(title)}-${index + 1}.jpg`, blob);
                         successCount++;
                     } catch (error) {
                         console.error(`Failed to add image ${index} to zip:`, error);
@@ -286,38 +297,27 @@ function ImageNoteGrid({ images, title, dict }: { images: string[]; title: strin
 
             // 检查是否有成功添加的图片
             if (successCount === 0) {
-                alert('所有图片加载失败，无法打包下载');
+                toast.error(dict.errors.allImagesLoadFailed);
                 return;
             }
-
-            if (failCount > 0) {
-                const confirmDownload = confirm(
-                    `有 ${failCount} 张图片加载失败，是否下载其余 ${successCount} 张图片？`
-                );
-                if (!confirmDownload) {
-                    return;
-                }
-            }
-
             // 生成 zip 文件
             const zipBlob = await zip.generateAsync({ type: 'blob' });
 
             // 触发下载
-            const sanitizedTitle = title.replace(/[<>:"/\\|?*]/g, '-'); // 清理文件名中的非法字符
-            downloadFile(URL.createObjectURL(zipBlob), `${sanitizedTitle}.zip`);
+            downloadFile(URL.createObjectURL(zipBlob), `${sanitizeFilename(title)}.zip`);
         } catch (error) {
             console.error('Failed to package images:', error);
-            alert('打包失败，请重试');
+            toast.error(dict.errors.packageFailed);
         } finally {
             setIsPackaging(false);
             setPackagingProgress(0);
         }
     };
 
-    // 计算加载完成的数量
-    const loadedCount = Array.from(loadingStates.values()).filter(loading => !loading).length;
+    // 计算加载完成的数量和成功数量
+    const loadedCount = Array.from(imageStates.values()).filter(state => !state.loading).length;
     const allLoaded = loadedCount === images.length;
-    const successCount = Array.from(errorStates.values()).filter(hasError => !hasError).length;
+    const successCount = Array.from(imageStates.values()).filter(state => !state.error && state.blobUrl).length;
 
     return (
         <div className="space-y-3">
@@ -331,7 +331,7 @@ function ImageNoteGrid({ images, title, dict }: { images: string[]; title: strin
                     </span>
                     {!allLoaded && (
                         <span className="ml-2 text-xs">
-                            (加载中 {loadedCount}/{images.length})
+                            ({dict.result.imageLoadingProgress.replace('{loaded}', String(loadedCount)).replace('{total}', String(images.length))})
                         </span>
                     )}
                 </div>
@@ -345,21 +345,22 @@ function ImageNoteGrid({ images, title, dict }: { images: string[]; title: strin
                     {isPackaging ? (
                         <>
                             <Loader2 className="h-3 w-3 mr-1 animate-spin" />
-                            打包中 {packagingProgress}%
+                            {dict.result.packaging} {packagingProgress}%
                         </>
                     ) : (
                         <>
                             <Package className="h-3 w-3 mr-1" />
-                            打包下载
+                            {dict.result.packageDownload}
                         </>
                     )}
                 </Button>
             </div>
             <div className="grid grid-cols-2 gap-3 max-h-[500px] overflow-y-auto pr-1">
                 {images.map((imageUrl, index) => {
-                    const isLoading = loadingStates.get(index);
-                    const hasError = errorStates.get(index);
-                    const blobUrl = imageBlobs.get(index);
+                    const state = imageStates.get(index);
+                    const isLoading = state?.loading ?? true;
+                    const hasError = state?.error ?? false;
+                    const blobUrl = state?.blobUrl ?? null;
 
                     return (
                         <div
@@ -370,14 +371,14 @@ function ImageNoteGrid({ images, title, dict }: { images: string[]; title: strin
                                 {isLoading && (
                                     <div className="absolute inset-0 flex flex-col items-center justify-center">
                                         <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-                                        <p className="text-xs text-muted-foreground mt-2">加载中...</p>
+                                        <p className="text-xs text-muted-foreground mt-2">{dict.result.loading}</p>
                                     </div>
                                 )}
                                 {!isLoading && hasError && (
                                     <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground">
                                         <div className="text-2xl">🖼️</div>
                                         <p className="text-xs mt-2">图片 #{index + 1}</p>
-                                        <p className="text-[10px] mt-1 opacity-60">加载失败</p>
+                                        <p className="text-[10px] mt-1 opacity-60">{dict.result.loadFailed}</p>
                                     </div>
                                 )}
                                 {!isLoading && !hasError && blobUrl && (
@@ -397,7 +398,7 @@ function ImageNoteGrid({ images, title, dict }: { images: string[]; title: strin
                                         onClick={() => handleDownload(index, imageUrl)}
                                     >
                                         <Download className="h-3 w-3 mr-1" />
-                                        {blobUrl ? dict.result.downloadImage : '查看大图'}
+                                        {blobUrl ? dict.result.downloadImage : dict.result.viewLargeImage}
                                     </Button>
                                 </div>
                             )}
@@ -409,7 +410,7 @@ function ImageNoteGrid({ images, title, dict }: { images: string[]; title: strin
                 })}
             </div>
             <p className="text-xs text-muted-foreground text-center">
-                💡 图片已自动加载，点击下载按钮保存
+                {dict.result.imageAutoLoadedTip}
             </p>
         </div>
     );

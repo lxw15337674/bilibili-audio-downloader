@@ -7,6 +7,14 @@ export interface ResultDict {
     downloadImage: string;
     imageNote: string;
     imageCount: string;
+    packaging: string;
+    packageDownload: string;
+    loading: string;
+    loadFailed: string;
+    viewLargeImage: string;
+    imageLoadingProgress: string;
+    imageAutoLoadedTip: string;
+    packagingProgress: string;
 }
 
 export interface Dictionary {
@@ -40,6 +48,11 @@ export interface Dictionary {
         getVideoInfoFailed: string;
         clipboardFailed: string;
         clipboardPermission: string;
+        allImagesLoadFailed: string;
+        packageFailed: string;
+        confirmPartialDownload: string;
+        continue: string;
+        cancel: string;
     };
     history: {
         title: string;

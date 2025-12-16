@@ -28,7 +28,12 @@
         "downloadFailed": "Processing failed",
         "getVideoInfoFailed": "Failed to get video information, please try again later.",
         "clipboardFailed": "Failed to read clipboard.",
-        "clipboardPermission": "Please check if clipboard permission is granted."
+        "clipboardPermission": "Please check if clipboard permission is granted.",
+        "allImagesLoadFailed": "All images failed to load, unable to package download",
+        "packageFailed": "Packaging failed, please try again",
+        "confirmPartialDownload": "{failCount} images failed to load. Download remaining {successCount} images?",
+        "continue": "Continue",
+        "cancel": "Cancel"
     },
     "history": {
         "title": "History",
@@ -288,7 +293,15 @@
         "totalParts": "Total {count} parts",
         "downloadImage": "Download Image",
         "imageNote": "Image Note",
-        "imageCount": "Total {count} images"
+        "imageCount": "Total {count} images",
+        "packaging": "Packaging",
+        "packageDownload": "Package Download",
+        "loading": "Loading",
+        "loadFailed": "Load Failed",
+        "viewLargeImage": "View Large Image",
+        "imageLoadingProgress": "Loading {loaded}/{total}",
+        "imageAutoLoadedTip": "💡 Images auto-loaded, click to download",
+        "packagingProgress": "Packaging image {current}/{total}"
     },
     "changelog": {
         "title": "Changelog"

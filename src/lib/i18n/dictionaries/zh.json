@@ -28,7 +28,12 @@
         "downloadFailed": "处理失败",
         "getVideoInfoFailed": "获取视频信息失败，请稍后重试。",
         "clipboardFailed": "读取剪贴板失败。",
-        "clipboardPermission": "请检查剪贴板权限是否已授予。"
+        "clipboardPermission": "请检查剪贴板权限是否已授予。",
+        "allImagesLoadFailed": "所有图片加载失败，无法打包下载",
+        "packageFailed": "打包失败，请重试",
+        "confirmPartialDownload": "有 {failCount} 张图片加载失败，是否下载其余 {successCount} 张图片？",
+        "continue": "继续",
+        "cancel": "取消"
     },
     "history": {
         "title": "历史记录",
@@ -288,7 +293,15 @@
         "totalParts": "共 {count} 个分P",
         "downloadImage": "下载图片",
         "imageNote": "图文笔记",
-        "imageCount": "共 {count} 张图片"
+        "imageCount": "共 {count} 张图片",
+        "packaging": "打包中",
+        "packageDownload": "打包下载",
+        "loading": "加载中",
+        "loadFailed": "加载失败",
+        "viewLargeImage": "查看大图",
+        "imageLoadingProgress": "加载中 {loaded}/{total}",
+        "imageAutoLoadedTip": "💡 图片已自动加载，点击下载按钮保存",
+        "packagingProgress": "正在打包第 {current}/{total} 张图片"
     },
     "changelog": {
         "title": "更新日志"

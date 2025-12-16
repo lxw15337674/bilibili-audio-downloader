@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import { extractAudioFromVideo, downloadBlob, ExtractStage, ProgressInfo } from '@/lib/ffmpeg';
+import { sanitizeFilename } from '@/lib/utils';
 
 export type FFmpegStatus = 'idle' | 'loading' | 'downloading' | 'converting' | 'completed' | 'error';
 
@@ -39,8 +40,7 @@ export function useFFmpeg(): UseFFmpegReturn {
       });
 
       // Trigger download
-      const safeFilename = title.replace(/[<>:"/\\|?*]/g, '_');
-      downloadBlob(audioBlob, `${safeFilename}.mp3`);
+      downloadBlob(audioBlob, `${sanitizeFilename(title)}.mp3`);
 
       setStatus('completed');
 

@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
-import { useToast } from '@/hooks/use-toast';
+import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
 import axios from 'axios';
 import type { Dictionary } from '@/lib/i18n/types';
@@ -35,7 +35,6 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
     const [error, setError] = useState('');
     const [parseResult, setParseResult] = useState<UnifiedParseResult['data'] | null>(null);
 
-    const { toast } = useToast();
     const [downloadHistory, setDownloadHistory] = useLocalStorageState<DownloadRecord[]>(DOWNLOAD_HISTORY_STORAGE_KEY, {
         defaultValue: []
     });
@@ -76,10 +75,8 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
         addToHistory(newRecord);
 
         // 显示成功提示
-        toast({
-            title: dict.toast.douyinParseSuccess,
+        toast.success(dict.toast.douyinParseSuccess, {
             description: `${apiResult.data.platform}: ${displayTitle}`,
-            duration: 3000
         });
     };
 
@@ -109,9 +106,7 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                 ? (err.response?.data?.error || dict.errors.getVideoInfoFailed)
                 : (err instanceof Error ? err.message : dict.errors.downloadError);
             setError(errorMessage);
-            toast({
-                variant: "destructive",
-                title: dict.errors.downloadFailed,
+            toast.error(dict.errors.downloadFailed, {
                 description: errorMessage
             });
         }
@@ -121,8 +116,7 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
 
     const handleRedownload = (url: string) => {
         setUrl(url);
-        toast({
-            title: dict.toast.linkFilledForRedownload,
+        toast(dict.toast.linkFilledForRedownload, {
             description: dict.toast.clickToRedownloadDesc,
         });
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -194,14 +188,10 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                                                             setUrl(text);
 
                                                             // 显示链接已粘贴提示
-                                                            toast({
-                                                                title: dict.toast.linkFilled,
-                                                            });
+                                                            toast.success(dict.toast.linkFilled);
                                                         } catch (err) {
                                                             console.error('Failed to read clipboard:', err);
-                                                            toast({
-                                                                variant: "destructive",
-                                                                title: dict.errors.clipboardFailed,
+                                                            toast.error(dict.errors.clipboardFailed, {
                                                                 description: dict.errors.clipboardPermission,
                                                             });
                                                         }

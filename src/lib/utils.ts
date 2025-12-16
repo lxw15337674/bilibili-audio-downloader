@@ -29,3 +29,27 @@ export function formatDuration(seconds: number): string {
   const secs = seconds % 60;
   return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
+
+/**
+ * 清理文件名中的非法字符
+ * @param filename 原始文件名
+ * @param replacement 替换字符，默认为 '-'
+ */
+export function sanitizeFilename(filename: string, replacement: string = '-'): string {
+  return filename.replace(/[<>:"/\\|?*]/g, replacement);
+}
+
+/**
+ * 格式化字节为可读的文件大小
+ * @param bytes 字节数
+ * @param decimals 小数位数，默认为 1
+ */
+export function formatBytes(bytes: number, decimals: number = 1): string {
+  if (bytes === 0) return '0 Bytes';
+
+  const k = 1024;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+  return `${(bytes / Math.pow(k, i)).toFixed(decimals)} ${sizes[i]}`;
+}
