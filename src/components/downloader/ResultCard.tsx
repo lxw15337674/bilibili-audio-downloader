@@ -214,7 +214,7 @@ function ImageNoteGrid({ images, title, dict }: { images: string[]; title: strin
                         const imageUrlObj = new URL(imageUrl);
 
                         // 使用后端代理 API 获取图片，这样可以设置自定义 Referer 头
-                        const proxyUrl = `https://bhwa233-api.vercel.app/api/proxy/request?url=${encodeURIComponent(imageUrl)}&referer=${encodeURIComponent(imageUrlObj.origin)}`;
+                        const proxyUrl = `https://bhwa233-api.vercel.app/api/proxy/request?url=${encodeURIComponent(imageUrl)}&Referer=${encodeURIComponent(imageUrlObj.origin)}`;
                         const response = await axios.get(proxyUrl);
                         const result = response.data;
 
