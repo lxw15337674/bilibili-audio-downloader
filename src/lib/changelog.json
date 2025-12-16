@@ -1,6 +1,21 @@
 {
   "versions": [
     {
+      "version": "1.4.0",
+      "date": "2025-12-16",
+      "changes": {
+        "zh": [
+          "支持小红书视频和图片下载"
+        ],
+        "en": [
+          "Support Xiaohongshu video and image download"
+        ],
+        "zh-tw": [
+          "支援小紅書影片和圖片下載"
+        ]
+      }
+    },
+    {
       "version": "1.3.0",
       "date": "2025-12-13",
       "changes": {

@@ -324,7 +324,7 @@ function ImageNoteGrid({ images, title, dict }: { images: string[]; title: strin
             <div className="flex items-center justify-between">
                 <div className="text-sm text-muted-foreground">
                     <span className="inline-flex items-center gap-1">
-                        📝 {dict.result.imageNote}
+                        {dict.result.imageNote}
                     </span>
                     <span className="ml-2">
                         {dict.result.imageCount?.replace('{count}', String(images.length)) || `共 ${images.length} 张图片`}
