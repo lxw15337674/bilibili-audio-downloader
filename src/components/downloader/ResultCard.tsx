@@ -218,9 +218,6 @@ function ImageNoteGrid({ images, title, dict }: { images: string[]; title: strin
                     </div>
                 ))}
             </div>
-            <p className="text-xs text-muted-foreground">
-                点击下载按钮直接下载图片，或点击图片地址在新标签页中查看
-            </p>
         </div>
     );
 } 
