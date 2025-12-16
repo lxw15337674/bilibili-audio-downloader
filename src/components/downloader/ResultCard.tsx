@@ -23,7 +23,6 @@ export function ResultCard({ result, onClose, dict }: ResultCardProps) {
     const isXiaohongshuImageNote = result.platform === 'xiaohongshu' && result.noteType === 'image';
 
     const displayTitle = result.title;
-
     return (
         <Card>
             <CardHeader className="flex flex-row items-center justify-between">
@@ -183,246 +182,44 @@ function MultiPartList({ pages, currentPage, dict }: { pages: PageInfo[]; curren
  * 小红书图文笔记的图片网格
  */
 function ImageNoteGrid({ images, title, dict }: { images: string[]; title: string; dict: Dictionary }) {
-    // 合并的状态类型
-    type ImageLoadState = {
-        loading: boolean;
-        error: boolean;
-        blobUrl: string | null;
-    };
+    const [downloadingIndex, setDownloadingIndex] = useState<number | null>(null);
 
-    const [imageStates, setImageStates] = useState<Map<number, ImageLoadState>>(new Map());
-    const [isPackaging, setIsPackaging] = useState(false);
-    const [packagingProgress, setPackagingProgress] = useState(0);
-
-    // 使用 ref 管理 blob URLs，避免依赖问题
-    const blobUrlsRef = useRef<Set<string>>(new Set());
-
-    useEffect(() => {
-        // 初始化加载状态
-        const initialStates = new Map<number, ImageLoadState>();
-        images.forEach((_, index) => {
-            initialStates.set(index, { loading: true, error: false, blobUrl: null });
-        });
-        setImageStates(initialStates);
-
-        // 获取所有图片
-        const fetchImages = async () => {
-            await Promise.all(
-                images.map(async (imageUrl, index) => {
-                    try {
-                        // 使用图片 URL 的 origin 作为 Referer
-                        const imageUrlObj = new URL(imageUrl);
-
-                        // 使用后端代理 API 获取图片，这样可以设置自定义 Referer 头
-                        const proxyUrl = `https://bhwa233-api.vercel.app/api/proxy/request?url=${encodeURIComponent(imageUrl)}&Referer=${encodeURIComponent(imageUrlObj.origin)}`;
-                        const response = await axios.get(proxyUrl);
-                        const result = response.data;
-
-                        if (!result.success) {
-                            throw new Error(result.error || 'Proxy request failed');
-                        }
-
-                        // 将 base64 数据转换为 blob
-                        const dataUrl = `data:${result.contentType || 'image/jpeg'};base64,${result.data}`;
-                        const blob = await fetch(dataUrl).then(r => r.blob());
-                        const blobUrl = URL.createObjectURL(blob);
-
-                        // 存储到 ref 用于清理
-                        blobUrlsRef.current.add(blobUrl);
-
-                        // 更新状态
-                        setImageStates(prev => {
-                            const updated = new Map(prev);
-                            updated.set(index, { loading: false, error: false, blobUrl });
-                            return updated;
-                        });
-                    } catch (error) {
-                        console.error(`Failed to load image ${index}:`, error);
-                        setImageStates(prev => {
-                            const updated = new Map(prev);
-                            updated.set(index, { loading: false, error: true, blobUrl: null });
-                            return updated;
-                        });
-                    }
-                })
-            );
-        };
-
-        fetchImages();
-
-        // 清理函数：释放所有 blob URLs
-        return () => {
-            blobUrlsRef.current.forEach(blobUrl => {
-                URL.revokeObjectURL(blobUrl);
-            });
-            blobUrlsRef.current.clear();
-        };
-    }, [images]);
-
-    const handleDownload = (index: number, originalUrl: string) => {
-        const state = imageStates.get(index);
-        if (state?.blobUrl) {
-            // 如果有 blob，直接下载
-            downloadFile(state.blobUrl, `${sanitizeFilename(title)}-${index + 1}.jpg`);
-        } else {
-            const a = document.createElement('a');
-            a.href = originalUrl;
-            a.target = '_blank';
-            a.rel = 'noreferrer';  // 不发送 Referer
-            a.click();
-        }
-    };
-
-    const handlePackageDownload = async () => {
-        setIsPackaging(true);
-        setPackagingProgress(0);
-
-        try {
-            const zip = new JSZip();
-            let successCount = 0;
-            let failCount = 0;
-
-            // 遍历所有图片，添加到 zip
-            for (let index = 0; index < images.length; index++) {
-                const state = imageStates.get(index);
-                const blobUrl = state?.blobUrl;
-                const hasError = state?.error;
-
-                if (blobUrl && !hasError) {
-                    try {
-                        // 从 blob URL 获取实际的 blob 数据
-                        const response = await fetch(blobUrl);
-                        const blob = await response.blob();
-                        zip.file(`${sanitizeFilename(title)}-${index + 1}.jpg`, blob);
-                        successCount++;
-                    } catch (error) {
-                        console.error(`Failed to add image ${index} to zip:`, error);
-                        failCount++;
-                    }
-                } else {
-                    failCount++;
-                }
-
-                // 更新进度
-                setPackagingProgress(Math.round(((index + 1) / images.length) * 100));
-            }
-
-            // 检查是否有成功添加的图片
-            if (successCount === 0) {
-                toast.error(dict.errors.allImagesLoadFailed);
-                return;
-            }
-            // 生成 zip 文件
-            const zipBlob = await zip.generateAsync({ type: 'blob' });
-
-            // 触发下载
-            downloadFile(URL.createObjectURL(zipBlob), `${sanitizeFilename(title)}.zip`);
-        } catch (error) {
-            console.error('Failed to package images:', error);
-            toast.error(dict.errors.packageFailed);
-        } finally {
-            setIsPackaging(false);
-            setPackagingProgress(0);
-        }
-    };
-
-    // 计算加载完成的数量和成功数量
-    const loadedCount = Array.from(imageStates.values()).filter(state => !state.loading).length;
-    const allLoaded = loadedCount === images.length;
-    const successCount = Array.from(imageStates.values()).filter(state => !state.error && state.blobUrl).length;
 
     return (
         <div className="space-y-3">
-            <div className="flex items-center justify-between">
-                <div className="text-sm text-muted-foreground">
-                    <span className="inline-flex items-center gap-1">
-                        {dict.result.imageNote}
-                    </span>
-                    <span className="ml-2">
-                        {dict.result.imageCount?.replace('{count}', String(images.length)) || `共 ${images.length} 张图片`}
-                    </span>
-                    {!allLoaded && (
-                        <span className="ml-2 text-xs">
-                            ({dict.result.imageLoadingProgress.replace('{loaded}', String(loadedCount)).replace('{total}', String(images.length))})
+            <div className="text-sm text-muted-foreground mb-3">
+                <span className="inline-flex items-center gap-1">
+                    {dict.result.imageNote}
+                </span>
+                <span className="ml-2">
+                    {dict.result.imageCount?.replace('{count}', String(images.length)) || `共 ${images.length} 张图片`}
+                </span>
+            </div>
+            <div className="space-y-2">
+                {images.map((imageUrl, index) => (
+                    <div
+                        key={index}
+                        className="flex items-center gap-2 p-3 border rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors"
+                    >
+                        <span className="text-xs font-medium text-muted-foreground min-w-[2rem]">
+                            #{index + 1}
                         </span>
-                    )}
-                </div>
-                <Button
-                    size="sm"
-                    variant="outline"
-                    disabled={!allLoaded || isPackaging || successCount === 0}
-                    onClick={handlePackageDownload}
-                    className="shrink-0"
-                >
-                    {isPackaging ? (
-                        <>
-                            <Loader2 className="h-3 w-3 mr-1 animate-spin" />
-                            {dict.result.packaging} {packagingProgress}%
-                        </>
-                    ) : (
-                        <>
-                            <Package className="h-3 w-3 mr-1" />
-                            {dict.result.packageDownload}
-                        </>
-                    )}
-                </Button>
-            </div>
-            <div className="grid grid-cols-2 gap-3 max-h-[500px] overflow-y-auto pr-1">
-                {images.map((imageUrl, index) => {
-                    const state = imageStates.get(index);
-                    const isLoading = state?.loading ?? true;
-                    const hasError = state?.error ?? false;
-                    const blobUrl = state?.blobUrl ?? null;
-
-                    return (
-                        <div
-                            key={index}
-                            className="relative group border rounded-lg overflow-hidden bg-muted/30 hover:bg-muted/50 transition-colors"
-                        >
-                            <div className="aspect-square relative bg-muted flex items-center justify-center">
-                                {isLoading && (
-                                    <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-                                        <p className="text-xs text-muted-foreground mt-2">{dict.result.loading}</p>
-                                    </div>
-                                )}
-                                {!isLoading && hasError && (
-                                    <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground">
-                                        <div className="text-2xl">🖼️</div>
-                                        <p className="text-xs mt-2">图片 #{index + 1}</p>
-                                        <p className="text-[10px] mt-1 opacity-60">{dict.result.loadFailed}</p>
-                                    </div>
-                                )}
-                                {!isLoading && !hasError && blobUrl && (
-                                    <img
-                                        src={blobUrl}
-                                        alt={`Image ${index + 1}`}
-                                        className="w-full h-full object-cover"
-                                    />
-                                )}
-                            </div>
-                            {!isLoading && (
-                                <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
-                                    <Button
-                                        size="sm"
-                                        variant="secondary"
-                                        className="flex-1 h-7 text-xs"
-                                        onClick={() => handleDownload(index, imageUrl)}
-                                    >
-                                        <Download className="h-3 w-3 mr-1" />
-                                        {blobUrl ? dict.result.downloadImage : dict.result.viewLargeImage}
-                                    </Button>
-                                </div>
-                            )}
-                            <div className="absolute top-1 right-1 bg-black/60 text-white text-xs px-2 py-0.5 rounded">
-                                {index + 1}
-                            </div>
+                        <div className="flex-1 min-w-0">
+                            <a
+                                href={imageUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 truncate block"
+                                title={imageUrl}
+                            >
+                                {imageUrl}
+                            </a>
                         </div>
-                    );
-                })}
+                    </div>
+                ))}
             </div>
-            <p className="text-xs text-muted-foreground text-center">
-                {dict.result.imageAutoLoadedTip}
+            <p className="text-xs text-muted-foreground">
+                点击下载按钮直接下载图片，或点击图片地址在新标签页中查看
             </p>
         </div>
     );
