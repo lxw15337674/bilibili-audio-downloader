@@ -212,13 +212,20 @@ function ImageNoteGrid({ images, title, dict }: { images: string[]; title: strin
                     try {
                         // 使用图片 URL 的 origin 作为 Referer
                         const imageUrlObj = new URL(imageUrl);
-                        const response = await axios.get(imageUrl, {
-                            responseType: 'blob',
-                            headers: {
-                                'Referer': imageUrlObj.origin
-                            }
-                        });
-                        const blobUrl = URL.createObjectURL(response.data);
+
+                        // 使用后端代理 API 获取图片，这样可以设置自定义 Referer 头
+                        const proxyUrl = `/api/proxy/request?url=${encodeURIComponent(imageUrl)}&referer=${encodeURIComponent(imageUrlObj.origin)}`;
+                        const response = await axios.get(proxyUrl);
+                        const result = response.data;
+
+                        if (!result.success) {
+                            throw new Error(result.error || 'Proxy request failed');
+                        }
+
+                        // 将 base64 数据转换为 blob
+                        const dataUrl = `data:${result.contentType || 'image/jpeg'};base64,${result.data}`;
+                        const blob = await fetch(dataUrl).then(r => r.blob());
+                        const blobUrl = URL.createObjectURL(blob);
 
                         // 存储到 ref 用于清理
                         blobUrlsRef.current.add(blobUrl);
