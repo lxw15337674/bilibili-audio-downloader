@@ -258,8 +258,11 @@ function ImageNoteGrid({ images, title, dict }: { images: string[]; title: strin
             // 如果有 blob，直接下载
             downloadFile(state.blobUrl, `${sanitizeFilename(title)}-${index + 1}.jpg`);
         } else {
-            // 否则在新标签打开原始 URL
-            window.open(originalUrl, '_blank');
+            const a = document.createElement('a');
+            a.href = originalUrl;
+            a.target = '_blank';
+            a.rel = 'noreferrer';  // 不发送 Referer
+            a.click();
         }
     };
 
