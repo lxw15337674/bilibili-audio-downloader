@@ -210,10 +210,12 @@ function ImageNoteGrid({ images, title, dict }: { images: string[]; title: strin
             await Promise.all(
                 images.map(async (imageUrl, index) => {
                     try {
+                        // 使用图片 URL 的 origin 作为 Referer
+                        const imageUrlObj = new URL(imageUrl);
                         const response = await axios.get(imageUrl, {
                             responseType: 'blob',
                             headers: {
-                                'Referer': 'https://www.xiaohongshu.com/'
+                                'Referer': imageUrlObj.origin
                             }
                         });
                         const blobUrl = URL.createObjectURL(response.data);
