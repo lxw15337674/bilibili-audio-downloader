@@ -53,12 +53,12 @@
         "clickToRedownloadDesc": "Click parse button to start re-parsing"
     },
     "metadata": {
-        "title": "Bilibili Audio & Video Downloader | Douyin Video Downloader - Free Online Tool",
-        "description": "Free online tool for Bilibili audio and video downloads, and Douyin video downloads. Supports Bilibili audio to MP3, Bilibili video download, Douyin no-watermark video download, and video parsing. Paste link, auto-detect platform, high-quality downloads.",
-        "keywords": "Bilibili audio download, Bilibili video download, Douyin video downloader, Bilibili audio extractor, Bilibili to MP3, Douyin no watermark, Douyin downloader, video downloader, audio extractor, free video download, online video downloader, short video downloader, Bilibili MP3, Douyin video parsing, MP3 converter",
-        "ogTitle": "Bilibili Audio & Video Downloader | Douyin Video Downloader - Free Online Tool",
-        "ogDescription": "Professional Bilibili audio and video, and Douyin video download tool. Supports Bilibili to MP3, Bilibili video download, Douyin no-watermark video download, auto-detect platform, one-click high-quality download.",
-        "siteName": "Bilibili & Douyin Downloader"
+        "title": "Universal Media Downloader - Download Videos & Audio from Bilibili, Douyin, Xiaohongshu",
+        "description": "Free online universal media download tool. Supports video and audio downloads from Bilibili, Douyin, Xiaohongshu and more platforms. Extract Bilibili audio to MP3, download Bilibili videos, Douyin no-watermark videos, Xiaohongshu image notes. Paste link, auto-detect platform, high-quality downloads.",
+        "keywords": "universal downloader,media downloader,Bilibili audio download,Bilibili video download,Douyin video downloader,Xiaohongshu downloader,Bilibili audio extractor,Bilibili to MP3,Douyin no watermark,video downloader,audio extractor,free video download,online video downloader",
+        "ogTitle": "Universal Media Downloader - Free Online Tool",
+        "ogDescription": "Professional universal media download tool. Supports video and audio downloads from Bilibili, Douyin, Xiaohongshu and more platforms, auto-detect platform, one-click high-quality download.",
+        "siteName": "Universal Media Downloader"
     },
     "languages": {
         "zh": "简体中文",

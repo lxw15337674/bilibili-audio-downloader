@@ -1,13 +1,18 @@
-# B站视频音频下载器
+# 通用媒体下载器
 
-这是一个基于 [Next.js](https://nextjs.org) 开发的B站视频音频提取工具，可以方便地下载B站视频的音频文件。
+这是一个基于 [Next.js](https://nextjs.org) 开发的通用媒体下载工具，支持从 Bilibili、抖音、小红书等平台下载视频和音频。
 
 ## 功能特点
 
-- 🎵 支持从B站视频链接提取音频
+- 🎵 支持 Bilibili 视频/音频下载
+- 🎬 支持抖音无水印视频下载及音频提取
+- 📷 支持小红书视频笔记和图文笔记下载
+- 🔍 自动识别平台链接
 - 🎨 现代化的用户界面设计
 - 💾 本地下载历史记录
+- 🌍 多语言支持（简体中文、繁体中文、英文）
 - 📊 下载统计
+
 ## 开始使用
 
 首先，运行开发服务器：
@@ -26,19 +31,28 @@ bun dev
 
 ## 使用方法
 
-1. 复制B站视频链接（支持 bilibili.com/video/ 格式的链接）
+1. 复制视频链接（支持 Bilibili、抖音、小红书等平台）
 2. 粘贴到输入框中
-3. 点击下载按钮
-4. 等待下载完成，音频文件会自动保存
+3. 点击解析按钮
+4. 选择下载音频或视频
+5. 等待下载完成，文件会自动保存
+
+### 支持的链接格式
+
+- **Bilibili**: `https://www.bilibili.com/video/BV...` 或 `https://b23.tv/...`
+- **抖音**: `https://www.douyin.com/...` 或 `https://v.douyin.com/...`
+- **小红书**: `https://www.xiaohongshu.com/explore/...` 或 `https://xhslink.com/...`
 
 ## 技术栈
 
-- Next.js 14 (App Router)
-- React
+- Next.js 16 (App Router)
+- React 19
 - TypeScript
 - Tailwind CSS
 - shadcn/ui
 - Axios
+- FFmpeg.wasm (浏览器端音频提取)
+- JSZip (图片打包下载)
 
 ## 本地开发
 

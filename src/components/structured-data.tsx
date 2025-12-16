@@ -11,7 +11,7 @@ export function StructuredData({ locale, dict }: StructuredDataProps) {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": dict.metadata.siteName,
-        "alternateName": locale === 'en' ? "Bilibili & Douyin Downloader" : "Bilibili抖音下载器",
+        "alternateName": locale === 'en' ? "Universal Media Downloader" : "通用媒体下载器",
         "description": dict.metadata.description,
         "url": `https://downloader.bhwa233.com/${locale}`,
         "inLanguage": locale === 'zh' ? 'zh-CN' : locale === 'zh-tw' ? 'zh-TW' : 'en-US',
