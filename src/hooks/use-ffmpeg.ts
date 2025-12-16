@@ -1,13 +1,14 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { extractAudioFromVideo, downloadBlob, ExtractStage } from '@/lib/ffmpeg';
+import { extractAudioFromVideo, downloadBlob, ExtractStage, ProgressInfo } from '@/lib/ffmpeg';
 
 export type FFmpegStatus = 'idle' | 'loading' | 'downloading' | 'converting' | 'completed' | 'error';
 
 export interface UseFFmpegReturn {
   status: FFmpegStatus;
   progress: number;
+  progressInfo: ProgressInfo | null;
   error: string | null;
   extractAudio: (videoUrl: string, title: string) => Promise<void>;
   reset: () => void;
@@ -16,19 +17,24 @@ export interface UseFFmpegReturn {
 export function useFFmpeg(): UseFFmpegReturn {
   const [status, setStatus] = useState<FFmpegStatus>('idle');
   const [progress, setProgress] = useState(0);
+  const [progressInfo, setProgressInfo] = useState<ProgressInfo | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const extractAudio = useCallback(async (videoUrl: string, title: string) => {
     try {
       setStatus('loading');
       setProgress(0);
+      setProgressInfo(null);
       setError(null);
 
       const audioBlob = await extractAudioFromVideo({
         videoUrl,
-        onProgress: (prog: number, stage: ExtractStage) => {
+        onProgress: (prog: number, stage: ExtractStage, info?: ProgressInfo) => {
           setStatus(stage);
           setProgress(prog);
+          if (info) {
+            setProgressInfo(info);
+          }
         },
       });
 
@@ -42,6 +48,7 @@ export function useFFmpeg(): UseFFmpegReturn {
       setTimeout(() => {
         setStatus('idle');
         setProgress(0);
+        setProgressInfo(null);
       }, 2000);
 
     } catch (err) {
@@ -55,8 +62,9 @@ export function useFFmpeg(): UseFFmpegReturn {
   const reset = useCallback(() => {
     setStatus('idle');
     setProgress(0);
+    setProgressInfo(null);
     setError(null);
   }, []);
 
-  return { status, progress, error, extractAudio, reset };
+  return { status, progress, progressInfo, error, extractAudio, reset };
 }

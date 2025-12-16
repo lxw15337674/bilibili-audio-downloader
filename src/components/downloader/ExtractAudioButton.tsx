@@ -12,8 +12,13 @@ interface ExtractAudioButtonProps {
   dict: Dictionary;
 }
 
+// 格式化字节大小为 MB
+function formatBytes(bytes: number): string {
+  return (bytes / (1024 * 1024)).toFixed(1);
+}
+
 export function ExtractAudioButton({ videoUrl, title, dict }: ExtractAudioButtonProps) {
-  const { status, progress, error, extractAudio, reset } = useFFmpeg();
+  const { status, progress, progressInfo, error, extractAudio, reset } = useFFmpeg();
 
   const handleClick = () => {
     if (status === 'error') {
@@ -35,6 +40,12 @@ export function ExtractAudioButton({ videoUrl, title, dict }: ExtractAudioButton
           </>
         );
       case 'downloading':
+        // 简洁版：显示百分比和大小
+        if (progressInfo?.loaded && progressInfo?.total) {
+          const loadedMB = formatBytes(progressInfo.loaded);
+          const totalMB = formatBytes(progressInfo.total);
+          return `下载中 ${progress}% (${loadedMB} MB / ${totalMB} MB)`;
+        }
         return dict.extractAudio.downloading.replace('{progress}', String(progress));
       case 'converting':
         return dict.extractAudio.converting.replace('{progress}', String(progress));

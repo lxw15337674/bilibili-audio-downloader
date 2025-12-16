@@ -1,5 +1,6 @@
 import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { toBlobURL, fetchFile } from '@ffmpeg/util';
+import { toBlobURL } from '@ffmpeg/util';
+import axios from 'axios';
 
 let ffmpegInstance: FFmpeg | null = null;
 let loadPromise: Promise<FFmpeg> | null = null;
@@ -57,9 +58,14 @@ export async function getFFmpeg(): Promise<FFmpeg> {
 
 export type ExtractStage = 'downloading' | 'converting';
 
+export interface ProgressInfo {
+  loaded?: number;
+  total?: number;
+}
+
 export interface ExtractAudioOptions {
   videoUrl: string;
-  onProgress?: (progress: number, stage: ExtractStage) => void;
+  onProgress?: (progress: number, stage: ExtractStage, info?: ProgressInfo) => void;
 }
 
 export async function extractAudioFromVideo({
@@ -71,13 +77,27 @@ export async function extractAudioFromVideo({
   const ffmpeg = await getFFmpeg();
   console.log('[FFmpeg] FFmpeg loaded successfully');
 
-  // Download video file
+  // Download video file with progress tracking
   onProgress?.(0, 'downloading');
   console.log('[FFmpeg] Downloading video...');
 
   let videoData: Uint8Array;
   try {
-    videoData = await fetchFile(videoUrl);
+    const response = await axios.get(videoUrl, {
+      responseType: 'arraybuffer',
+      onDownloadProgress: (progressEvent) => {
+        const loaded = progressEvent.loaded;
+        const total = progressEvent.total || 0;
+        const percentCompleted = total > 0 ? Math.round((loaded * 100) / total) : 0;
+
+        onProgress?.(percentCompleted, 'downloading', {
+          loaded,
+          total
+        });
+      }
+    });
+
+    videoData = new Uint8Array(response.data);
     console.log('[FFmpeg] Video downloaded, size:', videoData.byteLength);
   } catch (err) {
     throw new Error(`Failed to download video: ${err instanceof Error ? err.message : String(err)}`);
