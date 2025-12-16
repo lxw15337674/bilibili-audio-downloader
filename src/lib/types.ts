@@ -18,6 +18,7 @@ export interface UnifiedParseResult {
     success: boolean;
     data?: {
         title: string;
+        desc?: string;
         platform: string;
         downloadAudioUrl: string | null;
         downloadVideoUrl: string | null;
@@ -29,6 +30,10 @@ export interface UnifiedParseResult {
         isMultiPart?: boolean;
         currentPage?: number;
         pages?: PageInfo[];
+        // 小红书相关字段
+        noteType?: 'video' | 'image';
+        images?: string[];
+        author?: string;
     };
     error?: string;
     url?: string; // 错误时可能包含原始URL
@@ -47,4 +52,4 @@ export interface UnifiedApiResponse<T = unknown> {
 }
 
 
-export type Platform = 'bili' | 'bilibili' | 'douyin' | 'unknown'; 
+export type Platform = 'bili' | 'bilibili' | 'douyin' | 'xiaohongshu' | 'unknown'; 

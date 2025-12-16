@@ -7,7 +7,7 @@
     },
     "unified": {
         "pageTitle": "Social Media Downloader",
-        "pageDescription": "Paste video links and automatically detect platform. Supports Bilibili audio and Douyin videos.",
+        "pageDescription": "Paste video links and automatically detect platform. Supports Bilibili, Douyin, and Xiaohongshu.",
         "placeholder": "Paste video link here..."
     },
     "page": {
@@ -113,6 +113,16 @@
                     "⏱️ Larger videos require longer audio extraction time, please be patient"
                 ]
             },
+            "xiaohongshu": {
+                "name": "Xiaohongshu (xiaohongshu.com)",
+                "features": [
+                    "✅ Video note download supported",
+                    "✅ Image note supported (displays image list)"
+                ],
+                "limitations": [
+                    "💡 Image notes will display all images, click to download individually"
+                ]
+            },
             "urlExamples": {
                 "title": "🔗 Link formats:",
                 "bilibili": [
@@ -122,6 +132,10 @@
                 "douyin": [
                     "https://www.douyin.com/jingxuan?modal_id=7522057669591485738",
                     "https://v.douyin.com/fiU6t9rA3QU/ (short link)"
+                ],
+                "xiaohongshu": [
+                    "https://www.xiaohongshu.com/explore/xxxxx",
+                    "https://xhslink.com/xxxxx (short link)"
                 ]
             },
             "comingSoon": "🔄 More platforms coming soon..."
@@ -265,7 +279,11 @@
         "downloadVideo": "Download Video",
         "downloadAudio": "Download Audio",
         "originDownloadVideo": "Backup Direct Link",
-        "totalParts": "Total {count} parts"
+        "totalParts": "Total {count} parts",
+        "downloadImage": "Download Image",
+        "imageNote": "Image Note",
+        "imageCount": "Total {count} images",
+        "author": "Author"
     },
     "changelog": {
         "title": "Changelog"

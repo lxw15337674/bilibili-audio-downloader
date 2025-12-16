@@ -79,6 +79,31 @@ export function PlatformGuideCard({ dict }: PlatformGuideCardProps) {
                     </div>
                 )}
 
+                {/* 小红书部分 */}
+                <div className="space-y-2">
+                    <div className="flex items-start gap-2">
+                        <div className="flex-1">
+                            <p className="font-medium">{dict.guide.platformSupport.xiaohongshu.name}</p>
+                            <div className="text-sm text-muted-foreground space-y-1 mt-1">
+                                {dict.guide.platformSupport.xiaohongshu.features.map((feature, index) => (
+                                    <p key={index}>{feature}</p>
+                                ))}
+                                {dict.guide.platformSupport.xiaohongshu.limitations.map((limitation, index) => (
+                                    <p key={index}>{limitation}</p>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p className="text-sm font-medium text-muted-foreground mb-1">{dict.guide.platformSupport.urlExamples.title}</p>
+                        <div className="bg-muted p-2 rounded text-xs font-mono space-y-1">
+                            {dict.guide.platformSupport.urlExamples.xiaohongshu.map((example, index) => (
+                                <p key={index} className="break-all">{example}</p>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
                 {/* 更多平台预告 */}
                 <div className="text-center text-sm text-muted-foreground pt-2 border-t">
                     {dict.guide.platformSupport.comingSoon}

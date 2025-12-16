@@ -26,7 +26,6 @@ interface DownloadHistoryProps {
 
 // 获取平台标签样式
 const getPlatformBadge = (platform: Platform) => {
-
     switch (platform) {
         case 'bili':
         case 'bilibili':
@@ -39,6 +38,11 @@ const getPlatformBadge = (platform: Platform) => {
                 text: '抖音',
                 className: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
             };
+        case 'xiaohongshu':
+            return {
+                text: '小红书',
+                className: 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300'
+            }
         default:
             return {
                 text: '未知',

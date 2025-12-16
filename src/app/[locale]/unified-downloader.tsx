@@ -65,10 +65,11 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
         // 直接保存完整 parseResult.data，便于 ResultCard 渲染所有字段
         setParseResult(apiResult.data);
 
-        // 添加到下载历史
+        // 添加到下载历史 - 如果没有 title，使用 desc
+        const displayTitle = apiResult.data.title || apiResult.data.desc || 'Unknown Title';
         const newRecord: DownloadRecord = {
             url: videoUrl,
-            title: apiResult.data.title || 'Unknown Title',
+            title: displayTitle,
             timestamp: Date.now(),
             platform: apiResult.data.platform as Platform
         };
@@ -77,7 +78,7 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
         // 显示成功提示
         toast({
             title: dict.toast.douyinParseSuccess,
-            description: `${apiResult.data.platform}: ${apiResult.data.title}`,
+            description: `${apiResult.data.platform}: ${displayTitle}`,
             duration: 3000
         });
     };

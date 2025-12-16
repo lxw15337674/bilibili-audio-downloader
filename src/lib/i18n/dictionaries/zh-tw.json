@@ -7,7 +7,7 @@
     },
     "unified": {
         "pageTitle": "社交媒體下載器",
-        "pageDescription": "貼上影片連結，自動識別並下載。支援 Bilibili 音訊和抖音影片。",
+        "pageDescription": "貼上影片連結，自動識別並下載。支援 Bilibili、抖音、小紅書。",
         "placeholder": "請在此處貼上影片連結..."
     },
     "page": {
@@ -113,6 +113,16 @@
                     "⏱️ 影片越大，音訊提取處理時間越長，請耐心等待"
                 ]
             },
+            "xiaohongshu": {
+                "name": "小紅書 (xiaohongshu.com)",
+                "features": [
+                    "✅ 支援影片筆記下載",
+                    "✅ 支援圖文筆記（顯示圖片列表）"
+                ],
+                "limitations": [
+                    "💡 圖文筆記會顯示所有圖片，點擊可單獨下載"
+                ]
+            },
             "urlExamples": {
                 "title": "🔗 連結格式：",
                 "bilibili": [
@@ -122,6 +132,10 @@
                 "douyin": [
                     "https://www.douyin.com/jingxuan?modal_id=7522057669591485738",
                     "https://v.douyin.com/fiU6t9rA3QU/ (短連結)"
+                ],
+                "xiaohongshu": [
+                    "https://www.xiaohongshu.com/explore/xxxxx",
+                    "https://xhslink.com/xxxxx (短連結)"
                 ]
             },
             "comingSoon": "🔄 更多平台即將支援..."
@@ -265,7 +279,11 @@
         "downloadVideo": "下載影片",
         "downloadAudio": "下載音訊",
         "originDownloadVideo": "備用直鏈",
-        "totalParts": "共 {count} 個分P"
+        "totalParts": "共 {count} 個分P",
+        "downloadImage": "下載圖片",
+        "imageNote": "圖文筆記",
+        "imageCount": "共 {count} 張圖片",
+        "author": "作者"
     },
     "changelog": {
         "title": "更新日誌"

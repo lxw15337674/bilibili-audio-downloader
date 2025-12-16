@@ -8,11 +8,12 @@ export function cn(...inputs: ClassValue[]) {
 /**
  * 通用文件下载函数
  * @param url 下载链接
+ * @param filename 可选的文件名
  */
-export function downloadFile(url: string) {
+export function downloadFile(url: string, filename?: string) {
   const a = document.createElement('a');
   a.href = url;
-  a.download = '';
+  a.download = filename || '';
   a.style.display = 'none';
   document.body.appendChild(a);
   a.click();
