@@ -34,11 +34,6 @@ export function ResultCard({ result, onClose, dict }: ResultCardProps) {
                             <span className="ml-2 text-xs">({formatDuration(result.duration)})</span>
                         )}
                     </p>
-                    {result.author && (
-                        <p className="text-xs text-muted-foreground mt-1">
-                            {dict.result.author}: {result.author}
-                        </p>
-                    )}
                 </div>
                 <Button variant="ghost" size="sm" onClick={onClose}>
                     <X className="h-4 w-4" />

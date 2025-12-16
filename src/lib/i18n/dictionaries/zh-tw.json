@@ -288,8 +288,7 @@
         "totalParts": "共 {count} 個分P",
         "downloadImage": "下載圖片",
         "imageNote": "圖文筆記",
-        "imageCount": "共 {count} 張圖片",
-        "author": "作者"
+        "imageCount": "共 {count} 張圖片"
     },
     "changelog": {
         "title": "更新日誌"

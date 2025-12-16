@@ -288,8 +288,7 @@
         "totalParts": "共 {count} 个分P",
         "downloadImage": "下载图片",
         "imageNote": "图文笔记",
-        "imageCount": "共 {count} 张图片",
-        "author": "作者"
+        "imageCount": "共 {count} 张图片"
     },
     "changelog": {
         "title": "更新日志"

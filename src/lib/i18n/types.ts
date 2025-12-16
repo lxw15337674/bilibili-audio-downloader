@@ -7,7 +7,6 @@ export interface ResultDict {
     downloadImage: string;
     imageNote: string;
     imageCount: string;
-    author: string;
 }
 
 export interface Dictionary {

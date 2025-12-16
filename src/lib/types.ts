@@ -33,7 +33,6 @@ export interface UnifiedParseResult {
         // 小红书相关字段
         noteType?: 'video' | 'image';
         images?: string[];
-        author?: string;
     };
     error?: string;
     url?: string; // 错误时可能包含原始URL

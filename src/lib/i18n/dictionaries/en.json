@@ -288,8 +288,7 @@
         "totalParts": "Total {count} parts",
         "downloadImage": "Download Image",
         "imageNote": "Image Note",
-        "imageCount": "Total {count} images",
-        "author": "Author"
+        "imageCount": "Total {count} images"
     },
     "changelog": {
         "title": "Changelog"
