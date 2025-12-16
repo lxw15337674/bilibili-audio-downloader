@@ -21,8 +21,7 @@ export function ResultCard({ result, onClose, dict }: ResultCardProps) {
     const isMultiPart = result.isMultiPart && result.pages && result.pages.length > 1;
     const isXiaohongshuImageNote = result.platform === 'xiaohongshu' && result.noteType === 'image';
 
-    // 如果没有 title，使用 desc
-    const displayTitle = result.title || result.desc || 'Unknown Title';
+    const displayTitle = result.title;
 
     return (
         <Card>

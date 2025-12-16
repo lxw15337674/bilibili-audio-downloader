@@ -25,27 +25,27 @@ interface DownloadHistoryProps {
 }
 
 // 获取平台标签样式
-const getPlatformBadge = (platform: Platform) => {
+const getPlatformBadge = (platform: Platform, dict: Dictionary) => {
     switch (platform) {
         case 'bili':
         case 'bilibili':
             return {
-                text: 'bilibili',
+                text: dict.history.platforms.bilibili,
                 className: 'bg-pink-100 text-pink-700 dark:bg-pink-900 dark:text-pink-300'
             };
         case 'douyin':
             return {
-                text: '抖音',
+                text: dict.history.platforms.douyin,
                 className: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
             };
         case 'xiaohongshu':
             return {
-                text: '小红书',
+                text: dict.history.platforms.xiaohongshu,
                 className: 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300'
             }
         default:
             return {
-                text: '未知',
+                text: dict.history.platforms.unknown,
                 className: 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'
             };
     }
@@ -98,7 +98,7 @@ export function DownloadHistory({ dict, downloadHistory, clearHistory, onRedownl
                         <div className="px-6 pb-6 overflow-y-auto scrollbar-hide">
                             <div className="space-y-2">
                                 {downloadHistory.map((record: DownloadRecord, index: number) => {
-                                    const platformBadge = getPlatformBadge(record.platform);
+                                    const platformBadge = getPlatformBadge(record.platform, dict);
                                     return (
                                         <div
                                             key={index}

@@ -4,6 +4,10 @@ export interface ResultDict {
     downloadAudio: string;
     originDownloadVideo: string;
     totalParts?: string;
+    downloadImage: string;
+    imageNote: string;
+    imageCount: string;
+    author: string;
 }
 
 export interface Dictionary {
@@ -46,6 +50,12 @@ export interface Dictionary {
         redownload: string;
         linkFilled: string;
         clickToRedownload: string;
+        platforms: {
+            bilibili: string;
+            douyin: string;
+            xiaohongshu: string;
+            unknown: string;
+        };
     };
     toast: {
         linkFilled: string;
@@ -108,10 +118,16 @@ export interface Dictionary {
                     };
                 };
             };
+            xiaohongshu: {
+                name: string;
+                features: string[];
+                limitations: string[];
+            };
             urlExamples: {
                 title: string;
                 bilibili: string[];
                 douyin: string[];
+                xiaohongshu: string[];
             };
             comingSoon: string;
         };

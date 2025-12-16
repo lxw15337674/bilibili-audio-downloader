@@ -38,7 +38,13 @@
         "viewSource": "查看原视频",
         "redownload": "重新解析",
         "linkFilled": "链接已填入",
-        "clickToRedownload": "点击解析按钮开始重新解析"
+        "clickToRedownload": "点击解析按钮开始重新解析",
+        "platforms": {
+            "bilibili": "bilibili",
+            "douyin": "抖音",
+            "xiaohongshu": "小红书",
+            "unknown": "未知"
+        }
     },
     "toast": {
         "linkFilled": "链接已粘贴。",

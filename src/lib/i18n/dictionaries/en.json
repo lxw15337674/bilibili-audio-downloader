@@ -38,7 +38,13 @@
         "viewSource": "View Original",
         "redownload": "Re-parse",
         "linkFilled": "Link filled",
-        "clickToRedownload": "Click parse button to start re-parsing"
+        "clickToRedownload": "Click parse button to start re-parsing",
+        "platforms": {
+            "bilibili": "Bilibili",
+            "douyin": "Douyin",
+            "xiaohongshu": "Xiaohongshu",
+            "unknown": "Unknown"
+        }
     },
     "toast": {
         "linkFilled": "Link pasted.",
