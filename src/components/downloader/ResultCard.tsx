@@ -182,9 +182,6 @@ function MultiPartList({ pages, currentPage, dict }: { pages: PageInfo[]; curren
  * 小红书图文笔记的图片网格
  */
 function ImageNoteGrid({ images, title, dict }: { images: string[]; title: string; dict: Dictionary }) {
-    const [downloadingIndex, setDownloadingIndex] = useState<number | null>(null);
-
-
     return (
         <div className="space-y-3">
             <div className="text-sm text-muted-foreground mb-3">
