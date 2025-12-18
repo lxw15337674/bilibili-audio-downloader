@@ -192,6 +192,8 @@
             "en": [
                 "Extract MP3 audio from Bilibili videos",
                 "Download Douyin videos without watermark",
+                "Download Xiaohongshu Image Notes",
+                "Download Xiaohongshu Videos",
                 "Auto-detect video platform",
                 "High-quality audio and video downloads",
                 "Free online tool",
@@ -202,6 +204,8 @@
             "zh": [
                 "提取B站视频MP3音频",
                 "下载抖音无水印视频",
+                "下载小红书图文笔记",
+                "下载小红书无水印视频",
                 "自动识别视频平台",
                 "高清音频视频下载",
                 "免费在线工具",
@@ -221,6 +225,10 @@
                     "answer": "Paste the Douyin video link, the tool will automatically detect the platform and provide a watermark-free download link."
                 },
                 {
+                    "question": "How to download Xiaohongshu images and videos?",
+                    "answer": "Copy the Xiaohongshu note link, paste it into the input box, and the tool will automatically parse and provide watermark-free images or video downloads."
+                },
+                {
                     "question": "Is this tool free to use?",
                     "answer": "Yes, this is a completely free online tool with no registration required. You can download unlimited videos and audio files."
                 }
@@ -235,6 +243,10 @@
                     "answer": "粘贴抖音视频链接，工具会自动识别平台并提供无水印下载链接。"
                 },
                 {
+                    "question": "如何下载小红书图片和视频？",
+                    "answer": "复制小红书笔记链接，粘贴到输入框中，工具会自动解析并提供无水印图片或视频下载。"
+                },
+                {
                     "question": "这个工具免费吗？",
                     "answer": "是的，这是一个完全免费的在线工具，无需注册。您可以无限制下载视频和音频文件。"
                 }
@@ -242,44 +254,44 @@
         },
         "howTo": {
             "title": {
-                "en": "How to download Bilibili audio and Douyin videos",
-                "zh": "如何下载B站音频和抖音视频"
+                "en": "How to download Bilibili, Douyin and Xiaohongshu content",
+                "zh": "如何下载B站、抖音及小红书内容"
             },
             "steps": {
                 "en": [
                     {
-                        "name": "Copy video link",
-                        "text": "Copy the Bilibili or Douyin video link from your browser"
+                        "name": "Copy link",
+                        "text": "Copy the video or note link from Bilibili, Douyin or Xiaohongshu"
                     },
                     {
                         "name": "Paste link",
-                        "text": "Paste the video link into the input field on our website"
+                        "text": "Paste the link into the input field on our website"
                     },
                     {
-                        "name": "Auto-detect platform",
-                        "text": "The tool will automatically detect whether it's Bilibili or Douyin"
+                        "name": "Auto-detect",
+                        "text": "The tool will automatically detect the platform (Bilibili/Douyin/Xiaohongshu)"
                     },
                     {
                         "name": "Download",
-                        "text": "Click the download button to get your MP3 audio or watermark-free video"
+                        "text": "Click the download button to get your media content"
                     }
                 ],
                 "zh": [
                     {
-                        "name": "复制视频链接",
-                        "text": "从浏览器复制B站或抖音视频链接"
+                        "name": "复制链接",
+                        "text": "从浏览器复制B站、抖音或小红书的视频/笔记链接"
                     },
                     {
                         "name": "粘贴链接",
-                        "text": "将视频链接粘贴到网站的输入框中"
+                        "text": "将链接粘贴到网站的输入框中"
                     },
                     {
-                        "name": "自动识别平台",
-                        "text": "工具会自动识别是B站还是抖音"
+                        "name": "自动识别",
+                        "text": "工具会自动识别平台（B站/抖音/小红书）"
                     },
                     {
                         "name": "下载",
-                        "text": "点击下载按钮获取MP3音频或无水印视频"
+                        "text": "点击下载按钮获取对应的音视频或图片内容"
                     }
                 ]
             }
