@@ -95,6 +95,7 @@ export interface Dictionary {
         button: string;
         loading: string;
         downloading: string;
+        downloadingWithSize?: string;
         converting: string;
         completed: string;
         retry: string;

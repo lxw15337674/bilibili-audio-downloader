@@ -77,6 +77,7 @@
         "button": "Extract Audio",
         "loading": "Loading...",
         "downloading": "Downloading {progress}%",
+        "downloadingWithSize": "Downloading {progress}% ({loaded} / {total})",
         "converting": "Converting {progress}%",
         "completed": "Extraction Complete",
         "retry": "Retry",
