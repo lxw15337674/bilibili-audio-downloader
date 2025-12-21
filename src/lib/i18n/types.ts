@@ -136,6 +136,11 @@ export interface Dictionary {
                 features: string[];
                 limitations: string[];
             };
+            audioTip?: {
+                title: string;
+                steps: string;
+                warning: string;
+            };
             urlExamples: {
                 title: string;
                 bilibili: string[];
