@@ -131,7 +131,7 @@
                     "✅ Image note supported (displays image list)"
                 ],
                 "limitations": [
-                    "💡 Image notes will display all images, click to download individually"
+                    "💡 Image notes will display all images, supporting individual or batch downloads"
                 ]
             },
             "urlExamples": {
