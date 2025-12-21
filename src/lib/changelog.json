@@ -1,6 +1,21 @@
 {
   "versions": [
     {
+      "version": "1.7.0",
+      "date": "2025-12-21",
+      "changes": {
+        "zh": [
+          "支持小红书视频音频提取"
+        ],
+        "en": [
+          "Support Xiaohongshu video audio extraction"
+        ],
+        "zh-tw": [
+          "支援小紅書影片音訊提取"
+        ]
+      }
+    },
+    {
       "version": "1.6.0",
       "date": "2025-12-21",
       "changes": {

@@ -104,6 +104,20 @@ export function PlatformGuideCard({ dict }: PlatformGuideCardProps) {
                     </div>
                 </div>
 
+                {/* 音频提取说明 */}
+                {dict.guide.platformSupport.audioTip && (
+                    <div className="p-3 bg-muted/50 rounded-lg space-y-1 border border-border/50">
+                        <p className="text-sm font-medium flex items-center gap-1.5">
+                            <span className="text-primary">🎵</span>
+                            {dict.guide.platformSupport.audioTip.title}
+                        </p>
+                        <div className="text-xs text-muted-foreground space-y-1">
+                            <p>{dict.guide.platformSupport.audioTip.steps}</p>
+                            <p>{dict.guide.platformSupport.audioTip.warning}</p>
+                        </div>
+                    </div>
+                )}
+
                 {/* 更多平台预告 */}
                 <div className="text-center text-sm text-muted-foreground pt-2 border-t">
                     {dict.guide.platformSupport.comingSoon}
