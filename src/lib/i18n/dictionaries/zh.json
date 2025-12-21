@@ -138,16 +138,16 @@
                 "title": "🔗 链接格式：",
                 "bilibili": [
                     "https://www.bilibili.com/video/BV1xx411c7mD",
-                    "https://b23.tv/BV1xx411c7mD (短链接)"
+                    "https://b23.tv/BV1xx411c7mD"
                 ],
                 "douyin": [
                     "https://www.douyin.com/jingxuan?modal_id=7573004270581140751",
                     "https://www.douyin.com/video/7491698414288260387",
-                    "https://v.douyin.com/fiU6t9rA3QU/ (短链接)"
+                    "https://v.douyin.com/fiU6t9rA3QU/"
                 ],
                 "xiaohongshu": [
                     "https://www.xiaohongshu.com/explore/xxxxx",
-                    "https://xhslink.com/xxxxx (短链接)"
+                    "https://xhslink.com/xxxxx"
                 ]
             },
             "comingSoon": "🔄 更多平台即将支持..."
@@ -158,7 +158,7 @@
                 "title": "🔗 B站链接示例：",
                 "examples": [
                     "https://www.bilibili.com/video/BV1xx411c7mD",
-                    "https://b23.tv/BV1xx411c7mD (短链接)"
+                    "https://b23.tv/BV1xx411c7mD"
                 ]
             },
             "douyin": {
@@ -166,7 +166,7 @@
                 "examples": [
                     "https://www.douyin.com/jingxuan?modal_id=7573004270581140751",
                     "https://www.douyin.com/video/7491698414288260387",
-                    "https://v.douyin.com/fiU6t9rA3QU/ (短链接)"
+                    "https://v.douyin.com/fiU6t9rA3QU/"
                 ]
             },
             "tip": "提示：复制分享链接即可，无需手动修改"

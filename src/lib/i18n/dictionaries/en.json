@@ -138,16 +138,16 @@
                 "title": "🔗 Link formats:",
                 "bilibili": [
                     "https://www.bilibili.com/video/BV1xx411c7mD",
-                    "https://b23.tv/BV1xx411c7mD (short link)"
+                    "https://b23.tv/BV1xx411c7mD"
                 ],
                 "douyin": [
                     "https://www.douyin.com/jingxuan?modal_id=7573004270581140751",
                     "https://www.douyin.com/video/7491698414288260387",
-                    "https://v.douyin.com/fiU6t9rA3QU/ (short link)"
+                    "https://v.douyin.com/fiU6t9rA3QU"
                 ],
                 "xiaohongshu": [
                     "https://www.xiaohongshu.com/explore/xxxxx",
-                    "https://xhslink.com/xxxxx (short link)"
+                    "https://xhslink.com/xxxxx"
                 ]
             },
             "comingSoon": "🔄 More platforms coming soon..."
@@ -158,7 +158,7 @@
                 "title": "🔗 Bilibili link examples:",
                 "examples": [
                     "https://www.bilibili.com/video/BV1xx411c7mD",
-                    "https://b23.tv/BV1xx411c7mD (short link)"
+                    "https://b23.tv/BV1xx411c7mD"
                 ]
             },
             "douyin": {
@@ -166,7 +166,7 @@
                 "examples": [
                     "https://www.douyin.com/jingxuan?modal_id=7573004270581140751",
                     "https://www.douyin.com/video/7491698414288260387",
-                    "https://v.douyin.com/fiU6t9rA3QU/ (short link)"
+                    "https://v.douyin.com/fiU6t9rA3QU"
                 ]
             },
             "tip": "Tip: Just copy the share link, no manual modification needed"
