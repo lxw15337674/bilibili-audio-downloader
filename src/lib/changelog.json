@@ -1,6 +1,21 @@
 {
   "versions": [
     {
+      "version": "1.6.0",
+      "date": "2025-12-21",
+      "changes": {
+        "zh": [
+          "支持抖音 /video/ 格式链接解析"
+        ],
+        "en": [
+          "Support Douyin /video/ URL format parsing"
+        ],
+        "zh-tw": [
+          "支援抖音 /video/ 格式連結解析"
+        ]
+      }
+    },
+    {
       "version": "1.5.0",
       "date": "2025-12-17",
       "changes": {
