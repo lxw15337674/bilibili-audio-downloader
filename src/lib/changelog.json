@@ -1,6 +1,24 @@
 {
   "versions": [
     {
+      "version": "1.5.0",
+      "date": "2025-12-17",
+      "changes": {
+        "zh": [
+          "支持小红书图片预览",
+          "支持小红书图片打包下载"
+        ],
+        "en": [
+          "Support Xiaohongshu image preview",
+          "Support Xiaohongshu image package download"
+        ],
+        "zh-tw": [
+          "支援小紅書圖片預覽",
+          "支援小紅書圖片打包下載"
+        ]
+      }
+    },
+    {
       "version": "1.4.0",
       "date": "2025-12-16",
       "changes": {
