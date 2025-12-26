@@ -1,6 +1,24 @@
 {
   "versions": [
     {
+      "version": "1.6.0",
+      "date": "2025-12-26",
+      "changes": {
+        "zh": [
+          "支持抖音口令解析，可直接粘贴分享口令",
+          "支持小红书口令解析，可直接粘贴分享口令"
+        ],
+        "en": [
+          "Support Douyin command parsing, paste share commands directly",
+          "Support Xiaohongshu command parsing, paste share commands directly"
+        ],
+        "zh-tw": [
+          "支援抖音口令解析，可直接貼上分享口令",
+          "支援小紅書口令解析，可直接貼上分享口令"
+        ]
+      }
+    },
+    {
       "version": "1.5.0",
       "date": "2025-12-17",
       "changes": {

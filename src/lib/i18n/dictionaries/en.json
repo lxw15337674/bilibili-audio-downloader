@@ -117,7 +117,8 @@
                 "name": "Douyin (douyin.com)",
                 "features": [
                     "✅ Video download supported",
-                    "✅ Audio extraction supported (browser-side conversion)"
+                    "✅ Audio extraction supported (browser-side conversion)",
+                    "✅ Command parsing supported, paste share commands directly"
                 ],
                 "limitations": [
                     "💡 Audio extraction process: Load processor (~30MB first time) → Download video → Convert to audio",
@@ -128,7 +129,8 @@
                 "name": "Xiaohongshu (xiaohongshu.com)",
                 "features": [
                     "✅ Video note download supported",
-                    "✅ Image note supported (displays image list)"
+                    "✅ Image note supported (displays image list)",
+                    "✅ Command parsing supported, paste share commands directly"
                 ],
                 "limitations": [
                     "💡 Image notes will display all images, click to download individually"
