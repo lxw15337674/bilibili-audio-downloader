@@ -35,6 +35,7 @@ export interface Dictionary {
         copyrightVideo: string;
         copyrightStorage: string;
         copyrightYear: string;
+        copyrightBilibiliRestriction: string;
     };
     form: {
         pasteButton: string;
