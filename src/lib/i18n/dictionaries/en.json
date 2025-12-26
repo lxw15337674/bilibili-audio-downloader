@@ -15,7 +15,8 @@
         "feedbackLinkText": "submit an issue on GitHub",
         "copyrightVideo": "Copyright Notice: Video copyrights belong to relevant websites and authors",
         "copyrightStorage": "This site does not provide or store any videos or images",
-        "copyrightYear": "Copyright © 2025"
+        "copyrightYear": "Copyright © 2025",
+        "copyrightBilibiliRestriction": "⚠️ Downloading copyright-restricted videos (such as member-exclusive or paid content) is not supported."
     },
     "form": {
         "pasteButton": "Paste",

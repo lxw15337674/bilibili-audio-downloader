@@ -15,7 +15,8 @@
         "feedbackLinkText": "GitHub 提交 issue",
         "copyrightVideo": "版權說明：影片版權歸相關網站及作者所有",
         "copyrightStorage": "本站不提供和儲存任何影片及圖片",
-        "copyrightYear": "Copyright © 2025"
+        "copyrightYear": "Copyright © 2025",
+        "copyrightBilibiliRestriction": "⚠️ 不支援下載版權受限（如會員專享、付費）的影片。"
     },
     "form": {
         "pasteButton": "貼上",
