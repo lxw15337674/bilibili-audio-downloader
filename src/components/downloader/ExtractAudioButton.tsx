@@ -37,12 +37,15 @@ export function ExtractAudioButton({ videoUrl, title, dict }: ExtractAudioButton
         );
       case 'downloading':
         // 简洁版：显示百分比和大小
-        if (progressInfo?.loaded && progressInfo?.total) {
-          return `下载中 ${progress}% (${formatBytes(progressInfo.loaded)} / ${formatBytes(progressInfo.total)})`;
+        if (progressInfo?.loaded && progressInfo?.total && dict.extractAudio.downloadingWithSize) {
+          return dict.extractAudio.downloadingWithSize
+            .replace('{progress}', String(Math.floor(progress)))
+            .replace('{loaded}', formatBytes(progressInfo.loaded))
+            .replace('{total}', formatBytes(progressInfo.total));
         }
-        return dict.extractAudio.downloading.replace('{progress}', String(progress));
+        return dict.extractAudio.downloading.replace('{progress}', String(Math.floor(progress)));
       case 'converting':
-        return dict.extractAudio.converting.replace('{progress}', String(progress));
+        return dict.extractAudio.converting.replace('{progress}', String(Math.floor(progress)));
       case 'completed':
         return (
           <>
@@ -82,7 +85,7 @@ export function ExtractAudioButton({ videoUrl, title, dict }: ExtractAudioButton
       </Button>
 
       {showProgress && (
-        <Progress value={progress} className="h-2" />
+        <Progress value={Math.floor(progress)} className="h-2" />
       )}
 
       {error && (

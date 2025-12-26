@@ -77,6 +77,7 @@
         "button": "Extract Audio",
         "loading": "Loading...",
         "downloading": "Downloading {progress}%",
+        "downloadingWithSize": "Downloading {progress}% ({loaded} / {total})",
         "converting": "Converting {progress}%",
         "completed": "Extraction Complete",
         "retry": "Retry",
@@ -120,35 +121,39 @@
                     "✅ Audio extraction supported (browser-side conversion)",
                     "✅ Command parsing supported, paste share commands directly"
                 ],
-                "limitations": [
-                    "💡 Audio extraction process: Load processor (~30MB first time) → Download video → Convert to audio",
-                    "⏱️ Larger videos require longer audio extraction time, please be patient"
-                ]
+                "limitations": []
             },
             "xiaohongshu": {
                 "name": "Xiaohongshu (xiaohongshu.com)",
                 "features": [
                     "✅ Video note download supported",
                     "✅ Image note supported (displays image list)",
-                    "✅ Command parsing supported, paste share commands directly"
+                    "✅ Command parsing supported, paste share commands directly",
+                    "✅ Audio extraction supported (browser-side conversion)"
                 ],
                 "limitations": [
-                    "💡 Image notes will display all images, click to download individually"
+                    "💡 Image notes will display all images, supporting individual or batch downloads"
                 ]
+            },
+            "audioTip": {
+                "title": "Audio Extraction Guide",
+                "steps": "💡 Audio extraction process: Load processor (~30MB first time) → Download video → Convert to audio",
+                "warning": "⏱️ Larger videos require longer audio extraction time, please be patient"
             },
             "urlExamples": {
                 "title": "🔗 Link formats:",
                 "bilibili": [
                     "https://www.bilibili.com/video/BV1xx411c7mD",
-                    "https://b23.tv/BV1xx411c7mD (short link)"
+                    "https://b23.tv/BV1xx411c7mD"
                 ],
                 "douyin": [
-                    "https://www.douyin.com/jingxuan?modal_id=7522057669591485738",
-                    "https://v.douyin.com/fiU6t9rA3QU/ (short link)"
+                    "https://www.douyin.com/jingxuan?modal_id=7573004270581140751",
+                    "https://www.douyin.com/video/7491698414288260387",
+                    "https://v.douyin.com/fiU6t9rA3QU"
                 ],
                 "xiaohongshu": [
                     "https://www.xiaohongshu.com/explore/xxxxx",
-                    "https://xhslink.com/xxxxx (short link)"
+                    "https://xhslink.com/xxxxx"
                 ]
             },
             "comingSoon": "🔄 More platforms coming soon..."
@@ -159,14 +164,15 @@
                 "title": "🔗 Bilibili link examples:",
                 "examples": [
                     "https://www.bilibili.com/video/BV1xx411c7mD",
-                    "https://b23.tv/BV1xx411c7mD (short link)"
+                    "https://b23.tv/BV1xx411c7mD"
                 ]
             },
             "douyin": {
                 "title": "🔗 Douyin link examples:",
                 "examples": [
-                    "https://www.douyin.com/jingxuan?modal_id=7522057669591485738",
-                    "https://v.douyin.com/fiU6t9rA3QU/ (short link)"
+                    "https://www.douyin.com/jingxuan?modal_id=7573004270581140751",
+                    "https://www.douyin.com/video/7491698414288260387",
+                    "https://v.douyin.com/fiU6t9rA3QU"
                 ]
             },
             "tip": "Tip: Just copy the share link, no manual modification needed"
@@ -196,6 +202,7 @@
                 "Download Douyin videos without watermark",
                 "Download Xiaohongshu Image Notes",
                 "Download Xiaohongshu Videos",
+                "Extract audio from Xiaohongshu videos",
                 "Auto-detect video platform",
                 "High-quality audio and video downloads",
                 "Free online tool",

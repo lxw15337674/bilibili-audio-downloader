@@ -66,7 +66,7 @@ export function ResultCard({ result, onClose, dict }: ResultCardProps) {
  * 单P视频的下载按钮
  */
 function SinglePartButtons({ result, dict }: { result: NonNullable<UnifiedParseResult['data']>; dict: Dictionary }) {
-    const isDouyin = result.platform === 'douyin';
+    const showExtractAudio = result.platform === 'douyin' || result.platform === 'xiaohongshu';
 
     return (
         <>
@@ -92,7 +92,7 @@ function SinglePartButtons({ result, dict }: { result: NonNullable<UnifiedParseR
                     </Button>
                 )}
 
-                {isDouyin && result.downloadVideoUrl && (
+                {showExtractAudio && result.downloadVideoUrl && (
                     <ExtractAudioButton
                         videoUrl={result.downloadVideoUrl}
                         title={result.title}

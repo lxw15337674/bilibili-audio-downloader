@@ -95,6 +95,7 @@ export interface Dictionary {
         button: string;
         loading: string;
         downloading: string;
+        downloadingWithSize?: string;
         converting: string;
         completed: string;
         retry: string;
@@ -134,6 +135,11 @@ export interface Dictionary {
                 name: string;
                 features: string[];
                 limitations: string[];
+            };
+            audioTip?: {
+                title: string;
+                steps: string;
+                warning: string;
             };
             urlExamples: {
                 title: string;

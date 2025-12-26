@@ -3,7 +3,10 @@
     "allow": [
       "*",
       "Bash(curl:*)",
-      "Bash(pnpm add:*)"
+      "Bash(pnpm add:*)",
+      "Bash(npm run type-check:*)",
+      "Bash(pnpm run type-check:*)",
+      "Bash(npx tsc:*)"
     ]
   }
 }
