@@ -8,6 +8,7 @@ import { getDictionary } from "@/lib/i18n"
 import type { Locale } from "@/lib/i18n/config"
 import { i18n } from "@/lib/i18n/config"
 import { StructuredData } from "@/components/structured-data"
+import { Analytics } from '@vercel/analytics/next';
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -132,6 +133,7 @@ export default async function RootLayout({
             </head>
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <Toaster />
+                <Analytics />
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="dark"
